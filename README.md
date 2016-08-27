@@ -1,4 +1,6 @@
-[![Creasic Logo](https://s12.postimg.org/jty6ytpn1/Creasic_Logo.png)](https://postimg.org/image/eijae43k9/)
+<p align="center">
+  <img src="https://s12.postimg.org/jty6ytpn1/Creasic_Logo.png"/>
+</p>
 
 ## ¿Qué es Creasic?
 
