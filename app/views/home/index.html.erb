@@ -1,14 +1,26 @@
 <div class="container-fluid" ng-app="creasic">
+  <md-content class="md-padding">
+    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="goto('page1')" name="page1">Home</md-nav-item>
+      <md-nav-item md-nav-click="goto('page2')" name="page2">Letras</md-nav-item>
+      <md-nav-item md-nav-click="goto('page3')" name="page3">Acordes</md-nav-item>
+      <md-nav-item md-nav-click="goto('page4')" name="page4">Canciones</md-nav-item>
+      <span flex> </span>
+      <md-nav-item md-nav-click="goto('page5')" name="page5">Registrar</md-nav-item>
+      <md-nav-item md-nav-click="goto('page6')" name="page6">Ingresar</md-nav-item>
+    </md-nav-bar>
+  </md-content>
+
   <md-content layout-gt-sm="row" layout-padding>
     <div>
       <md-input-container>
-        <label>Title</label>
-        <input ng-model="user.title">
+        <label>Nombre de Usuario</label>
+        <input ng-model="user.nombre">
       </md-input-container>
 
       <md-input-container>
-        <label>Email</label>
-        <input ng-model="user.email" type="email">
+        <label>Password</label>
+        <input ng-model="user.password" type="password">
       </md-input-container>
     </div>
   </md-content>
