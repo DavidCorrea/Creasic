@@ -1,0 +1,15 @@
+<div class="container-fluid" ng-app="creasic">
+    <md-content class="md-padding">
+        <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+            <md-nav-item md-nav-sref="home" name="page1">Home</md-nav-item>
+            <md-nav-item md-nav-sref="letras" name="page2">Letras</md-nav-item>
+            <md-nav-item md-nav-sref="acordes" name="page3">Acordes</md-nav-item>
+            <md-nav-item md-nav-sref="canciones" name="page4">Canciones</md-nav-item>
+            <span flex> </span>
+            <md-nav-item md-nav-sref="registrar" name="page5">Registrar</md-nav-item>
+            <md-nav-item md-nav-sref="ingresar" name="page6">Ingresar</md-nav-item>
+        </md-nav-bar>
+    </md-content>
+
+    <div id="content" ui-view flex> </div>
+</div>

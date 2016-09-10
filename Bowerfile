@@ -1,3 +1,4 @@
 asset 'angular'
 asset 'angular-material'
 asset 'angular-devise'
+asset 'angular-ui-router'
