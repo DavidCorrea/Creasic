@@ -16,4 +16,6 @@
 //= require angular-aria
 //= require angular-messages
 //= require angular-material
+//= require angular-devise
+//= require angular-ui-router
 //= require_tree .
