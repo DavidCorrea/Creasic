@@ -1,14 +1,15 @@
 <div class="container-fluid" ng-app="creasic">
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <h1 ng-if="name">Hello, {{name}}</h1>
+  <md-content layout-gt-sm="row" layout-padding>
+    <div>
+      <md-input-container>
+        <label>Title</label>
+        <input ng-model="user.title">
+      </md-input-container>
+
+      <md-input-container>
+        <label>Email</label>
+        <input ng-model="user.email" type="email">
+      </md-input-container>
     </div>
-    <div class="panel-body">
-      <form class="form-inline">
-        <div class="form-group">
-          <input class="form-control" type="text" placeholder="Enter your name" autofocus ng-model="name">
-        </div>
-      </form>
-    </div>
-  </div>
+  </md-content>
 </div>
