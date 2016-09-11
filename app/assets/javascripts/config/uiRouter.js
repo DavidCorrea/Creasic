@@ -26,7 +26,8 @@ creasic.config(function($stateProvider) {
     var registrarState = {
         name: 'registrar',
         url: '/registrar',
-        templateUrl: 'views/registrar'
+        templateUrl: 'views/registrar',
+        controller: 'registracionCtrl'
     };
 
     var ingresarState = {
