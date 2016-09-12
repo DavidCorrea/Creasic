@@ -1,4 +1,4 @@
-creasic.controller("registracionCtrl", ['$scope', 'registracionService', 'toastService', 'navegacionService', function ($scope, registracionService, toastService, navegacionService) {
+creasic.controller("registracionCtrl", ['$scope', 'authService', 'toastService', 'navegacionService', function ($scope, authService, toastService, navegacionService) {
 
     $scope.nuevo_usuario = {
         nombre_de_usuario: '',
@@ -11,7 +11,7 @@ creasic.controller("registracionCtrl", ['$scope', 'registracionService', 'toastS
         $scope.hubo_errores = false;
 
         //TODO: Mejores errores. These ones suck.
-        registracionService.registrarUsuario($scope.nuevo_usuario).then(function(usuarioRegistrado) {
+        authService.crearUsuario($scope.nuevo_usuario).then(function(usuarioRegistrado) {
             console.log(usuarioRegistrado);
             toastService.mostrarMensaje('Usuario creado correctamente.');
             navegacionService.llevarAIngresar();

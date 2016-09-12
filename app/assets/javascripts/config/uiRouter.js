@@ -1,4 +1,5 @@
 creasic.config(function($stateProvider) {
+
     var homeState = {
         name: 'home',
         url: '/home',
@@ -33,7 +34,8 @@ creasic.config(function($stateProvider) {
     var ingresarState = {
         name: 'ingresar',
         url: '/ingresar',
-        templateUrl: 'views/ingresar'
+        templateUrl: 'views/ingresar',
+        controller: 'ingresoCtrl'
     };
 
     $stateProvider.state(homeState);

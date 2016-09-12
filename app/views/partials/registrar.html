@@ -1,4 +1,4 @@
-<div layout="row" layout-align="center center">
+<div layout="column" layout-align="center center">
     <md-content ng-show="hubo_errores">
         <md-list flex>
             <md-subheader class="md-no-sticky">Errores</md-subheader>
@@ -28,5 +28,5 @@
         <input ng-model="nuevo_usuario.confirmacion_de_password" type="password">
     </md-input-container>
 
-    <md-button class="md-raised md-primary" ng-click="registrarUsuario()">Registrar</md-button>
+    <md-button class="md-raised" ng-click="registrarUsuario()">Registrar</md-button>
 </div>

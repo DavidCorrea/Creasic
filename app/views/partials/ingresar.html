@@ -1,18 +1,13 @@
-<div layout="row" layout-align="center center">
+<div layout="column" layout-align="center center">
     <md-input-container>
         <label>E-Mail</label>
-        <input ng-model="user.title">
+        <input ng-model="usuario.email" type="email">
     </md-input-container>
 
     <md-input-container>
         <label>Password</label>
-        <input ng-model="user.email" type="password">
+        <input ng-model="usuario.password" type="password">
     </md-input-container>
 
-    <md-checkbox ng-model="data.cb2"
-                 aria-label="recordarContrasena"
-                 ng-true-value="'Yes'"
-                 ng-false-value="'No'">
-        Recordar Contrasena
-    </md-checkbox>
+    <md-button class="md-raised" ng-click="loguearUsuario()">Ingresar</md-button>
 </div>
