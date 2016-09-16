@@ -1,16 +1,3 @@
 <div class="container-fluid" ng-app="creasic">
-    <md-content class="md-padding">
-        <md-nav-bar md-selected-nav-item="home" nav-bar-aria-label="navigation links">
-            <md-nav-item md-nav-sref="home" name="creasic">Creasic</md-nav-item>
-            <md-nav-item md-nav-sref="letras" name="letras">Letras</md-nav-item>
-            <md-nav-item md-nav-sref="acordes" name="acordes">Acordes</md-nav-item>
-            <md-nav-item md-nav-sref="canciones" name="canciones">Canciones</md-nav-item>
-            <span flex> </span>
-            <md-nav-item md-nav-sref="ingresar" name="ingresar">Ingresar</md-nav-item>
-            <md-nav-item md-nav-sref="registrar" name="registrar">Registrar</md-nav-item>
-            <md-nav-item md-nav-sref="cerrarSesion" name="cerrarSesion">Cerrar Sesion</md-nav-item>
-        </md-nav-bar>
-    </md-content>
-
-    <md-content flex layout-padding ui-view> </md-content>
+    <ui-view></ui-view>
 </div>

@@ -1,13 +1,4 @@
 <div layout="column" layout-align="center center">
-    <md-content ng-show="hubo_errores">
-        <md-list flex>
-            <md-subheader class="md-no-sticky">Errores</md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="error in errores" ng-click="null">
-                <p>{{ error[0] }}</p>
-            </md-list-item>
-        </md-list>
-    </md-content>
-
     <md-input-container>
         <label>Nombre de Usuario</label>
         <input ng-model="nuevo_usuario.nombre_de_usuario">
