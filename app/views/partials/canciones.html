@@ -1,0 +1,10 @@
+<md-button href="#crearCancion"> Crear Cancion </md-button>
+</br>
+
+<md-list-item class="md-3-line" ng-repeat="cancion in canciones" ng-click="null">
+    <div class="md-list-item-text" layout="column">
+        <h3>{{ cancion.titulo }}</h3>
+    </div>
+</md-list-item>
+
+

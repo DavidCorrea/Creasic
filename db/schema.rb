@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911190413) do
+ActiveRecord::Schema.define(version: 20160917020301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "canciones", force: :cascade do |t|
+    t.string   "titulo",     default: "", null: false
+    t.string   "letra",      default: "", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  create_table "comentarios", force: :cascade do |t|
+    t.string   "contenido",  default: "", null: false
+    t.integer  "cancion_id",              null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["cancion_id"], name: "index_comentarios_on_cancion_id", using: :btree
+  end
 
   create_table "usuarios", force: :cascade do |t|
     t.string   "nombre_de_usuario",      default: "", null: false
