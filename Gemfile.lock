@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/tpmullan/angular_rails_csrf
+  revision: 3729c779237b64ddecd9054158abbfa362fa1add
+  specs:
+    angular_rails_csrf (1.0.4)
+      rails (>= 3, < 5.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -172,6 +179,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  angular_rails_csrf!
   bower-rails
   devise
   listen (~> 3.0.5)
