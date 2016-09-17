@@ -36,10 +36,19 @@ creasic.config(function($stateProvider) {
         templateUrl: 'views/ingresar'
     };
 
+    var crearCancionState = {
+        name: 'crearCancion',
+        url: '/crearCancion',
+        templateUrl: 'views/crear_cancion',
+        controller: 'crearCancionCtrl'
+
+    }
+
     $stateProvider.state(homeState);
     $stateProvider.state(letrasState);
     $stateProvider.state(acordesState);
     $stateProvider.state(cancionesState);
     $stateProvider.state(ingresarState);
     $stateProvider.state(registrarState);
+    $stateProvider.state(crearCancionState);
 });
