@@ -20,6 +20,8 @@ gem 'bower-rails'
 
 gem 'devise'
 
+gem 'angular_rails_csrf', git: 'https://github.com/tpmullan/angular_rails_csrf'
+
 group :development, :test do
   gem 'rspec-rails'
 
