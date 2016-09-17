@@ -6,4 +6,8 @@ class CancionController < ApplicationController
 
     render json: @cancion, status: :created
   end
+
+  def obtener_canciones
+    render json: Cancion.all
+  end
 end

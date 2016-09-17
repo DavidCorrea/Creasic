@@ -34,7 +34,8 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         parent: 'app',
         name: 'canciones',
         url: 'canciones',
-        templateUrl: 'views/canciones'
+        templateUrl: 'views/canciones',
+        controller: 'cancionesCtrl'
     };
 
     var registrarState = {
@@ -54,8 +55,9 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     };
 
     var crearCancionState = {
+        parent: 'app',
         name: 'crearCancion',
-        url: '/crearCancion',
+        url: 'crearCancion',
         templateUrl: 'views/crear_cancion',
         controller: 'crearCancionCtrl'
 

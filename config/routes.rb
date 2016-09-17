@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   post 'cancion/crear_cancion' => 'cancion#crear_cancion'
 
+  get 'cancion/obtener_canciones' => 'cancion#obtener_canciones'
+
 end

@@ -1,4 +1,4 @@
-creasic.controller("crearCancionCtrl", ['$scope', '$http', 'crearCancionService', 'toastService', 'navegacionService', function ($scope, $http, crearCancionService, toastService, navegacionService) {
+creasic.controller("crearCancionCtrl", ['$scope', '$http', 'cancionesService', 'toastService', 'navegacionService', function ($scope, $http, cancionesService, toastService, navegacionService) {
 
     $scope.cancion = {
         titulo: '',
@@ -6,7 +6,14 @@ creasic.controller("crearCancionCtrl", ['$scope', '$http', 'crearCancionService'
     };
 
     $scope.guardarCancion = function(){
-        crearCancionService.crearCancion($scope.cancion)
+        cancionesService.crearCancion($scope.cancion).then(function(response){
+            var texto = 'Cancion creada: ' + response.data.titulo;
+            toastService.mostrarMensaje(texto);
+            navegacionService.llevarACanciones();
+
+        }, function(){
+
+        });
     };
 
 }]);
