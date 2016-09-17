@@ -14,13 +14,17 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'active_model_serializers'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'bower-rails'
 
-group :development do
+gem 'devise'
+
+gem 'angular_rails_csrf', git: 'https://github.com/tpmullan/angular_rails_csrf'
+
+group :development, :test do
+  gem 'rspec-rails'
+
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'

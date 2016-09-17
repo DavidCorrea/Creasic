@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  root 'views#application_template'
+
+  get 'views/*path', :to => 'views#partial_template'
+
+  devise_for :usuarios, :controllers => { registrations: 'registracion' }
+
+  post 'cancion/crear_cancion' => 'cancion#crear_cancion'
+
+  get 'cancion/obtener_canciones' => 'cancion#obtener_canciones'
+
 end
