@@ -11,4 +11,8 @@ creasic.service('authObserverService', [function() {
             callback(usuario);
         })
     };
+
+    this.limpiarObservers = function() {
+        observerCallbacks = [];
+    }
 }]);

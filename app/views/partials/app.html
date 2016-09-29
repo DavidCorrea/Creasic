@@ -5,10 +5,11 @@
         <md-nav-item md-nav-sref="acordes" name="acordes">Acordes</md-nav-item>
         <md-nav-item md-nav-sref="canciones" name="canciones">Canciones</md-nav-item>
         <span flex> </span>
-        <md-nav-item md-nav-sref="ingresar" name="ingresar" ng-hide="existeSesion">Ingresar</md-nav-item>
-        <md-nav-item md-nav-sref="registrar" name="registrar" ng-hide="existeSesion">Registrar</md-nav-item>
-        <md-nav-item md-nav-sref="perfil" name="perfil" ng-show="existeSesion">Perfil</md-nav-item>
-        <md-nav-item md-nav-sref="cerrarSesion" ng-click="cerrarSesion()" name="cerrarSesion" ng-show="existeSesion">Cerrar Sesion</md-nav-item>
+        <md-nav-item md-nav-sref="ingresar" name="ingresar" ng-if="!existeSesion">Ingresar</md-nav-item>
+        <md-nav-item md-nav-sref="registrar" name="registrar" ng-if="!existeSesion">Registrar</md-nav-item>
+
+        <md-nav-item md-nav-sref="perfil" name="perfil" ng-if="existeSesion">Perfil</md-nav-item>
+        <md-nav-item md-nav-sref="cerrarSesion" ng-click="cerrarSesion()" name="cerrarSesion" ng-if="existeSesion">Cerrar Sesion</md-nav-item>
     </md-nav-bar>
 </md-content>
 

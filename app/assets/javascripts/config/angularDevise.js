@@ -9,4 +9,8 @@ creasic.config(function(AuthProvider) {
 
     AuthProvider.logoutPath('usuarios/sign_out.json');
     AuthProvider.logoutMethod('DELETE');
+
+    AuthProvider.parse(function(response) {
+        return Usuario.llenarDesde(response.data)
+    })
 });

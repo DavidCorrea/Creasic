@@ -20,7 +20,8 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         parent: 'app',
         name: 'letras',
         url: 'letras',
-        templateUrl: 'views/letras'
+        templateUrl: 'views/letras',
+        controller: 'letrasCtrl'
     };
 
     var acordesState = {
@@ -34,8 +35,7 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         parent: 'app',
         name: 'canciones',
         url: 'canciones',
-        templateUrl: 'views/canciones',
-        controller: 'cancionesCtrl'
+        templateUrl: 'views/canciones'
     };
 
     var registrarState = {
@@ -54,13 +54,12 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         controller: 'ingresoCtrl'
     };
 
-    var crearCancionState = {
+    var crearLetraState = {
         parent: 'app',
-        name: 'crearCancion',
-        url: 'crearCancion',
-        templateUrl: 'views/crear_cancion',
-        controller: 'crearCancionCtrl'
-
+        name: 'crearLetra',
+        url: 'crearLetra',
+        templateUrl: 'views/crear_letra',
+        controller: 'crearLetraCtrl'
     };
 
     var perfilState = {
@@ -75,7 +74,6 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         name: 'cerrarSesion'
     };
 
-
     $stateProvider.state(appParentState);
     $stateProvider.state(homeState);
     $stateProvider.state(letrasState);
@@ -83,7 +81,7 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(cancionesState);
     $stateProvider.state(ingresarState);
     $stateProvider.state(registrarState);
-    $stateProvider.state(crearCancionState);
+    $stateProvider.state(crearLetraState);
     $stateProvider.state(perfilState);
     $stateProvider.state(cerrarSesionState);
 });
