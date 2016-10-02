@@ -22,9 +22,17 @@ gem 'devise'
 
 gem 'angular_rails_csrf', git: 'https://github.com/tpmullan/angular_rails_csrf'
 
-group :development, :test do
+group :test do
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 3.1'
 
+  gem 'listen', '~> 3.0.5'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+end
+
+group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'

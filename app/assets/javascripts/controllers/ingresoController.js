@@ -1,15 +1,11 @@
-creasic.controller("ingresoCtrl", ['$scope', 'authService', 'authObserverService', 'toastService', 'navegacionService', function ($scope, authService, authObserverService, toastService, navegacionService) {
+creasic.controller("ingresoCtrl", ['$scope', 'authService', 'toastService', 'navegacionService', function ($scope, authService, toastService, navegacionService) {
 
-    $scope.usuario = {
-        email: '',
-        password: ''
-    };
+    $scope.usuario = new Usuario();
 
     $scope.loguearUsuario = function() {
-        authService.iniciarSesion($scope.usuario).then(function(usuarioRegistrado) {
+        authService.iniciarSesion($scope.usuario).then(function() {
             navegacionService.llevarAHome();
             toastService.mostrarMensaje('Ingreso satisfactorio.');
-            authObserverService.notifyObservers(usuarioRegistrado);
         }, function(response) {
 
         });

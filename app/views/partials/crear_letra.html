@@ -2,16 +2,16 @@
 
     <md-input-container>
         <label>Titulo</label>
-        <input ng-model="cancion.titulo">
+        <input ng-model="letra.titulo">
     </md-input-container>
 
 </div>
 
 <div>
     <md-input-container class="md-block md-input-has-value">
-        <label for="input_31">Letra</label>
+        <label for="input_31">Contenido</label>
         <div class="md-resize-wrapper">
-            <textarea ng-model="cancion.letra" md-maxlength="150" rows="5" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
+            <textarea ng-model="letra.contenido" md-maxlength="150" rows="5" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
 
             </textarea>
             <div class="md-resize-handle" style="touch-action: pan-y;">
@@ -24,4 +24,5 @@
     </md-input-container>
 </div>
 
-<md-button class="md-label" ng-click="guardarCancion()">Guardar Cancion</md-button>
+<md-button class="md-label" ui-sref="letras.todas">Cancelar</md-button>
+<md-button class="md-label" ng-click="guardarLetra()">Guardar Letra</md-button>

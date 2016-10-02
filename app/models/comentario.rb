@@ -1,5 +1,5 @@
 class Comentario < ApplicationRecord
 
-  belongs_to :cancion
+  belongs_to :letra
 
 end

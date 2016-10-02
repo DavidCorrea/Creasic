@@ -6,8 +6,7 @@ Rails.application.routes.draw do
 
   devise_for :usuarios, :controllers => { registrations: 'registracion' }
 
-  post 'cancion/crear_cancion' => 'cancion#crear_cancion'
-
-  get 'cancion/obtener_canciones' => 'cancion#obtener_canciones'
+  post 'letra/crear' => 'letras#crear'
+  get 'letra/obtener_letras' => 'letras#obtener_letras'
 
 end
