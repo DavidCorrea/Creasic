@@ -1,29 +1,35 @@
-creasic.service('authService', ['$http', 'Auth', function($http, Auth) {
+creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', function($http, $rootScope, lock, authManager) {
 
-    this.crearUsuario = function(usuario) {
-        return Auth.register(usuario, config);
-    };
-
-    this.iniciarSesion = function(usuario) {
-        return Auth.login(usuario, config);
+    this.iniciarSesion = function() {
+        lock.show();
     };
 
     this.cerrarSesion = function() {
-        return Auth.logout(config);
+        localStorage.removeItem('id_token');
+        localStorage.removeItem('usuario');
+        authManager.unauthenticate();
+    };
+
+    this.haySesion = function() {
+        return $rootScope.isAuthenticated;
     };
 
     this.sesionActual = function() {
-        return Auth.currentUser();
+        return localStorage.getItem('usuario');
     };
 
-    this.existeSesion = function() {
-        return Auth.isAuthenticated();
-    };
+    this.guardarInformacionDeSesion = function() {
+        lock.on('authenticated', function(authResult) {
+            localStorage.setItem('id_token', authResult.idToken);
+            authManager.authenticate();
 
-    var config = {
-        headers: {
-            'X-HTTP-Method-Override': 'POST'
-        }
+            lock.getProfile(authResult.idToken, function(error, response) {
+                debugger;
+                localStorage.setItem('usuario', Usuario.llenarDesde(response));
+                $rootScope.$broadcast('sesionIniciada');
+                $http.post('/usuarios/crear', {global_id: response.user_id});
+            });
+        });
     };
 
 }]);

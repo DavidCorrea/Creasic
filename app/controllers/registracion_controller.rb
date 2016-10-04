@@ -1,9 +1,9 @@
-class RegistracionController < Devise::RegistrationsController
-  skip_before_filter :verify_authenticity_token, :only => :create
+class RegistracionController < ApplicationController
 
-  private
-
-  def sign_up_params
-    params.require(:usuario).permit(:nombre_de_usuario, :email, :password)
+  def crear
+    unless Usuario.exists?(params[:global_id])
+      Usuario.create!(global_id: params[:global_id])
+    end
   end
+
 end

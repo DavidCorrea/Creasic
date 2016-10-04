@@ -2,11 +2,11 @@ Rails.application.routes.draw do
 
   root 'views#application_template'
 
-  get 'views/*path', :to => 'views#partial_template'
+  get  'views/*path',    :to => 'views#partial_template'
 
-  devise_for :usuarios, :controllers => { registrations: 'registracion' }
+  post 'usuarios/crear', :to => 'registracion#crear'
 
-  post 'letra/crear' => 'letras#crear'
-  get 'letra/obtener_letras' => 'letras#obtener_letras'
+  post 'letras/crear',   :to => 'letras#crear'
+  get  'letras/todas',   :to => 'letras#todas'
 
 end

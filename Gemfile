@@ -18,18 +18,11 @@ gem 'active_model_serializers'
 
 gem 'bower-rails'
 
-gem 'devise'
-
 gem 'angular_rails_csrf', git: 'https://github.com/tpmullan/angular_rails_csrf'
 
 group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers', '~> 3.1'
-
-  gem 'listen', '~> 3.0.5'
-
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
 end
 
 group :development do
