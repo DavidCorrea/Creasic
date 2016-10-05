@@ -1,5 +1,5 @@
 class Usuario < ApplicationRecord
 
-  validates_presence_of :global_id
+  validates_presence_of :id_externo
 
 end

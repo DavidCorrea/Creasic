@@ -24,10 +24,9 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', fu
             authManager.authenticate();
 
             lock.getProfile(authResult.idToken, function(error, response) {
-                debugger;
                 localStorage.setItem('usuario', Usuario.llenarDesde(response));
                 $rootScope.$broadcast('sesionIniciada');
-                $http.post('/usuarios/crear', {global_id: response.user_id});
+                $http.post('/usuarios/crear', {id_externo: response.user_id});
             });
         });
     };

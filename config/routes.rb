@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   get  'views/*path',    :to => 'views#partial_template'
 
-  post 'usuarios/crear', :to => 'registracion#crear'
+  post 'usuarios/crear', :to => 'usuarios#crear'
 
   post 'letras/crear',   :to => 'letras#crear'
   get  'letras/todas',   :to => 'letras#todas'
