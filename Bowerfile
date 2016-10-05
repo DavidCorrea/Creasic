@@ -1,4 +1,6 @@
 asset 'angular'
 asset 'angular-material'
-asset 'angular-devise'
 asset 'angular-ui-router'
+asset 'auth0-lock'
+asset 'angular-lock'
+asset 'angular-jwt'

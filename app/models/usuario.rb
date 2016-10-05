@@ -1,3 +1,5 @@
 class Usuario < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
+  validates_presence_of :id_externo
+
 end

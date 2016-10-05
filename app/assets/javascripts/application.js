@@ -16,6 +16,8 @@
 //= require angular-aria
 //= require angular-messages
 //= require angular-material
-//= require angular-devise
 //= require angular-ui-router
+//= require auth0-lock
+//= require angular-lock
+//= require angular-jwt
 //= require_tree .

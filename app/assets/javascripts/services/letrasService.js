@@ -1,11 +1,11 @@
 creasic.service('letrasService', ['$http', function($http) {
 
     this.crearLetra = function(cancion) {
-        return $http.post('letra/crear', cancion);
+        return $http.post('letras/crear', cancion);
     };
 
     this.obtenerTodasLasLetras = function(){
-        return $http.get('letra/obtener_letras');
+        return $http.get('letras/todas');
     };
 
 }]);

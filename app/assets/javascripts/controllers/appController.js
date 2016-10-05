@@ -1,22 +1,17 @@
 creasic.controller("appCtrl", ['$scope', 'authService', 'navegacionService', function ($scope, authService, navegacionService) {
 
-    authService.sesionActual().then(function(usuario) {
-        $scope.usuario = usuario;
-        $scope.existeSesion = authService.existeSesion();
-    }, function() {
-        navegacionService.llevarAHome();
-    });
-
-    $scope.cerrarSesion = function() {
-        authService.cerrarSesion($scope.usuario).then(function(usuarioViejo) {
-            $scope.existeSesion = authService.existeSesion();
-            navegacionService.llevarAHome();
-        });
+    $scope.iniciarSesion = function() {
+        authService.iniciarSesion();
     };
 
-    $scope.$on('devise:new-session', function(event, usuario) {
-        $scope.usuario = usuario;
-        $scope.existeSesion = authService.existeSesion();
+    $scope.cerrarSesion = function() {
+        authService.cerrarSesion();
+        $scope.haySesion = authService.haySesion();
+    };
+
+    $scope.$on('sesionIniciada', function(event, args) {
+        $scope.usuario = authService.sesionActual();
+        $scope.haySesion = authService.haySesion();
     });
 
 }]);

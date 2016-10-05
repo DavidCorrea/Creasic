@@ -7,9 +7,11 @@ function Letra() {
 /* Constructor */
 Letra.llenarDesde = function(datosDePropuesta) {
     var letra = new Letra();
+
     letra.id = datosDePropuesta.id;
     letra.titulo = datosDePropuesta.titulo;
     letra.contenido = datosDePropuesta.contenido;
+
     return letra;
 };
 
