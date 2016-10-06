@@ -12,10 +12,18 @@ class LetrasService
     Letra.all
   end
 
+  def ver_letra
+    Letra.find parametros_de_busqueda[:id]
+  end
+
   private
 
   def parametros_de_creacion
     @parametros.require(:letra).permit(:titulo, :contenido)
+  end
+
+  def parametros_de_busqueda
+    @parametros.permit(:id)
   end
 
 end

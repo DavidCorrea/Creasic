@@ -8,4 +8,8 @@ creasic.service('letrasService', ['$http', function($http) {
         return $http.get('letras/todas');
     };
 
+    this.obtenerLetra = function(id) {
+        return $http.get('letras/ver/' + id);
+    }
+
 }]);

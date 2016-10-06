@@ -8,6 +8,12 @@ class LetrasController < ApplicationController
     render json: @letra, status: :created
   end
 
+  def ver
+    @letra = @service.ver_letra
+
+    render json: @letra
+  end
+
   def todas
     render json: @service.todas_las_letras
   end
