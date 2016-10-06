@@ -8,5 +8,6 @@ Rails.application.routes.draw do
 
   post 'letras/crear',   :to => 'letras#crear'
   get  'letras/todas',   :to => 'letras#todas'
+  get  'letras/ver/*id', :to => 'letras#ver'
 
 end

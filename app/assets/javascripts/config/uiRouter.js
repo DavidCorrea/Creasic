@@ -38,6 +38,13 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         controller: 'crearLetraCtrl'
     };
 
+    var verLetraState = {
+        name: 'letras.ver',
+        url: '/{id}',
+        templateUrl: 'views/ver_letra',
+        controller: 'verLetraCtrl'
+    };
+
     var acordesState = {
         parent: 'app',
         name: 'acordes',
@@ -83,9 +90,10 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(appParentState);
     $stateProvider.state(homeState);
     $stateProvider.state(letrasState);
-    $stateProvider.state(todasLasletrasState);
     $stateProvider.state(crearLetraState);
     $stateProvider.state(acordesState);
+    $stateProvider.state(todasLasletrasState);
+    $stateProvider.state(verLetraState);
     $stateProvider.state(cancionesState);
     $stateProvider.state(ingresarState);
     $stateProvider.state(registrarState);
