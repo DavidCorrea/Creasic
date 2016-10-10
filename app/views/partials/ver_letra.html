@@ -4,17 +4,20 @@
     </div>
 </md-toolbar>
 
-
+<!--Seccion contenido letra-->
 <md-input-container>
     <textarea readonly ng-model="letra.contenido"></textarea>
 </md-input-container>
 
+
+<!--Seccion comentarios-->
 <div style="padding-top: 20px;">
     <span>
-        Comentarios
+        Comentarios ({{ letra.comentarios.length }})
     </span>
 </div>
 
+<!--Seccion comentarios realizados-->
 <md-card md-theme-watch ng-repeat="comentario in letra.comentarios">
     <md-card-title class="col-md-8">
         <span>{{comentario.contenido}}</span>
@@ -26,20 +29,18 @@
 
 <md-button ng-click="comentar()" ng-if="!comentando">Comentar</md-button>
 
+<!--Seccion nuevo comentario-->
 <md-card md-theme-watch ng-if="comentando">
     <md-card-title>
         <md-card-title-text>
-            <span class="md-subhead">
+
                 <md-input-container class="md-block md-input-has-value">
         <label for="input_31">Comentario</label>
         <div class="md-resize-wrapper">
             <textarea ng-model="comentario.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
-
             </textarea>
-
         </div>
     </md-input-container>
-            </span>
         </md-card-title-text>
         <md-card-title-media>
             <div class="md-media-sm card-media"></div>
