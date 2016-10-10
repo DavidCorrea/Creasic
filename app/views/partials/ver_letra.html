@@ -4,9 +4,10 @@
     </div>
 </md-toolbar>
 
-<md-content flex layout-padding>
-    {{ letra.contenido }}
-</md-content>
+
+<md-input-container>
+    <textarea readonly ng-model="letra.contenido"></textarea>
+</md-input-container>
 
 <div style="padding-top: 20px;">
     <span>
@@ -35,9 +36,7 @@
             <textarea ng-model="comentario.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
 
             </textarea>
-            <div class="md-resize-handle" style="touch-action: pan-y;">
 
-            </div>
         </div>
     </md-input-container>
             </span>
