@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   get  'letras/todas',   :to => 'letras#todas'
   get  'letras/ver/*id', :to => 'letras#ver'
 
+  post 'comentarios/crear', :to => 'comentarios#crear'
+  get 'comentarios/todos/*letra_id', :to => 'comentarios#todos'
+
 end
