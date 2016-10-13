@@ -13,4 +13,7 @@ Rails.application.routes.draw do
   post 'comentarios/crear', :to => 'comentarios#crear'
   get 'comentarios/todos/*letra_id', :to => 'comentarios#todos'
 
+  post 'comentarios_anidados/crear', :to => 'comentarios_anidados#crear'
+  get 'comentarios_anidados/todos/*comentario_id', :to => 'comentarios_anidados#todos'
+
 end

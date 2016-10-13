@@ -18,14 +18,19 @@
 </div>
 
 <!--Seccion comentarios realizados-->
-<md-card md-theme-watch ng-repeat="comentario in letra.comentarios">
-    <md-card-title class="col-md-8">
-        <span>{{comentario.contenido}}</span>
-    </md-card-title>
-    <md-card-actions class="col-md-4" layout="row" layout-align="end center">
-        <md-button ng-click="Responder()">Responder</md-button>
-    </md-card-actions>
-</md-card>
+<div ng-repeat="comentario in letra.comentarios">
+    <md-card md-theme-watch>
+        <md-card-title class="col-md-8">
+            <span>{{comentario.contenido}}</span>
+        </md-card-title>
+        <md-card-actions class="col-md-4" layout="row" layout-align="end center">
+            <md-button ng-click="responder()">Responder</md-button>
+        </md-card-actions>
+    </md-card>
+    <md-card ng-repeat="comentarioAnidado in comentario.comentariosAnidados">
+        <span> {{comentarioAnidado.contenido}} </span>
+    </md-card>
+</div>
 
 <md-button ng-click="comentar()" ng-if="!comentando">Comentar</md-button>
 

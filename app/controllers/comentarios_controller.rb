@@ -12,6 +12,8 @@ class ComentariosController < ApplicationController
     render json: @service.todos_los_comentarios
   end
 
+
+
   private
 
   def crear_service
