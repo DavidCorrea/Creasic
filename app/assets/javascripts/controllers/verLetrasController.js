@@ -6,7 +6,6 @@ creasic.controller('verLetraCtrl', ['$scope', '$stateParams', 'letrasService', '
             $scope.letra.comentarios = response.data;
 
             angular.forEach($scope.letra.comentarios, function(comentario){
-                debugger;
                 comentariosAnidadosService.obtenerTodosLosComentariosAnidados(comentario.id).then(function(response){
                     comentario.comentariosAnidados = response.data;
                 });
@@ -16,7 +15,7 @@ creasic.controller('verLetraCtrl', ['$scope', '$stateParams', 'letrasService', '
     });
 
     $scope.comentando = false;
-    $scope.anidandoComentarios = false;
+    $scope.anidando1 = false;
 
     $scope.comentar = function() {
         $scope.comentario = new Comentario($scope.letra);
@@ -38,15 +37,24 @@ creasic.controller('verLetraCtrl', ['$scope', '$stateParams', 'letrasService', '
         });
     };
 
-    $scope.responder = function(comentario){
-        $scope.comentarioAnidado = new ComentarioAnidado(comentario);
-        $scope.anidandoComentarios = true;
+    $scope.responder = function(comentario_id){
+        $scope.comentarioAnidado = new ComentarioAnidado();
+        $scope['anidando' + comentario_id] = true;
     };
 
-    $scope.guardarComentarioAnidado = function(comentario){
+    $scope.cancelarComentarioAnidado = function (comentario_id) {
+        $scope['anidando' + comentario_id] = false;
+    };
+
+    $scope.guardarComentarioAnidado = function(comentario_id){
+        $scope.comentarioAnidado.comentario_id = comentario_id;
         comentariosAnidadosService.crearComentarioAnidado($scope.comentarioAnidado).then(function(response){
-            var comentarioAnidadoCreado = ComentarioAnidado.llenarDesde(response.data, comentario)
-            comentario.comentariosAnidados.push(comentarioAnidadoCreado);
+            var comentarioAnidadoCreado = ComentarioAnidado.llenarDesde(response.data);
+            var comentario = $scope.letra.comentarios.filter(function (com) {
+                return (com.id == comentario_id);
+            });
+            comentario[0].comentariosAnidados.push(comentarioAnidadoCreado);
+            $scope['anidando' + comentario_id] = false;
         });
     };
 }]);

@@ -10,6 +10,12 @@
 </md-input-container>
 
 
+
+
+
+
+
+
 <!--Seccion comentarios-->
 <div style="padding-top: 20px;">
     <span>
@@ -20,15 +26,38 @@
 <!--Seccion comentarios realizados-->
 <div ng-repeat="comentario in letra.comentarios">
     <md-card md-theme-watch>
-        <md-card-title class="col-md-8">
+        <md-card-title>
             <span>{{comentario.contenido}}</span>
         </md-card-title>
-        <md-card-actions class="col-md-4" layout="row" layout-align="end center">
-            <md-button ng-click="responder()">Responder</md-button>
+
+        <md-card flex-offset="10" md-theme-watch ng-repeat="comentarioAnidado in comentario.comentariosAnidados">
+            <md-card-title>
+                <span> {{comentarioAnidado.contenido}} </span>
+            </md-card-title>
+        </md-card>
+
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="responder(comentario.id)" ng-show="!(anidando{{comentario.id}})">Responder</md-button>
         </md-card-actions>
-    </md-card>
-    <md-card ng-repeat="comentarioAnidado in comentario.comentariosAnidados">
-        <span> {{comentarioAnidado.contenido}} </span>
+
+        <md-card flex-offset="10" md-theme-watch ng-show="anidando{{comentario.id}}" + {{comentario.id}}>
+                <md-card-title-text>
+                    <md-input-container class="md-block md-input-has-value">
+                        <label for="input_31">Respuesta</label>
+                        <div class="md-resize-wrapper">
+                            <textarea ng-model="comentarioAnidado.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
+                            </textarea>
+                        </div>
+                    </md-input-container>
+                </md-card-title-text>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-click="cancelarComentarioAnidado(comentario.id)">Cancelar</md-button>
+                <md-button ng-click="guardarComentarioAnidado(comentario.id)">Aceptar</md-button>
+            </md-card-actions>
+        </md-card>
+
+
+
     </md-card>
 </div>
 

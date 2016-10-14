@@ -3,7 +3,7 @@ class ComentariosAnidadosController < ApplicationController
   before_action :crear_service
 
   def crear
-    @comentario_anidado = @service.crear_comentario
+    @comentario_anidado = @service.crear_comentario_anidado
 
     render json: @comentario_anidado, status: :created
   end

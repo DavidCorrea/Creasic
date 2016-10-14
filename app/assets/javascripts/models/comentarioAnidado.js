@@ -5,14 +5,15 @@ function ComentarioAnidado() {
 }
 
 /* Constructor */
-ComentarioAnidado.llenarDesde = function(datosDePropuesta, comentario) {
+ComentarioAnidado.llenarDesde = function(datosDePropuesta) {
+    debugger;
     var comentarioAnidado = new ComentarioAnidado();
 
-    comentario.id = datosDePropuesta.id;
-    comentario.contenido = datosDePropuesta.contenido;
-    comentario.comentario_id = comentario.id;
+    comentarioAnidado.id = datosDePropuesta.id;
+    comentarioAnidado.contenido = datosDePropuesta.contenido;
+    comentarioAnidado.comentario_id = datosDePropuesta.comentario_id;
 
-    return comentario;
+    return comentarioAnidado;
 };
 
 /* Métodos de Instancia. */
