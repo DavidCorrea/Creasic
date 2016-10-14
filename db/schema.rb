@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005033131) do
+ActiveRecord::Schema.define(version: 20161013043854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,9 +25,17 @@ ActiveRecord::Schema.define(version: 20161005033131) do
 
   create_table "letras", force: :cascade do |t|
     t.string   "titulo",     default: "", null: false
-    t.string   "contenido",  default: "", null: false
+    t.text     "contenido",  default: "", null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "respuestas", force: :cascade do |t|
+    t.string   "contenido",     default: "", null: false
+    t.integer  "comentario_id",              null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["comentario_id"], name: "index_respuestas_on_comentario_id", using: :btree
   end
 
   create_table "usuarios", force: :cascade do |t|

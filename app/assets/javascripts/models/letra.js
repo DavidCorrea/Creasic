@@ -1,16 +1,21 @@
 function Letra() {
-    this.id = 0;
     this.titulo = "";
     this.contenido = "";
+    this.comentarios = [];
 }
 
 /* Constructor */
-Letra.llenarDesde = function(datosDePropuesta) {
+Letra.llenarDesde = function(datosDeLetra) {
     var letra = new Letra();
 
-    letra.id = datosDePropuesta.id;
-    letra.titulo = datosDePropuesta.titulo;
-    letra.contenido = datosDePropuesta.contenido;
+    letra.id = datosDeLetra.id;
+    letra.titulo = datosDeLetra.titulo;
+    letra.contenido = datosDeLetra.contenido;
+
+    angular.forEach(datosDeLetra.comentarios, function(comentario) {
+        var comentarioAAgregar = Comentario.llenarDesde(comentario, letra);
+        letra.comentarios.push(comentarioAAgregar);
+    });
 
     return letra;
 };

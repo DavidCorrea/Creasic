@@ -38,18 +38,18 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         controller: 'crearLetraCtrl'
     };
 
-    var crearComentarioState = {
-        name: 'comentarios.crear',
-        url: '/crear',
-        templateUrl: 'views/ver_letra',
-        controller: 'verLetraCtrl'
-    };
-
     var verLetraState = {
         name: 'letras.ver',
         url: '/{id}',
         templateUrl: 'views/ver_letra',
-        controller: 'verLetraCtrl'
+        controller: 'verLetraCtrl',
+        resolve: {
+            letra: function($stateParams, letrasService) {
+                return letrasService.obtenerLetra($stateParams.id).then(function(response) {
+                    return Letra.llenarDesde(response.data);
+                });
+            }
+        }
     };
 
     var acordesState = {
@@ -106,5 +106,4 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(registrarState);
     $stateProvider.state(perfilState);
     $stateProvider.state(cerrarSesionState);
-    $stateProvider.state(crearComentarioState);
 });
