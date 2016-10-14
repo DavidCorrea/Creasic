@@ -35,7 +35,6 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', 'toastSe
 
     $scope.guardarRespuesta = function(){
         letrasService.agregarRespuesta($scope.respuesta).then(function(response) {
-            debugger;
             $scope.letra = Letra.llenarDesde(response.data);
             $scope.comentarioSiendoRespondido = null;
         });
