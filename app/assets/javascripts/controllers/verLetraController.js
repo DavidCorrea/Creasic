@@ -6,8 +6,13 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
 
     $scope.comentando = false;
 
+    $scope.sePuedeComentar = function() {
+      if(!$scope.haySesion)
+          return false;
+      return $scope.comentando;
+    };
+
     $scope.comentar = function() {
-        debugger;
         $scope.comentario = new Comentario($scope.letra, $scope.usuario.id);
         $scope.comentando = true;
     };
@@ -26,6 +31,10 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
     $scope.responder = function(comentario){
         $scope.respuesta = new Respuesta(comentario, $scope.usuario.id);
         $scope.comentarioSiendoRespondido = comentario.id;
+    };
+
+    $scope.sePuedeResponder = function() {
+      return $scope.haySesion;
     };
 
     $scope.estaRespondiendo = function(idComentario) {
@@ -47,6 +56,12 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
 
     $scope.enModoEdicion = false;
 
+    $scope.sePuedeEditar = function() {
+        if(!$scope.haySesion)
+            return false;
+        return $scope.puedeSerEditadaPorUsuarioLogueado();
+    };
+
     $scope.entrarModoEdicion = function() {
         $scope.enModoEdicion = true;
     };
@@ -62,8 +77,8 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
         $scope.enModoEdicion = false;
     };
 
-    $scope.puedeSerEditadaPor = function(usuario) {
-        return $scope.letra.usuario_id === usuario.id;
+    $scope.puedeSerEditadaPorUsuarioLogueado = function() {
+        return $scope.letra.usuario_id === $scope.usuario.id;
     };
 
 }]);

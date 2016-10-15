@@ -57,7 +57,7 @@
         </md-card>
 
         <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-click="responder(comentario)">Responder</md-button>
+            <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
         </md-card-actions>
 
         <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
@@ -78,7 +78,7 @@
     </md-card>
 </div>
 
-<md-card md-theme-watch ng-if="comentando">
+<md-card md-theme-watch ng-show="comentando">
     <md-card-title>
         <md-card-title-text>
             <md-input-container class="md-block md-input-has-value">
@@ -106,9 +106,9 @@
 <md-divider></md-divider>
 
 <section layout="row" layout-sm="column" layout-wrap>
-    <md-button ng-click="comentar()" ng-if="!comentando">Comentar</md-button>
+    <md-button ng-click="comentar()" ng-show="sePuedeComentar()">Comentar</md-button>
 
-    <md-button class="md-label" ng-click="entrarModoEdicion()" ng-hide="enModoEdicion || !puedeSerEditadaPor(usuario)">Editar</md-button>
+    <md-button class="md-label" ng-click="entrarModoEdicion()" ng-show="sePuedeEditar()">Editar</md-button>
     <md-button class="md-label" ui-sref="letras.todas" ng-hide="enModoEdicion">Volver</md-button>
 
     <md-button class="md-label" ng-click="guardarEdicion()" ng-show="enModoEdicion">Guardar</md-button>
