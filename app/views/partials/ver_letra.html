@@ -4,9 +4,72 @@
     </div>
 </md-toolbar>
 
-<md-content flex layout-padding>
-    {{ letra.contenido }}
-</md-content>
+<md-input-container>
+    <textarea readonly ng-model="letra.contenido"></textarea>
+</md-input-container>
+
+<div style="padding-top: 20px;">
+    <span>
+        Comentarios ({{ letra.comentarios.length }})
+    </span>
+</div>
+
+<div ng-repeat="comentario in letra.comentarios">
+    <md-card md-theme-watch>
+        <md-card-title>
+            <span>{{comentario.contenido}}</span>
+        </md-card-title>
+
+        <md-card flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
+            <md-card-title>
+                <span> {{respuesta.contenido}} </span>
+            </md-card-title>
+        </md-card>
+
+        <md-card-actions layout="row" layout-align="end center">
+            <md-button ng-click="responder(comentario)">Responder</md-button>
+        </md-card-actions>
+
+        <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
+            <md-card-title-text>
+                <md-input-container class="md-block md-input-has-value">
+                    <label for="input_31">Respuesta</label>
+                    <div class="md-resize-wrapper">
+                        <textarea ng-model="respuesta.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
+                        </textarea>
+                    </div>
+                </md-input-container>
+            </md-card-title-text>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-click="cancelarRespuesta()">Cancelar</md-button>
+                <md-button ng-click="guardarRespuesta()">Aceptar</md-button>
+            </md-card-actions>
+        </md-card>
+    </md-card>
+</div>
+
+<md-button ng-click="comentar()" ng-if="!comentando">Comentar</md-button>
+
+<md-card md-theme-watch ng-if="comentando">
+    <md-card-title>
+        <md-card-title-text>
+            <md-input-container class="md-block md-input-has-value">
+                <label for="input_31">Comentario</label>
+                <div class="md-resize-wrapper">
+                    <textarea ng-model="comentario.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
+                    </textarea>
+                </div>
+            </md-input-container>
+        </md-card-title-text>
+        <md-card-title-media>
+            <div class="md-media-sm card-media"></div>
+        </md-card-title-media>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="cancelarComentario()">Cancelar</md-button>
+        <md-button ng-click="guardarComentario()">Aceptar</md-button>
+    </md-card-actions>
+</md-card>
 
 <section layout="row" layout-sm="column" layout-wrap>
     <md-button class="md-label" ui-sref="letras.todas">Volver</md-button>

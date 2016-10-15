@@ -1,7 +1,7 @@
 creasic.service('letrasService', ['$http', function($http) {
 
-    this.crearLetra = function(cancion) {
-        return $http.post('letras/crear', cancion);
+    this.crearLetra = function(letra) {
+        return $http.post('letras/crear', letra);
     };
 
     this.obtenerTodasLasLetras = function(){
@@ -10,6 +10,14 @@ creasic.service('letrasService', ['$http', function($http) {
 
     this.obtenerLetra = function(id) {
         return $http.get('letras/ver/' + id);
-    }
+    };
+
+    this.agregarComentario = function(comentario) {
+        return $http.post('letras/comentar/' + comentario.letra_id, comentario);
+    };
+
+    this.agregarRespuesta = function(respuesta) {
+        return $http.post('letras/responder/' + respuesta.comentario_id, respuesta);
+    };
 
 }]);

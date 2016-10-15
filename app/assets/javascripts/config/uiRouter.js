@@ -42,7 +42,14 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         name: 'letras.ver',
         url: '/{id}',
         templateUrl: 'views/ver_letra',
-        controller: 'verLetraCtrl'
+        controller: 'verLetraCtrl',
+        resolve: {
+            letra: function($stateParams, letrasService) {
+                return letrasService.obtenerLetra($stateParams.id).then(function(response) {
+                    return Letra.llenarDesde(response.data);
+                });
+            }
+        }
     };
 
     var acordesState = {
