@@ -7,7 +7,8 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
     $scope.comentando = false;
 
     $scope.comentar = function() {
-        $scope.comentario = new Comentario($scope.letra);
+        debugger;
+        $scope.comentario = new Comentario($scope.letra, $scope.usuario.id);
         $scope.comentando = true;
     };
 
@@ -23,7 +24,7 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
     };
 
     $scope.responder = function(comentario){
-        $scope.respuesta = new Respuesta(comentario);
+        $scope.respuesta = new Respuesta(comentario, $scope.usuario.id);
         $scope.comentarioSiendoRespondido = comentario.id;
     };
 
@@ -61,5 +62,8 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
         $scope.enModoEdicion = false;
     };
 
+    $scope.puedeSerEditadaPor = function(usuario) {
+        return $scope.letra.usuario_id === usuario.id;
+    };
 
 }]);

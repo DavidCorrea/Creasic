@@ -8,7 +8,7 @@
         </md-input-container>
     </div>
 
-    <h5 ng-hide="enModoEdicion">by David</h5>
+    <h5 ng-hide="enModoEdicion">by {{letra.emailUsuario}}</h5>
 </div>
 
 <div>
@@ -42,7 +42,12 @@
 <div ng-repeat="comentario in letra.comentarios">
     <md-card md-theme-watch>
         <md-card-title>
-            <span>{{comentario.contenido}}</span>
+            <span>
+                {{comentario.emailUsuario}} dijo:
+                <br>
+                <br>
+                {{comentario.contenido}}
+            </span>
         </md-card-title>
 
         <md-card flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
@@ -73,8 +78,6 @@
     </md-card>
 </div>
 
-<md-button ng-click="comentar()" ng-if="!comentando">Comentar</md-button>
-
 <md-card md-theme-watch ng-if="comentando">
     <md-card-title>
         <md-card-title-text>
@@ -103,7 +106,9 @@
 <md-divider></md-divider>
 
 <section layout="row" layout-sm="column" layout-wrap>
-    <md-button class="md-label" ng-click="entrarModoEdicion()" ng-hide="enModoEdicion">Editar</md-button>
+    <md-button ng-click="comentar()" ng-if="!comentando">Comentar</md-button>
+
+    <md-button class="md-label" ng-click="entrarModoEdicion()" ng-hide="enModoEdicion || !puedeSerEditadaPor(usuario)">Editar</md-button>
     <md-button class="md-label" ui-sref="letras.todas" ng-hide="enModoEdicion">Volver</md-button>
 
     <md-button class="md-label" ng-click="guardarEdicion()" ng-show="enModoEdicion">Guardar</md-button>

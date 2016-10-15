@@ -1,5 +1,6 @@
 class Letra < ApplicationRecord
 
+  belongs_to :usuario
   has_many :comentarios
 
   validates_presence_of :titulo, :contenido

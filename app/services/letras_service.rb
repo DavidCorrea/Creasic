@@ -2,6 +2,7 @@ class LetrasService
 
   def initialize params
     @parametros = params
+    asignar_usuario
   end
 
   def crear_letra
@@ -36,8 +37,15 @@ class LetrasService
 
   private
 
+  def asignar_usuario
+    if @parametros[:usuario_id]
+      @usuario = Usuario.find_by_id_externo(@parametros[:usuario_id])
+    end
+  end
+
   def parametros_de_creacion
-    @parametros.require(:letra).permit(:titulo, :contenido)
+    @parametros.require(:letra).permit(:titulo, :contenido).merge({usuario: @usuario})
+
   end
 
   def parametros_de_busqueda
@@ -45,15 +53,15 @@ class LetrasService
   end
 
   def parametros_de_creacion_de_comentario
-    @parametros.permit(:letra_id, :contenido)
+    @parametros.permit(:letra_id, :contenido).merge({usuario: @usuario})
   end
 
   def parametros_de_creacion_de_respuesta
-    @parametros.permit(:comentario_id, :contenido)
+    @parametros.permit(:comentario_id, :contenido).merge({usuario: @usuario})
   end
 
   def parametros_de_edicion
-    @parametros.require(:letra).permit(:titulo, :contenido)
+    @parametros.require(:letra).permit(:titulo, :contenido).merge({usuario: @usuario})
   end
 
 end
