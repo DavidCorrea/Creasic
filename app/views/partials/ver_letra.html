@@ -1,17 +1,42 @@
-<md-toolbar class="md-warn">
-    <div class="md-toolbar-tools">
-        <h2 class="md-flex">{{ letra. titulo }}</h2>
+<div layout="column" layout-align="center center">
+    <div>
+        <h1 ng-hide="enModoEdicion" style="color: orangered">{{ letra.titulo }} </h1>
+
+        <md-input-container ng-show="enModoEdicion">
+            <label>Titulo</label>
+            <input ng-model="letra.titulo">
+        </md-input-container>
     </div>
-</md-toolbar>
 
-<md-input-container>
-    <textarea readonly ng-model="letra.contenido"></textarea>
-</md-input-container>
+    <h5 ng-hide="enModoEdicion">by David</h5>
+</div>
 
-<div style="padding-top: 20px;">
-    <span>
-        Comentarios ({{ letra.comentarios.length }})
-    </span>
+<div>
+    <md-content ng-hide="enModoEdicion" style="white-space: pre-line;" flex="90" flex-offset="5">
+        {{ letra.contenido }}
+    </md-content>
+
+    <md-input-container class="md-block" ng-show="enModoEdicion" flex="90" flex-offset="5">
+        <label>Contenido</label>
+        <div class="md-resize-wrapper">
+            <textarea ng-model="letra.contenido" rows="5" aria-invalid="false">
+            </textarea>
+        </div>
+    </md-input-container>
+</div>
+
+<br>
+
+<br>
+
+<md-divider></md-divider>
+
+<div>
+    <div style="padding-top: 20px;">
+        <span>
+            Comentarios ({{ letra.comentarios.length }})
+        </span>
+    </div>
 </div>
 
 <div ng-repeat="comentario in letra.comentarios">
@@ -56,8 +81,8 @@
             <md-input-container class="md-block md-input-has-value">
                 <label for="input_31">Comentario</label>
                 <div class="md-resize-wrapper">
-                    <textarea ng-model="comentario.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
-                    </textarea>
+                        <textarea ng-model="comentario.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
+                        </textarea>
                 </div>
             </md-input-container>
         </md-card-title-text>
@@ -71,6 +96,16 @@
     </md-card-actions>
 </md-card>
 
+<br>
+
+<br>
+
+<md-divider></md-divider>
+
 <section layout="row" layout-sm="column" layout-wrap>
-    <md-button class="md-label" ui-sref="letras.todas">Volver</md-button>
+    <md-button class="md-label" ng-click="entrarModoEdicion()" ng-hide="enModoEdicion">Editar</md-button>
+    <md-button class="md-label" ui-sref="letras.todas" ng-hide="enModoEdicion">Volver</md-button>
+
+    <md-button class="md-label" ng-click="guardarEdicion()" ng-show="enModoEdicion">Guardar</md-button>
+    <md-button class="md-label" ng-click="cancelarModoEdicion()" ng-show="enModoEdicion">Cancelar</md-button>
 </section>

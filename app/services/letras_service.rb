@@ -16,6 +16,12 @@ class LetrasService
     Letra.find parametros_de_busqueda[:id]
   end
 
+  def editar
+    letra_a_editar = ver_letra
+    letra_a_editar.update! parametros_de_edicion
+    letra_a_editar
+  end
+
   def agregar_comentario
     letra_a_utilizar = Letra.find parametros_de_creacion_de_comentario[:letra_id]
     letra_a_utilizar.comentarios.create parametros_de_creacion_de_comentario
@@ -44,6 +50,10 @@ class LetrasService
 
   def parametros_de_creacion_de_respuesta
     @parametros.permit(:comentario_id, :contenido)
+  end
+
+  def parametros_de_edicion
+    @parametros.require(:letra).permit(:titulo, :contenido)
   end
 
 end

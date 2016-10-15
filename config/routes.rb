@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'letras/crear',                    :to => 'letras#crear'
   get  'letras/todas',                    :to => 'letras#todas'
   get  'letras/ver/*id',                  :to => 'letras#ver'
+  post 'letras/editar/*id',               :to => 'letras#editar'
   post 'letras/comentar/*id',             :to => 'letras#agregar_comentario'
   post 'letras/responder/*comentario_id', :to => 'letras#agregar_respuesta'
 

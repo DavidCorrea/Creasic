@@ -1,6 +1,8 @@
-creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', 'toastService', function ($scope, letra, letrasService, toastService) {
+creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function ($scope, letra, letrasService) {
 
     $scope.letra = letra;
+
+    /* Comentarios */
 
     $scope.comentando = false;
 
@@ -39,4 +41,25 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', 'toastSe
             $scope.comentarioSiendoRespondido = null;
         });
     };
+
+    /* Edicion */
+
+    $scope.enModoEdicion = false;
+
+    $scope.entrarModoEdicion = function() {
+        $scope.enModoEdicion = true;
+    };
+
+    $scope.guardarEdicion = function() {
+        letrasService.editarLetra($scope.letra).then(function(response) {
+            $scope.letra = Letra.llenarDesde(response.data);
+            $scope.enModoEdicion = false;
+        });
+    };
+
+    $scope.cancelarModoEdicion = function() {
+        $scope.enModoEdicion = false;
+    };
+
+
 }]);
