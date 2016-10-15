@@ -59,7 +59,7 @@ creasic.controller('verLetraCtrl', ['$scope', 'letra', 'letrasService', function
     $scope.sePuedeEditar = function() {
         if(!$scope.haySesion)
             return false;
-        return $scope.puedeSerEditadaPorUsuarioLogueado();
+        return $scope.puedeSerEditadaPorUsuarioLogueado() && !$scope.enModoEdicion;
     };
 
     $scope.entrarModoEdicion = function() {
