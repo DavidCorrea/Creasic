@@ -12,6 +12,10 @@ creasic.service('letrasService', ['$http', function($http) {
         return $http.get('letras/ver/' + id);
     };
 
+    this.editarLetra = function(nuevaLetra) {
+        return $http.post('letras/editar/' + nuevaLetra.id, nuevaLetra);
+    };
+
     this.agregarComentario = function(comentario) {
         return $http.post('letras/comentar/' + comentario.letra_id, comentario);
     };

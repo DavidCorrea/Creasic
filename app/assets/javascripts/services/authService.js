@@ -11,11 +11,13 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', fu
     };
 
     this.haySesion = function() {
-        return $rootScope.isAuthenticated;
+        return localStorage.getItem('usuario') !== null;
     };
 
     this.sesionActual = function() {
-        return localStorage.getItem('usuario');
+        if(this.haySesion()) {
+            return Usuario.llenarDesde(JSON.parse(localStorage.getItem('usuario')));
+        }
     };
 
     this.guardarInformacionDeSesion = function() {
@@ -24,9 +26,9 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', fu
             authManager.authenticate();
 
             lock.getProfile(authResult.idToken, function(error, response) {
-                localStorage.setItem('usuario', Usuario.llenarDesde(response));
+                localStorage.setItem('usuario', JSON.stringify(response));
                 $rootScope.$broadcast('sesionIniciada');
-                $http.post('/usuarios/crear', {id_externo: response.user_id});
+                $http.post('/usuarios/crear', {id_externo: response.user_id, email: response.email});
             });
         });
     };

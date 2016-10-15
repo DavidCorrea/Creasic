@@ -1,11 +1,14 @@
-<md-button ui-sref="letras.crear"> Crear Letra </md-button>
+<md-button ui-sref="letras.crear" ng-if="haySesion"> Crear Letra </md-button>
 
-</br>
+<br>
+
+<br>
 
 <md-list flex>
     <md-list-item class="md-3-line" ng-repeat="letra in letras" ui-sref="letras.ver({id: letra.id})">
         <div class="md-list-item-text" layout="column">
-            <h3>{{ letra.titulo }}</h3>
+            <h2 style="color: orangered">{{ letra.titulo }} </h2>
+            by {{ letra.emailUsuario}}
         </div>
     </md-list-item>
 </md-list>

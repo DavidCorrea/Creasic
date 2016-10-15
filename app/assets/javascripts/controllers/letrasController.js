@@ -6,6 +6,6 @@ creasic.controller('letrasCtrl', ['$scope', 'letrasService', function ($scope, l
         angular.forEach(response.data, function(letra_json) {
             $scope.letras.push(Letra.llenarDesde(letra_json))
         });
-    })
+    });
 
 }]);

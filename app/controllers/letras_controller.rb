@@ -16,6 +16,10 @@ class LetrasController < ApplicationController
     render json: @service.todas_las_letras
   end
 
+  def editar
+    render json: @service.editar
+  end
+
   def agregar_comentario
     @letra = @service.agregar_comentario
     render json: @letra, status: :created
