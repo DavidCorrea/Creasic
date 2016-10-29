@@ -1,7 +1,7 @@
 class Letra < ApplicationRecord
 
   belongs_to :usuario
-  has_many :comentarios
+  has_many :comentarios, as: :comentable
 
   validates_presence_of :titulo, :contenido
   validates_length_of :titulo, minimum: 3

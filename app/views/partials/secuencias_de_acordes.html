@@ -1,0 +1,14 @@
+<md-button ui-sref="secuenciasDeAcordes.crear" ng-if="haySesion">Crear Secuencia de Acordes</md-button>
+
+<br>
+
+<br>
+
+<md-list flex>
+    <md-list-item class="md-3-line" ng-repeat="secuencia in secuenciasDeAcordes" ui-sref="secuenciasDeAcordes.ver({id: secuencia.id})">
+        <div class="md-list-item-text" layout="column">
+            <h2 style="color: orangered">{{ secuencia.titulo }} </h2>
+            by {{ secuencia.emailUsuario }}
+        </div>
+    </md-list-item>
+</md-list>

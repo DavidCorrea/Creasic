@@ -10,18 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015052024) do
+ActiveRecord::Schema.define(version: 20161029162210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "acordes", force: :cascade do |t|
+    t.integer "posicion",                default: 0, null: false
+    t.integer "secuencia_de_acordes_id",             null: false
+    t.index ["secuencia_de_acordes_id"], name: "index_acordes_on_secuencia_de_acordes_id", using: :btree
+  end
+
+  create_table "acordes_notas", id: false, force: :cascade do |t|
+    t.integer "acorde_id"
+    t.integer "nota_id"
+    t.index ["acorde_id"], name: "index_acordes_notas_on_acorde_id", using: :btree
+    t.index ["nota_id"], name: "index_acordes_notas_on_nota_id", using: :btree
+  end
+
+  create_table "canciones", force: :cascade do |t|
+    t.integer "usuario_id", null: false
+    t.index ["usuario_id"], name: "index_canciones_on_usuario_id", using: :btree
+  end
+
   create_table "comentarios", force: :cascade do |t|
-    t.string   "contenido",  default: "", null: false
-    t.integer  "letra_id",                null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.integer  "usuario_id",              null: false
-    t.index ["letra_id"], name: "index_comentarios_on_letra_id", using: :btree
+    t.string   "contenido",       default: "", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "usuario_id",                   null: false
+    t.string   "comentable_type"
+    t.integer  "comentable_id"
+    t.index ["comentable_type", "comentable_id"], name: "index_comentarios_on_comentable_type_and_comentable_id", using: :btree
   end
 
   create_table "letras", force: :cascade do |t|
@@ -32,6 +51,11 @@ ActiveRecord::Schema.define(version: 20161015052024) do
     t.integer  "usuario_id",              null: false
   end
 
+  create_table "notas", force: :cascade do |t|
+    t.string "cifrado", null: false
+    t.string "nombre",  null: false
+  end
+
   create_table "respuestas", force: :cascade do |t|
     t.string   "contenido",     default: "", null: false
     t.integer  "comentario_id",              null: false
@@ -39,6 +63,13 @@ ActiveRecord::Schema.define(version: 20161015052024) do
     t.datetime "updated_at",                 null: false
     t.integer  "usuario_id",                 null: false
     t.index ["comentario_id"], name: "index_respuestas_on_comentario_id", using: :btree
+  end
+
+  create_table "secuencias_de_acordes", force: :cascade do |t|
+    t.string  "titulo",     default: "", null: false
+    t.integer "bpm",                     null: false
+    t.integer "usuario_id",              null: false
+    t.index ["usuario_id"], name: "index_secuencias_de_acordes_on_usuario_id", using: :btree
   end
 
   create_table "usuarios", force: :cascade do |t|

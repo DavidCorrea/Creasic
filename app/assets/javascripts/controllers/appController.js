@@ -1,7 +1,7 @@
-creasic.controller("appCtrl", ['$scope', 'authService', 'navegacionService', function ($scope, authService, navegacionService) {
+creasic.controller("appCtrl", ['$scope', '$rootScope', 'authService', 'navegacionService', function ($scope, $rootScope, authService, navegacionService) {
 
-    $scope.usuario = authService.sesionActual();
-    $scope.haySesion = authService.haySesion();
+    $rootScope.usuario = authService.sesionActual();
+    $rootScope.haySesion = authService.haySesion();
 
     $scope.iniciarSesion = function() {
         authService.iniciarSesion();
@@ -9,13 +9,13 @@ creasic.controller("appCtrl", ['$scope', 'authService', 'navegacionService', fun
 
     $scope.cerrarSesion = function() {
         authService.cerrarSesion();
-        $scope.haySesion = authService.haySesion();
-        $scope.usuario = null;
+        $rootScope.haySesion = authService.haySesion();
+        $rootScope.usuario = null;
     };
 
     $scope.$on('sesionIniciada', function(event, args) {
-        $scope.usuario = authService.sesionActual();
-        $scope.haySesion = authService.haySesion();
+        $rootScope.usuario = authService.sesionActual();
+        $rootScope.haySesion = authService.haySesion();
     });
 
 }]);

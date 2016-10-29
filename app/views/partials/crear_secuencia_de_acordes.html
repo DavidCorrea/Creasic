@@ -1,0 +1,40 @@
+<div flex layout="column" layout-align="center center">
+
+    <div layout="column">
+        <h3>BPM (Beats per minute)</h3>
+        <md-slider flex min="80" max="200" ng-model="secuencia.bpm">
+    </div>
+
+    <div layout="row">
+        <h3>Notas</h3>
+    </div>
+
+    <div layout="row">
+        <md-button class="md-raised" ng-repeat="nota in notas" ng-click="seleccionarNota(nota)">
+            {{ nota.nombre }}
+        </md-button>
+    </div>
+</div>
+
+<br>
+
+<div flex layout="row">
+    <div ng-repeat="acorde in secuencia.acordes" layout="column">
+        <md-card>
+            <md-card-content>
+                <md-chips ng-model="acorde.notas"/>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-click="escucharAcorde(acorde.notas)">Escuchar</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>
+
+<md-button class="md-label" ui-sref="secuenciasDeAcordes.todas">Cancelar</md-button>
+
+<md-button class="md-label" ng-click="guardar()">Guardar</md-button>
+
+<md-button class="md-label" ng-click="agregarNuevoAcorde()">Agregar nuevo acorde</md-button>
+
+<md-button class="md-label" ng-click="escucharAcordes()">Escuchar Acordes</md-button>
