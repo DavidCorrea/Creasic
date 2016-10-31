@@ -79,13 +79,19 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     var crearSecuenciaDeAcordesState = {
         name: 'secuenciasDeAcordes.crear',
         url: '/crear',
-        templateUrl: 'views/crear_secuencia_de_acordes',
-        controller: 'crearSecuenciaDeAcordesCtrl',
+        templateUrl: 'views/secuencia_de_acordes',
+        controller: 'secuenciaDeAcordesCtrl',
         resolve: {
+            secuenciaDeAcordes: function($rootScope) {
+                return new SecuenciaDeAcordes($rootScope.usuario.id);
+            },
             notas: function(notasService) {
                 return notasService.todasLasNotas().then(function(response) {
                     return response;
                 });
+            },
+            modoEdicion: function() {
+                return false;
             }
         }
     };
@@ -93,8 +99,8 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     var verSecuenciaDeAcordesState = {
         name: 'secuenciasDeAcordes.ver',
         url: '/{id}',
-        templateUrl: 'views/ver_secuencia_de_acordes',
-        controller: 'verSecuenciaDeAcordesCtrl',
+        templateUrl: 'views/secuencia_de_acordes',
+        controller: 'secuenciaDeAcordesCtrl',
         resolve: {
             secuenciaDeAcordes: function($stateParams, secuenciasDeAcordesService) {
                 return secuenciasDeAcordesService.ver($stateParams.id).then(function(response) {
@@ -105,6 +111,9 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
                 return notasService.todasLasNotas().then(function(response) {
                     return response;
                 });
+            },
+            modoEdicion: function() {
+                return true;
             }
         }
     };

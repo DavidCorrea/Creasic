@@ -4,10 +4,10 @@ creasic.directive("acorde", function(pianoService) {
         templateUrl: 'views/directives/acorde',
         scope: {
           data: '=',
-          source: '='
+          source: '=',
+          puedeSerEditado: '='
         },
         link: function(scope) {
-
             scope.eliminarNota = function(notaAEliminar) {
                 scope.data.eliminarNota(notaAEliminar);
             };

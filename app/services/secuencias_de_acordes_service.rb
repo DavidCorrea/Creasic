@@ -32,7 +32,7 @@ class SecuenciasDeAcordesService
   end
 
   def parametros_de_creacion
-    @parametros.require(:secuencia_de_acordes).permit(:usuario, :titulo, :bpm, acordes_attributes: [ nota_ids: [] ]).merge({usuario_id: @usuario.id })
+    @parametros.require(:secuencia_de_acordes).permit(:usuario, :titulo, :bpm, acordes_attributes: [ :posicion, nota_ids: [] ]).merge({usuario_id: @usuario.id })
   end
 
   def parametros_de_busqueda
@@ -40,7 +40,7 @@ class SecuenciasDeAcordesService
   end
 
   def parametros_de_edicion
-    @parametros.require(:secuencia_de_acordes).permit(:usuario, :titulo, :bpm, acordes_attributes: [ :id, nota_ids: [] ]).merge({usuario_id: @usuario.id })
+    @parametros.require(:secuencia_de_acordes).permit(:usuario, :titulo, :bpm, acordes_attributes: [ :id, :posicion, nota_ids: [] ]).merge({usuario_id: @usuario.id })
   end
 
 end

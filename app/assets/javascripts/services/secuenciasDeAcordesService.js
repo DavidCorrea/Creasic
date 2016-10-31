@@ -1,6 +1,6 @@
 creasic.service('secuenciasDeAcordesService', ['$http', function($http) {
 
-    this.crearSecuencia = function(secuencia) {
+    this.crear = function(secuencia) {
         secuencia.acordes.map(function(acorde) {
             acorde.nota_ids = acorde.notas.map(function(nota) {
                return nota.id;

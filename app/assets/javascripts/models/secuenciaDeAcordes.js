@@ -4,6 +4,7 @@ function SecuenciaDeAcordes(idUsuario) {
     this.bpm = 80;
     this.usuario_id = idUsuario;
     this.posicionParaProximoAcorde = 0;
+    this.comentarios = [];
 }
 
 /* Constructor */
@@ -17,6 +18,11 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
     angular.forEach(datosDeSecuencia.acordes, function(acorde) {
         var acordeAAgregar = Acorde.llenarDesde(acorde, secuenciaDeAcordes);
         secuenciaDeAcordes.acordes.push(acordeAAgregar);
+    });
+
+    angular.forEach(datosDeSecuencia.comentarios, function(comentario) {
+        var comentarioAAgregar = Comentario.llenarDesde(comentario, secuenciaDeAcordes);
+        secuenciaDeAcordes.comentarios.push(comentarioAAgregar);
     });
 
     return secuenciaDeAcordes;
