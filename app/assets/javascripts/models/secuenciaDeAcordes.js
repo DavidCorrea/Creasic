@@ -3,6 +3,7 @@ function SecuenciaDeAcordes(idUsuario) {
     this.acordes = [];
     this.bpm = 80;
     this.usuario_id = idUsuario;
+    this.posicionParaProximoAcorde = 0;
 }
 
 /* Constructor */
@@ -23,5 +24,21 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
 
 /* Métodos de Instancia. */
 SecuenciaDeAcordes.prototype = {
+    agregarAcorde: function() {
+        this.acordes.push(new Acorde(this.posicionParaProximoAcorde));
+        this.posicionParaProximoAcorde += 1;
+    },
+    eliminarAcorde: function(acordeAEliminar) {
+        this.acordes = this.acordes.filter(function(acorde) {
+            return acordeAEliminar.posicion !== acorde.posicion;
+        });
 
+        var acordesACorrer = this.acordes.filter(function(acorde) {
+            return acorde.posicion > acordeAEliminar.posicion;
+        });
+
+        acordesACorrer.forEach(function(acorde) {
+           acorde.decrementarPosicion();
+        });
+    }
 };

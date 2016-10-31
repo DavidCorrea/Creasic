@@ -1,0 +1,11 @@
+<md-card class="acorde">
+    <md-card-content class="notas">
+        <div class="nota" ng-repeat="nota in data.notas track by $index" ng-click="eliminarNota(nota)" layout-align="center center">
+            {{ nota.nombre }}
+        </div>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end end">
+        <md-button ng-click="escuchar()">Escuchar</md-button>
+        <md-button ng-click="eliminar()">Eliminar</md-button>
+    </md-card-actions>
+</md-card>

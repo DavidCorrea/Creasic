@@ -1,40 +1,48 @@
-<div flex layout="column" layout-align="center center">
+<div layout="column" class="content-section">
+    <div layout="column" flex="33">
+        <div layout="row" layout-align="center center">
+            <md-input-container>
+                <label>Titulo</label>
+                <input ng-model="secuencia.titulo">
+            </md-input-container>
 
-    <div layout="column">
-        <h3>BPM (Beats per minute)</h3>
-        <md-slider flex min="80" max="200" ng-model="secuencia.bpm">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>BPM (Beats per minute)</label>
+                <input name="social" ng-model="secuencia.bpm"/>
+            </md-input-container>
+        </div>
+
+        <md-divider></md-divider>
+        <br>
+
+        <div layout="row" layout-align="center center">
+            <div layout="column" layout-align="center center">
+                <div layout="row">
+                    <div class="nota" ng-repeat="nota in notas" ng-click="agregarNota(nota)" layout-align="center center">
+                        {{ nota.nombre }}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div layout="row">
-        <h3>Notas</h3>
+    <br>
+
+    <div layout="row" flex="33" layout-wrap layout-align="start center" style="min-height: 200px;">
+        <div ng-repeat="acorde in secuencia.acordes" layout="column">
+            <acorde source="secuencia" data="acorde"></acorde>
+        </div>
     </div>
 
-    <div layout="row">
-        <md-button class="md-raised" ng-repeat="nota in notas" ng-click="seleccionarNota(nota)">
-            {{ nota.nombre }}
-        </md-button>
-    </div>
+    <br>
+
+    <opciones>
+        <md-button class="md-label" ui-sref="secuenciasDeAcordes.todas">Cancelar</md-button>
+        |
+        <md-button class="md-label" ng-click="agregarNuevoAcorde()">Agregar nuevo acorde</md-button>
+        |
+        <md-button class="md-label" ng-click="escucharAcordes()">Escuchar Acordes</md-button>
+        |
+        <md-button class="md-label" ng-click="guardar()">Guardar</md-button>
+    </opciones>
 </div>
-
-<br>
-
-<div flex layout="row">
-    <div ng-repeat="acorde in secuencia.acordes" layout="column">
-        <md-card>
-            <md-card-content>
-                <md-chips ng-model="acorde.notas"/>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="escucharAcorde(acorde.notas)">Escuchar</md-button>
-            </md-card-actions>
-        </md-card>
-    </div>
-</div>
-
-<md-button class="md-label" ui-sref="secuenciasDeAcordes.todas">Cancelar</md-button>
-
-<md-button class="md-label" ng-click="guardar()">Guardar</md-button>
-
-<md-button class="md-label" ng-click="agregarNuevoAcorde()">Agregar nuevo acorde</md-button>
-
-<md-button class="md-label" ng-click="escucharAcordes()">Escuchar Acordes</md-button>

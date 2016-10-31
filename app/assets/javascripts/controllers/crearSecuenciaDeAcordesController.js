@@ -7,16 +7,10 @@ creasic.controller("crearSecuenciaDeAcordesCtrl", ['$scope', '$rootScope', 'nota
         pianoService.cambiarBPM($scope.secuencia.bpm);
     });
 
-
-    $scope.seleccionarNota = function(nota){
+    $scope.agregarNota = function(nota){
         pianoService.tocarNota(nota.cifrado);
-        $scope.secuencia.acordes[$scope.secuencia.acordes.length - 1].notas.push(nota);
-    };
-
-    $scope.escucharAcorde = function(notas){
-        pianoService.tocarAcorde(notas.map(function(nota) {
-            return nota.cifrado;
-        }));
+        var acorde = $scope.secuencia.acordes[$scope.secuencia.acordes.length - 1];
+        acorde.agregarNota(nota);
     };
 
     $scope.escucharAcordes = function(){
@@ -30,7 +24,7 @@ creasic.controller("crearSecuenciaDeAcordesCtrl", ['$scope', '$rootScope', 'nota
     };
 
     $scope.agregarNuevoAcorde = function(){
-        $scope.secuencia.acordes.push(new Acorde());
+        $scope.secuencia.agregarAcorde();
     };
 
     $scope.guardar = function() {
