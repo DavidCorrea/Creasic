@@ -42,10 +42,12 @@
     <md-divider></md-divider>
     <br>
 
-    <comentarios-con-respuestas post="secuencia" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
+    <div ng-show="modoEdicion">
+        <comentarios-con-respuestas post="secuencia" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
 
-    <md-divider></md-divider>
-    <br>
+        <md-divider></md-divider>
+        <br>
+    </div>
 
     <opciones>
         <md-button class="md-label" ng-click="guardar()" ng-show="perteneceAlUsuario">Guardar</md-button>
