@@ -1,7 +1,7 @@
 function Comentario(post, idUsuario) {
     this.contenido = "";
     this.respuestas = [];
-    this.letra_id = post.id;
+    this.comentable_id = post.id;
     this.usuario_id = idUsuario;
 }
 

@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require_directory ./styles
  */
 
 @import "angular-material/angular-material.min";

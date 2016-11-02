@@ -1,4 +1,4 @@
-class LetrasController < ApplicationController
+class LetrasController < ApiController
 
   before_action :crear_service
 
@@ -18,16 +18,6 @@ class LetrasController < ApplicationController
 
   def editar
     render json: @service.editar
-  end
-
-  def agregar_comentario
-    @letra = @service.agregar_comentario
-    render json: @letra, status: :created
-  end
-
-  def agregar_respuesta
-    @letra = @service.agregar_respuesta
-    render json: @letra, status: :created
   end
 
   private

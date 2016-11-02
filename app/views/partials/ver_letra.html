@@ -31,86 +31,18 @@
 
 <md-divider></md-divider>
 
+
 <div>
-    <div style="padding-top: 20px;">
-        <span>
-            Comentarios ({{ letra.comentarios.length }})
-        </span>
-    </div>
+    <comentarios-con-respuestas post="letra" actualizar-post="letraActualizada"/>
 </div>
 
-<div ng-repeat="comentario in letra.comentarios">
-    <md-card md-theme-watch>
-        <md-card-title>
-            <span>
-                {{comentario.emailUsuario}} dijo:
-                <br>
-                <br>
-                {{comentario.contenido}}
-            </span>
-        </md-card-title>
-
-        <md-card flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
-            <md-card-title>
-                <span> {{respuesta.contenido}} </span>
-            </md-card-title>
-        </md-card>
-
-        <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
-        </md-card-actions>
-
-        <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
-            <md-card-title-text>
-                <md-input-container class="md-block md-input-has-value">
-                    <label for="input_31">Respuesta</label>
-                    <div class="md-resize-wrapper">
-                        <textarea ng-model="respuesta.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
-                        </textarea>
-                    </div>
-                </md-input-container>
-            </md-card-title-text>
-            <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="cancelarRespuesta()">Cancelar</md-button>
-                <md-button ng-click="guardarRespuesta()">Aceptar</md-button>
-            </md-card-actions>
-        </md-card>
-    </md-card>
-</div>
-
-<md-card md-theme-watch ng-show="comentando">
-    <md-card-title>
-        <md-card-title-text>
-            <md-input-container class="md-block md-input-has-value">
-                <label for="input_31">Comentario</label>
-                <div class="md-resize-wrapper">
-                        <textarea ng-model="comentario.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
-                        </textarea>
-                </div>
-            </md-input-container>
-        </md-card-title-text>
-        <md-card-title-media>
-            <div class="md-media-sm card-media"></div>
-        </md-card-title-media>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="cancelarComentario()">Cancelar</md-button>
-        <md-button ng-click="guardarComentario()">Aceptar</md-button>
-    </md-card-actions>
-</md-card>
-
-<br>
-
-<br>
 
 <md-divider></md-divider>
 
-<section layout="row" layout-sm="column" layout-wrap>
-    <md-button ng-click="comentar()" ng-show="sePuedeComentar()">Comentar</md-button>
-
+<div layout="row" layout-sm="column" layout-wrap>
     <md-button class="md-label" ng-click="entrarModoEdicion()" ng-show="sePuedeEditar()">Editar</md-button>
     <md-button class="md-label" ui-sref="letras.todas" ng-hide="enModoEdicion">Volver</md-button>
 
     <md-button class="md-label" ng-click="guardarEdicion()" ng-show="enModoEdicion">Guardar</md-button>
     <md-button class="md-label" ng-click="cancelarModoEdicion()" ng-show="enModoEdicion">Cancelar</md-button>
-</section>
+</div>

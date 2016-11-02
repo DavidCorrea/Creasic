@@ -1,0 +1,61 @@
+<div layout="column" class="content-section">
+    <div layout="column" flex="33">
+        <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
+            <md-input-container>
+                <label>Titulo</label>
+                <input ng-model="secuencia.titulo">
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>BPM (Beats per minute)</label>
+                <input name="social" ng-model="secuencia.bpm"/>
+            </md-input-container>
+        </div>
+
+        <div layout="column" layout-align="center center" ng-hide="perteneceAlUsuario">
+            <h1 ng-hide="perteneceAlUsuario" style="color: orangered">{{ secuencia.titulo }} </h1>
+            <h5 ng-hide="perteneceAlUsuario">by {{secuencia.emailUsuario}}</h5>
+        </div>
+
+        <md-divider></md-divider>
+        <br>
+
+        <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
+            <div layout="column" layout-align="center center">
+                <div layout="row">
+                    <div class="nota" ng-repeat="nota in notas" ng-click="agregarNota(nota)" layout-align="center center">
+                        {{ nota.nombre }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div layout="row" flex="33" layout-wrap layout-align="start center" style="min-height: 200px;">
+        <div ng-repeat="acorde in secuencia.acordes" layout="column">
+            <acorde source="secuencia" data="acorde" puede-ser-editado="perteneceAlUsuario"></acorde>
+        </div>
+    </div>
+
+    <md-divider></md-divider>
+    <br>
+
+    <div ng-show="modoEdicion">
+        <comentarios-con-respuestas post="secuencia" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
+
+        <md-divider></md-divider>
+        <br>
+    </div>
+
+    <opciones>
+        <md-button class="md-label" ng-click="guardar()" ng-show="perteneceAlUsuario">Guardar</md-button>
+        <span ng-show="perteneceAlUsuario">|</span>
+        <md-button class="md-label" ng-click="agregarNuevoAcorde()" ng-show="perteneceAlUsuario">Agregar nuevo acorde</md-button>
+        <span ng-show="perteneceAlUsuario">|</span>
+        <md-button class="md-label" ng-click="escucharAcordes()">Escuchar Acordes</md-button>
+        <span>|</span>
+        <md-button class="md-label" ui-sref="secuenciasDeAcordes.todas">Cancelar</md-button>
+    </opciones>
+</div>

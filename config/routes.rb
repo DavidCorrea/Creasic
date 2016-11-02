@@ -6,11 +6,27 @@ Rails.application.routes.draw do
 
   post 'usuarios/crear', :to => 'usuarios#crear'
 
-  post 'letras/crear',                    :to => 'letras#crear'
-  get  'letras/todas',                    :to => 'letras#todas'
-  get  'letras/ver/*id',                  :to => 'letras#ver'
-  post 'letras/editar/*id',               :to => 'letras#editar'
-  post 'letras/comentar/*id',             :to => 'letras#agregar_comentario'
-  post 'letras/responder/*comentario_id', :to => 'letras#agregar_respuesta'
+  scope '/letras' do
+    post '/crear',      :to => 'letras#crear'
+    get  '/todas',      :to => 'letras#todas'
+    get  '/ver/*id',    :to => 'letras#ver'
+    post '/editar/*id', :to => 'letras#editar'
+  end
+
+  scope '/secuencias_de_acordes' do
+    post '/crear',      :to => 'secuencias_de_acordes#crear'
+    get  '/todas',      :to => 'secuencias_de_acordes#todas'
+    get  '/ver/*id',    :to => 'secuencias_de_acordes#ver'
+    post '/editar/*id', :to => 'secuencias_de_acordes#editar'
+  end
+
+  scope '/notas' do
+    get '/todas', :to => 'notas#todas'
+  end
+
+  scope '/comentarios' do
+    post '/comentar/*id',             :to => 'comentarios#agregar_comentario'
+    post '/responder/*comentario_id', :to => 'comentarios#agregar_respuesta'
+  end
 
 end

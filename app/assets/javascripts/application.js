@@ -11,6 +11,7 @@
 // about supported directives.
 //
 // require jquery
+//= require tone
 //= require angular
 //= require angular-animate
 //= require angular-aria

@@ -1,6 +1,6 @@
 class Respuesta < ApplicationRecord
 
-  belongs_to :comentario
   belongs_to :usuario
+  belongs_to :comentario
 
 end

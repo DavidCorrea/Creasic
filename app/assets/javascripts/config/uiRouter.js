@@ -52,11 +52,70 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         }
     };
 
-    var acordesState = {
+    var secuenciasDeAcordesState = {
         parent: 'app',
-        name: 'acordes',
-        url: 'acordes',
-        templateUrl: 'views/acordes'
+        abstract: true,
+        name: 'secuenciasDeAcordes',
+        url: 'secuenciasDeAcordes',
+        template: '<ui-view/>'
+    };
+
+    var todasLasSecuenciasDeAcordesState = {
+        name: 'secuenciasDeAcordes.todas',
+        url: '',
+        templateUrl: 'views/secuencias_de_acordes',
+        controller: 'secuenciasDeAcordesCtrl',
+        resolve: {
+            secuenciasDeAcordes: function(secuenciasDeAcordesService) {
+                return secuenciasDeAcordesService.todas().then(function(response) {
+                    return response.data.map(function(secuenciaDeAcordes) {
+                       return SecuenciaDeAcordes.llenarDesde(secuenciaDeAcordes);
+                    });
+                });
+            }
+        }
+    };
+
+    var crearSecuenciaDeAcordesState = {
+        name: 'secuenciasDeAcordes.crear',
+        url: '/crear',
+        templateUrl: 'views/secuencia_de_acordes',
+        controller: 'secuenciaDeAcordesCtrl',
+        resolve: {
+            secuenciaDeAcordes: function($rootScope) {
+                return new SecuenciaDeAcordes($rootScope.usuario.id);
+            },
+            notas: function(notasService) {
+                return notasService.todasLasNotas().then(function(response) {
+                    return response;
+                });
+            },
+            modoEdicion: function() {
+                return false;
+            }
+        }
+    };
+
+    var verSecuenciaDeAcordesState = {
+        name: 'secuenciasDeAcordes.ver',
+        url: '/{id}',
+        templateUrl: 'views/secuencia_de_acordes',
+        controller: 'secuenciaDeAcordesCtrl',
+        resolve: {
+            secuenciaDeAcordes: function($stateParams, secuenciasDeAcordesService) {
+                return secuenciasDeAcordesService.ver($stateParams.id).then(function(response) {
+                    return SecuenciaDeAcordes.llenarDesde(response.data);
+                });
+            },
+            notas: function(notasService) {
+                return notasService.todasLasNotas().then(function(response) {
+                    return response;
+                });
+            },
+            modoEdicion: function() {
+                return true;
+            }
+        }
     };
 
     var cancionesState = {
@@ -98,7 +157,10 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(homeState);
     $stateProvider.state(letrasState);
     $stateProvider.state(crearLetraState);
-    $stateProvider.state(acordesState);
+    $stateProvider.state(secuenciasDeAcordesState);
+    $stateProvider.state(todasLasSecuenciasDeAcordesState);
+    $stateProvider.state(crearSecuenciaDeAcordesState);
+    $stateProvider.state(verSecuenciaDeAcordesState);
     $stateProvider.state(todasLasletrasState);
     $stateProvider.state(verLetraState);
     $stateProvider.state(cancionesState);

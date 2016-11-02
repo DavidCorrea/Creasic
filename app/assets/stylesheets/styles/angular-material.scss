@@ -1,0 +1,33 @@
+@import "./variables";
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+md-toast {
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+
+  &.success {
+    position: fixed;
+
+    .md-toast-content {
+      background-color: $creasic-success;
+
+      .md-toast-text {
+        font-size: 16px;
+      }
+    }
+  }
+  &.error {
+    position: fixed;
+
+    .md-toast-content {
+      background-color: $creasic-error;
+
+      .md-toast-text {
+        font-size: 16px;
+      }
+    }
+  }
+}
