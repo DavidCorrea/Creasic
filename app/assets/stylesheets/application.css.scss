@@ -22,6 +22,10 @@ $creasic-light-grey: #696969;
 $creasic-mid-light-grey: #DCDCDC;
 $creasic-black: #000000;
 
+body {
+  font-family: 'Titillium Web', sans-serif;
+}
+
 .content-section {
   background-color: $creasic-grey;
   border-radius: 10px;
