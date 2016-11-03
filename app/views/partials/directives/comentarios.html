@@ -19,7 +19,12 @@
 
         <md-card flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
             <md-card-title>
-                <span> {{respuesta.contenido}} </span>
+                <span>
+                    {{respuesta.emailUsuario}} dijo:
+                    <br>
+                    <br>
+                    {{respuesta.contenido}}
+                </span>
             </md-card-title>
         </md-card>
 
