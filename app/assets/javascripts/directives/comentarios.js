@@ -1,4 +1,4 @@
-creasic.directive("comentariosConRespuestas", function($rootScope, comentariosService) {
+creasic.directive("comentariosConRespuestas", function($rootScope, $sce, comentariosService) {
     return {
         type: 'E',
         templateUrl: 'views/directives/comentarios',
@@ -7,7 +7,7 @@ creasic.directive("comentariosConRespuestas", function($rootScope, comentariosSe
             actualizarPost: '='
         },
         link: function(scope) {
-            
+            console.log(scope.post);
             scope.comentando = false;
             scope.respondiendo = false;
             
@@ -29,6 +29,7 @@ creasic.directive("comentariosConRespuestas", function($rootScope, comentariosSe
             };
 
             scope.guardarComentario = function(){
+                console.log(scope.comentario.media_id);
                 comentariosService.agregarComentario(scope.comentario).then(function(response) {
                     scope.post = scope.actualizarPost(response.data);
                     scope.comentando = false;
@@ -62,6 +63,10 @@ creasic.directive("comentariosConRespuestas", function($rootScope, comentariosSe
                 });
             };
 
+            scope.urlFor = function(comentario) {
+                var url = "http://res.cloudinary.com/dzfxwe6la/video/upload/v1478324228/" + comentario.media_id + ".wav";
+                return $sce.trustAsResourceUrl(url);
+            }
         }
     };
 });

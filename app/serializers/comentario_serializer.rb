@@ -1,5 +1,5 @@
 class ComentarioSerializer < ActiveModel::Serializer
-  attributes :id, :contenido, :respuestas, :email_usuario
+  attributes :id, :contenido, :respuestas, :email_usuario, :media_id
 
   belongs_to :letra
 

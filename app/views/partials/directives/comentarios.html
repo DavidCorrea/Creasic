@@ -17,6 +17,8 @@
             </span>
         </md-card-title>
 
+        <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
+
         <md-card flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
             <md-card-title>
                 <span>
@@ -62,7 +64,7 @@
             </md-input-container>
         </md-card-title-text>
         <md-card-title-media>
-            <div class="md-media-sm card-media"></div>
+            <recorder data="comentario"></recorder>
         </md-card-title-media>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
