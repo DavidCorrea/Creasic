@@ -34,7 +34,7 @@ class ComentariosService
   end
 
   def parametros_de_creacion_de_comentario
-    @parametros.permit(:comentable_id, :contenido).merge({usuario: @usuario})
+    @parametros.permit(:comentable_id, :contenido, :media_id).merge({usuario: @usuario})
   end
 
   def parametros_de_creacion_de_respuesta

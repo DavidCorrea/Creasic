@@ -3,6 +3,7 @@ function Comentario(post, idUsuario) {
     this.respuestas = [];
     this.comentable_id = post.id;
     this.usuario_id = idUsuario;
+    this.media_id = "";
 }
 
 /* Constructor */
@@ -12,6 +13,7 @@ Comentario.llenarDesde = function(datosDeComentario, post) {
     comentario.id = datosDeComentario.id;
     comentario.contenido = datosDeComentario.contenido;
     comentario.emailUsuario = datosDeComentario.email_usuario;
+    comentario.media_id = datosDeComentario.media_id;
 
     angular.forEach(datosDeComentario.respuestas, function(respuesta) {
         var respuestaAAgregar = Respuesta.llenarDesde(respuesta, comentario);
