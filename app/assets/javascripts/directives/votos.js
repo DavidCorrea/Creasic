@@ -8,7 +8,7 @@ creasic.directive("votos", function($rootScope, votosService) {
         },
         link: function(scope) {
 
-            var colorConVoto = {"color": "red"};
+            var colorConVoto = {"color": "#FF9800"};
             var colorSinVoto = {"color": "white"};
             scope.votoPositivo = false;
             scope.votoNegativo = false;
