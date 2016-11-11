@@ -29,4 +29,11 @@ Rails.application.routes.draw do
     post '/responder/*comentario_id', :to => 'comentarios#agregar_respuesta'
   end
 
+  scope '/votos' do
+    post '/dar_voto_positivo/*id',     :to => 'votos#dar_voto_positivo'
+    post '/dar_voto_negativo/*id',     :to => 'votos#dar_voto_negativo'
+    get  '/obtener_valor_de_voto/*votable_id', :to => 'votos#obtener_valor_de_voto'
+    post '/eliminar_voto/*id',     :to => 'votos#eliminar_voto'
+  end
+
 end

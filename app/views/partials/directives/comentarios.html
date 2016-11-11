@@ -19,7 +19,7 @@
 
         <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
 
-        <md-card flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
+        <md-card layout="raw" layout-align="center end" flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
             <md-card-title>
                 <span>
                     {{respuesta.emailUsuario}} dijo:
@@ -28,11 +28,13 @@
                     {{respuesta.contenido}}
                 </span>
             </md-card-title>
+            <votos post="respuesta"></votos>
         </md-card>
 
-        <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
-        </md-card-actions>
+            <md-card-actions layout="raw" layout-align="space-between start">
+                <votos post="comentario"></votos>
+                <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
+            </md-card-actions>
 
         <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
             <md-card-title-text>
