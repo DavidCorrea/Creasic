@@ -21,4 +21,9 @@
 //= require auth0-lock
 //= require angular-lock
 //= require angular-jwt
+//= require angularAudioRecorder
+//= require lodash
+//= require cloudinary-core
+//= require cloudinary_ng
+//= require ng-file-upload
 //= require_tree .

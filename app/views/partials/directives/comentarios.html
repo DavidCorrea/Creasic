@@ -17,9 +17,16 @@
             </span>
         </md-card-title>
 
+        <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
+
         <md-card layout="raw" layout-align="center end" flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
             <md-card-title>
-                <span> {{respuesta.contenido}} </span>
+                <span>
+                    {{respuesta.emailUsuario}} dijo:
+                    <br>
+                    <br>
+                    {{respuesta.contenido}}
+                </span>
             </md-card-title>
             <votos post="respuesta"></votos>
         </md-card>
@@ -59,7 +66,7 @@
             </md-input-container>
         </md-card-title-text>
         <md-card-title-media>
-            <div class="md-media-sm card-media"></div>
+            <recorder data="comentario"></recorder>
         </md-card-title-media>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">

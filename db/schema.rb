@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029162210) do
+ActiveRecord::Schema.define(version: 20161105055134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20161029162210) do
     t.integer  "usuario_id",                   null: false
     t.string   "comentable_type"
     t.integer  "comentable_id"
+    t.string   "media_id"
     t.index ["comentable_type", "comentable_id"], name: "index_comentarios_on_comentable_type_and_comentable_id", using: :btree
   end
 
