@@ -14,6 +14,7 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
     secuenciaDeAcordes.id = datosDeSecuencia.id;
     secuenciaDeAcordes.titulo = datosDeSecuencia.titulo;
     secuenciaDeAcordes.emailUsuario = datosDeSecuencia.email_usuario;
+    secuenciaDeAcordes.bpm = datosDeSecuencia.bpm;
 
     datosDeSecuencia.acordes.forEach(function(acorde) {
         var acordeAAgregar = Acorde.llenarDesde(acorde, secuenciaDeAcordes);
