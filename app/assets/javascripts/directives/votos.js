@@ -16,7 +16,7 @@ creasic.directive("votos", function($rootScope, votosService) {
             scope.colorNegativo = colorSinVoto;
 
             angular.forEach(scope.post.votos, function(voto){
-                if (voto.usuario_id == $rootScope.usuario.id){
+                if ($rootScope.usuario && voto.usuario_id == $rootScope.usuario.id){
                     scope.votoDelUsuario = voto;
                     scope.votoPositivo = voto.valor == 1;
                     scope.votoNegativo = voto.valor == -1;
