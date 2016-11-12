@@ -7,14 +7,7 @@ class VotosService
     asignar_usuario
   end
 
-  def dar_voto_positivo
-    tipo_de_post = encontrar_tipo_de_post
-    post_a_votar = tipo_de_post.find @post_id
-    post_a_votar.votos.create parametros_de_creacion
-
-  end
-
-  def dar_voto_negativo
+  def dar_voto
     tipo_de_post = encontrar_tipo_de_post
     post_a_votar = tipo_de_post.find @post_id
     post_a_votar.votos.create parametros_de_creacion

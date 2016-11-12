@@ -51,7 +51,7 @@ creasic.directive("votos", function($rootScope, votosService) {
                 else {
                     scope.voto = new Voto(scope.post, $rootScope.usuario.id);
                     scope.voto.valor = 1;
-                    votosService.darVotoPositivo(scope.voto).then(function (response) {
+                    votosService.darVoto(scope.voto).then(function (response) {
                         scope.votoDelUsuario = response.data;
                         scope.votoPositivo = true;
                         scope.votoNegativo = false;
@@ -76,7 +76,7 @@ creasic.directive("votos", function($rootScope, votosService) {
                 else {
                     scope.voto = new Voto(scope.post, $rootScope.usuario.id);
                     scope.voto.valor = -1;
-                    votosService.darVotoNegativo(scope.voto).then(function (response) {
+                    votosService.darVoto(scope.voto).then(function (response) {
                         scope.votoDelUsuario = response.data;
                         scope.votoPositivo = false;
                         scope.votoNegativo = true;
