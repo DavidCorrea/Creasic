@@ -8,7 +8,6 @@ function Letra(idUsuario) {
 /* Constructor */
 Letra.llenarDesde = function(datosDeLetra) {
     var letra = new Letra(datosDeLetra.usuario_id);
-
     letra.id = datosDeLetra.id;
     letra.titulo = datosDeLetra.titulo;
     letra.contenido = datosDeLetra.contenido;
@@ -18,7 +17,6 @@ Letra.llenarDesde = function(datosDeLetra) {
         var comentarioAAgregar = Comentario.llenarDesde(comentario, letra);
         letra.agregarComentario(comentarioAAgregar);
     });
-
     return letra;
 };
 

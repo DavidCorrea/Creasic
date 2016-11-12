@@ -24,13 +24,15 @@
                     {{respuesta.emailUsuario}} dijo: {{respuesta.contenido}}
                 </span>
             </md-card-title>
+            <votos post="respuesta"></votos>
         </md-card>
 
-        <md-card-actions layout="row" layout-align="end center">
-            <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
-        </md-card-actions>
+            <md-card-actions layout="raw" layout-align="space-between start">
+                <votos post="comentario"></votos>
+                <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
+            </md-card-actions>
 
-        <md-card flex-offset="10" ng-show="estaRespondiendo(comentario.id)">
+        <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
             <md-card-title-text>
                 <md-input-container class="md-block md-input-has-value">
                     <label for="input_31">Respuesta</label>
@@ -48,7 +50,7 @@
     </md-card>
 </div>
 
-<md-card ng-show="comentando">
+<md-card md-theme-watch ng-show="comentando">
     <md-card-title>
         <md-card-title-text>
             <div ng-show="seQuiereComentar">
