@@ -16,6 +16,13 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'views/home'
     };
 
+    var perfilState = {
+        parent: 'app',
+        name: 'perfil',
+        url: 'perfil',
+        templateUrl: 'views/perfil'
+    };
+
     var letrasState = {
         parent: 'app',
         abstract: true,
@@ -28,26 +35,46 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         name: 'letras.todas',
         url: '',
         templateUrl: 'views/letras',
-        controller: 'letrasCtrl'
+        controller: 'letrasCtrl',
+        resolve: {
+            letras: function(letrasService) {
+                return letrasService.obtenerTodasLasLetras().then(function(response){
+                    return response.data.map(function(letra) {
+                        return Letra.llenarDesde(letra);
+                    });
+                });
+            }
+        }
     };
 
     var crearLetraState = {
         name: 'letras.crear',
         url: '/crear',
-        templateUrl: 'views/crear_letra',
-        controller: 'crearLetraCtrl'
+        templateUrl: 'views/letra',
+        controller: 'letraCtrl',
+        resolve: {
+            letra: function($rootScope) {
+                return new Letra($rootScope.usuario.id);
+            },
+            modoEdicion: function() {
+                return false;
+            }
+        }
     };
 
     var verLetraState = {
         name: 'letras.ver',
         url: '/{id}',
-        templateUrl: 'views/ver_letra',
-        controller: 'verLetraCtrl',
+        templateUrl: 'views/letra',
+        controller: 'letraCtrl',
         resolve: {
             letra: function($stateParams, letrasService) {
                 return letrasService.obtenerLetra($stateParams.id).then(function(response) {
                     return Letra.llenarDesde(response.data);
                 });
+            },
+            modoEdicion: function() {
+                return true;
             }
         }
     };
@@ -125,29 +152,6 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'views/canciones'
     };
 
-    var registrarState = {
-        parent: 'app',
-        name: 'registrar',
-        url: 'registrar',
-        templateUrl: 'views/registrar',
-        controller: 'registracionCtrl'
-    };
-
-    var ingresarState = {
-        parent: 'app',
-        name: 'ingresar',
-        url: 'ingresar',
-        templateUrl: 'views/ingresar',
-        controller: 'ingresoCtrl'
-    };
-
-    var perfilState = {
-        parent: 'app',
-        name: 'perfil',
-        url: 'perfil',
-        templateUrl: 'views/perfil'
-    };
-
     var cerrarSesionState = {
         parent: 'app',
         name: 'cerrarSesion'
@@ -155,6 +159,7 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider.state(appParentState);
     $stateProvider.state(homeState);
+    $stateProvider.state(perfilState);
     $stateProvider.state(letrasState);
     $stateProvider.state(crearLetraState);
     $stateProvider.state(secuenciasDeAcordesState);
@@ -164,8 +169,5 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(todasLasletrasState);
     $stateProvider.state(verLetraState);
     $stateProvider.state(cancionesState);
-    $stateProvider.state(ingresarState);
-    $stateProvider.state(registrarState);
-    $stateProvider.state(perfilState);
     $stateProvider.state(cerrarSesionState);
 });

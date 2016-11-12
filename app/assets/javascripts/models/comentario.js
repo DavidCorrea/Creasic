@@ -15,7 +15,7 @@ Comentario.llenarDesde = function(datosDeComentario, post) {
     comentario.emailUsuario = datosDeComentario.email_usuario;
     comentario.media_id = datosDeComentario.media_id;
 
-    angular.forEach(datosDeComentario.respuestas, function(respuesta) {
+    datosDeComentario.respuestas.forEach(function(respuesta) {
         var respuestaAAgregar = Respuesta.llenarDesde(respuesta, comentario);
         comentario.respuestas.push(respuestaAAgregar);
     });

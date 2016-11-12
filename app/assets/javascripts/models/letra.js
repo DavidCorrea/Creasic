@@ -13,14 +13,16 @@ Letra.llenarDesde = function(datosDeLetra) {
     letra.contenido = datosDeLetra.contenido;
     letra.emailUsuario = datosDeLetra.email_usuario;
 
-    angular.forEach(datosDeLetra.comentarios, function(comentario) {
+    datosDeLetra.comentarios.forEach(function(comentario) {
         var comentarioAAgregar = Comentario.llenarDesde(comentario, letra);
-        letra.comentarios.push(comentarioAAgregar);
+        letra.agregarComentario(comentarioAAgregar);
     });
     return letra;
 };
 
 /* Métodos de Instancia. */
 Letra.prototype = {
-
+    agregarComentario: function(comentario){
+        this.comentarios.push(comentario);
+    }
 };

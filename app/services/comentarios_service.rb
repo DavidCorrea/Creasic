@@ -3,7 +3,6 @@ class ComentariosService
   def initialize params
     @parametros = params
     @post_id = params[:comentable_id]
-    @tipos_de_post = [SecuenciaDeAcordes, Cancion, Letra]
     asignar_usuario
   end
 
@@ -30,7 +29,15 @@ class ComentariosService
   end
 
   def encontrar_tipo_de_post
-    @tipos_de_post.find { |tipo| tipo.exists? @post_id }
+    tipo_de_post = @parametros[:tipo]
+    tipos_de_posts[tipo_de_post.to_sym]
+  end
+
+  def tipos_de_posts
+    {
+        secuencia: SecuenciaDeAcordes,
+        letra: Letra
+    }
   end
 
   def parametros_de_creacion_de_comentario

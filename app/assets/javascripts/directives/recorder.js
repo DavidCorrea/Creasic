@@ -1,4 +1,4 @@
-creasic.directive("recorder", function(Upload, cloudinary) {
+creasic.directive("recorder", function() {
     return {
         type: 'E',
         templateUrl: 'views/directives/recorder',
@@ -7,8 +7,7 @@ creasic.directive("recorder", function(Upload, cloudinary) {
         },
         link: function(scope) {
             var recorder;
-            var audio = document.querySelector('audio');
-            var recordedAudio;
+            var audioRecorder = document.querySelector('.audio_recorder');
             navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
             var onSuccess = function(s) {
@@ -35,24 +34,10 @@ creasic.directive("recorder", function(Upload, cloudinary) {
 
             scope.stopRecording = function() {
                 recorder.stop();
-                recorder.exportWAV(function(s) {
-                    audio.src = window.URL.createObjectURL(s);
-                    recordedAudio = s;
-                });
-            };
 
-            scope.save = function() {
-                Upload.upload({
-                    url: "https://api.cloudinary.com/v1_1/" + cloudinary.config().cloud_name + "/upload",
-                    data: {
-                        upload_preset: cloudinary.config().upload_preset,
-                        file: recordedAudio
-                    }
-                }).success(function (data, status, headers, config) {
-                    scope.data.media_id = data.public_id;
-                    console.log('Guardo');
-                }).error(function (data, status, headers, config) {
-                    console.log('Error');
+                recorder.exportWAV(function(s) {
+                    audioRecorder.src = window.URL.createObjectURL(s);
+                    scope.data.audio = s;
                 });
             };
         }

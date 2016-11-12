@@ -1,9 +1,6 @@
 class ComentarioSerializer < ActiveModel::Serializer
   attributes :id, :contenido, :respuestas, :email_usuario, :votos, :media_id
 
-
-  belongs_to :letra
-
   def votos
     object.votos.map do |voto|
       {

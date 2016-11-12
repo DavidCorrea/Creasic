@@ -1,5 +1,5 @@
 class RespuestaSerializer < ActiveModel::Serializer
-  attributes :id, :contenido, :email_usuario, :votos
+  attributes :id, :contenido, :email_usuario, :votos, :media_id
 
   belongs_to :comentario
 

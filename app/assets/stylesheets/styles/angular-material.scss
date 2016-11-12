@@ -31,3 +31,9 @@ md-toast {
     }
   }
 }
+
+md-input-container textarea.md-input.letra-contenido {
+  min-height: 250px !important;
+  max-height: 250px !important;
+  overflow-y: auto;
+}

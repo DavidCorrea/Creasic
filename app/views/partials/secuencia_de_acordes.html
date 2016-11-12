@@ -13,11 +13,12 @@
         </div>
 
         <div layout="column" layout-align="center center" ng-hide="perteneceAlUsuario">
-            <h1 ng-hide="perteneceAlUsuario" style="color: orangered">{{ secuencia.titulo }} </h1>
-            <h5 ng-hide="perteneceAlUsuario">by {{secuencia.emailUsuario}}</h5>
+            <span class="titulo">
+                {{ secuencia.titulo }}
+            </span>
+            by {{secuencia.emailUsuario}}
         </div>
 
-        <md-divider></md-divider>
         <br>
 
         <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
@@ -43,7 +44,7 @@
     <br>
 
     <div ng-show="modoEdicion">
-        <comentarios-con-respuestas post="secuencia" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
+        <comentarios-con-respuestas post="secuencia" tipo-post="'secuencia'" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
 
         <md-divider></md-divider>
         <br>
