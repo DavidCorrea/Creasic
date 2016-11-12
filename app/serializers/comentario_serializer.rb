@@ -23,7 +23,14 @@ class ComentarioSerializer < ActiveModel::Serializer
       {
           id: respuesta.id,
           contenido: respuesta.contenido,
-          email_usuario: respuesta.usuario.email
+          email_usuario: respuesta.usuario.email,
+          votos: respuesta.votos.map do |voto|
+            {
+                id: voto.id,
+                valor: voto.valor,
+                usuario_id: Usuario.find(voto.usuario_id).id_externo
+            }
+          end
       }
     end
   end

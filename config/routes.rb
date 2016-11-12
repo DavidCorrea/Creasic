@@ -30,8 +30,7 @@ Rails.application.routes.draw do
   end
 
   scope '/votos' do
-    post '/dar_voto_positivo/*id',     :to => 'votos#dar_voto_positivo'
-    post '/dar_voto_negativo/*id',     :to => 'votos#dar_voto_negativo'
+    post '/dar_voto/*id',     :to => 'votos#dar_voto'
     get  '/obtener_valor_de_voto/*votable_id', :to => 'votos#obtener_valor_de_voto'
     post '/eliminar_voto/*id',     :to => 'votos#eliminar_voto'
   end

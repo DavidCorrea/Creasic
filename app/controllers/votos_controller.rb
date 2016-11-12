@@ -2,14 +2,9 @@ class VotosController < ApiController
 
   before_action :crear_service
 
-  def dar_voto_positivo
-    @voto_positivo = @service.dar_voto_positivo
-    render json: @voto_positivo
-  end
-
-  def dar_voto_negativo
-    @voto_negativo = @service.dar_voto_negativo
-    render json: @voto_negativo
+  def dar_voto
+    @voto = @service.dar_voto
+    render json: @voto
   end
 
   def eliminar_voto
