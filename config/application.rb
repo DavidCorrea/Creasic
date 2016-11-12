@@ -15,6 +15,10 @@ module Creasic
     # Assets directory.
     config.assets.paths << Rails.root.join('vendor','assets','bower_components')
 
+    # Locale.
     config.i18n.default_locale = :es
+
+    # Serializer.
+    ActiveModelSerializers.config.default_includes = '**'
   end
 end

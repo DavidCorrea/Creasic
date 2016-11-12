@@ -1,16 +1,29 @@
-creasic.directive("comentariosConRespuestas", function($rootScope, $sce, comentariosService) {
+creasic.directive("comentariosConRespuestas", function($rootScope, $sce, comentariosService, uploadService) {
     return {
         type: 'E',
         templateUrl: 'views/directives/comentarios',
         scope: {
             post: '=',
+            tipoPost: '=',
             actualizarPost: '='
         },
         link: function(scope) {
-            console.log(scope.post);
             scope.comentando = false;
             scope.respondiendo = false;
-            
+
+            scope.seQuiereComentar = true;
+            scope.seQuiereGrabar = false;
+
+            scope.modoComentar = function() {
+                scope.seQuiereComentar = true;
+                scope.seQuiereGrabar = false;
+            };
+
+            scope.modoGrabar = function() {
+                scope.seQuiereComentar = false;
+                scope.seQuiereGrabar = true;
+            };
+
             scope.cantidadDeComentarios = function() {
                 return scope.post.comentarios.length;
             };
@@ -29,11 +42,26 @@ creasic.directive("comentariosConRespuestas", function($rootScope, $sce, comenta
             };
 
             scope.guardarComentario = function(){
-                console.log(scope.comentario.media_id);
-                comentariosService.agregarComentario(scope.comentario).then(function(response) {
-                    scope.post = scope.actualizarPost(response.data);
-                    scope.comentando = false;
-                });
+                scope.comentario.tipo = scope.tipoPost;
+
+                if(scope.seQuiereGrabar) {
+                    uploadService.upload(scope.comentario.audio, function(audio_id) {
+                        scope.comentario.media_id = audio_id;
+                        comentariosService.agregarComentario(scope.comentario).then(function(response) {
+                            scope.post = scope.actualizarPost(response.data);
+                            scope.comentando = false;
+                        });
+                    });
+                } else {
+                    comentariosService.agregarComentario(scope.comentario).then(function(response) {
+                        scope.post = scope.actualizarPost(response.data);
+                        scope.comentando = false;
+                    });
+                }
+            };
+
+            scope.comentarioTieneAudio = function(comentario) {
+                return comentario.media_id && comentario.media_id.length > 0;
             };
 
             scope.responder = function(comentario){

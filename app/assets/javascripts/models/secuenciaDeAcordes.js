@@ -15,14 +15,14 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
     secuenciaDeAcordes.titulo = datosDeSecuencia.titulo;
     secuenciaDeAcordes.emailUsuario = datosDeSecuencia.email_usuario;
 
-    angular.forEach(datosDeSecuencia.acordes, function(acorde) {
+    datosDeSecuencia.acordes.forEach(function(acorde) {
         var acordeAAgregar = Acorde.llenarDesde(acorde, secuenciaDeAcordes);
-        secuenciaDeAcordes.acordes.push(acordeAAgregar);
+        secuenciaDeAcordes.agregarAcordeArmado(acordeAAgregar);
     });
 
-    angular.forEach(datosDeSecuencia.comentarios, function(comentario) {
+    datosDeSecuencia.comentarios.forEach(function(comentario) {
         var comentarioAAgregar = Comentario.llenarDesde(comentario, secuenciaDeAcordes);
-        secuenciaDeAcordes.comentarios.push(comentarioAAgregar);
+        secuenciaDeAcordes.agregarComentario(comentarioAAgregar);
     });
 
     return secuenciaDeAcordes;
@@ -30,10 +30,20 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
 
 /* Métodos de Instancia. */
 SecuenciaDeAcordes.prototype = {
+    agregarComentario: function(comentario){
+        this.comentarios.push(comentario);
+    },
+
     agregarAcorde: function() {
         this.acordes.push(new Acorde(this.posicionParaProximoAcorde));
         this.posicionParaProximoAcorde += 1;
     },
+
+    agregarAcordeArmado: function(acorde) {
+        this.acordes.push(acorde);
+        this.posicionParaProximoAcorde += 1;
+    },
+
     eliminarAcorde: function(acordeAEliminar) {
         this.acordes = this.acordes.filter(function(acorde) {
             return acordeAEliminar.posicion !== acorde.posicion;

@@ -1,0 +1,38 @@
+<div layout="column" class="content-section">
+    <div layout="column" flex="33">
+        <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
+            <md-input-container md-no-float>
+                <input ng-model="letra.titulo" placeholder="Titulo">
+            </md-input-container>
+        </div>
+
+        <div layout="column" layout-align="center center" ng-hide="perteneceAlUsuario">
+            <span class="titulo">
+                {{ letra.titulo }}
+            </span>
+            by {{letra.emailUsuario}}
+        </div>
+    </div>
+
+    <br>
+
+    <div layout="row" flex="33" layout-wrap layout-align="center center">
+        <md-input-container class="md-block md-input-has-value" ng-show="perteneceAlUsuario" layout-fill layout-margin flex="80" md-no-float>
+            <textarea ng-model="letra.contenido" class="letra-contenido" placeholder="Contenido"></textarea>
+        </md-input-container>
+
+        <div class="letra" style="white-space: pre-line;" layout-fill layout-margin flex="80" ng-hide="perteneceAlUsuario">
+            {{ letra.contenido }}
+        </div>
+    </div>
+
+    <div ng-show="modoEdicion">
+        <comentarios-con-respuestas post="letra" tipo-post="'letra'" actualizar-post="letraActualizada"></comentarios-con-respuestas>
+    </div>
+
+    <opciones>
+        <md-button class="md-label" ng-click="guardar()" ng-show="perteneceAlUsuario">Guardar</md-button>
+        <span ng-show="perteneceAlUsuario">|</span>
+        <md-button class="md-label" ui-sref="letras.todas">Cancelar</md-button>
+    </opciones>
+</div>

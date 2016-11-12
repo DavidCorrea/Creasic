@@ -21,6 +21,7 @@ Acorde.prototype = {
             return nota.cifrado;
         });
     },
+
     agregarNota: function(notaAAgregar) {
         var noFueAgregada = true;
 
@@ -34,11 +35,13 @@ Acorde.prototype = {
             this.notas.push(notaAAgregar);
         }
     },
+
     eliminarNota: function(notaAEliminiar) {
         this.notas = this.notas.filter(function(nota) {
             return notaAEliminiar.id !== nota.id;
         });
     },
+
     decrementarPosicion: function() {
         this.posicion -= 1;
     }

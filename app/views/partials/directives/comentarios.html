@@ -1,31 +1,27 @@
 <div>
     <div style="padding-top: 20px;">
-        <span>
-            Comentarios ({{ cantidadDeComentarios() }})
-        </span>
+        Comentarios ({{ cantidadDeComentarios() }})
     </div>
 </div>
 
 <div ng-repeat="comentario in post.comentarios">
-    <md-card md-theme-watch>
+    <md-card>
         <md-card-title>
-            <span>
-                {{comentario.emailUsuario}} dijo:
-                <br>
-                <br>
-                {{comentario.contenido}}
-            </span>
+            <div ng-if="!comentarioTieneAudio(comentario)">
+                <span>
+                    {{comentario.emailUsuario}} dijo: {{comentario.contenido}}
+                </span>
+            </div>
+
+            <div ng-if="comentarioTieneAudio(comentario)">
+                {{comentario.emailUsuario}} dijo: <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
+            </div>
         </md-card-title>
 
-        <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
-
-        <md-card flex-offset="10" md-theme-watch ng-repeat="respuesta in comentario.respuestas">
+        <md-card flex-offset="10" ng-repeat="respuesta in comentario.respuestas">
             <md-card-title>
                 <span>
-                    {{respuesta.emailUsuario}} dijo:
-                    <br>
-                    <br>
-                    {{respuesta.contenido}}
+                    {{respuesta.emailUsuario}} dijo: {{respuesta.contenido}}
                 </span>
             </md-card-title>
         </md-card>
@@ -34,7 +30,7 @@
             <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
         </md-card-actions>
 
-        <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
+        <md-card flex-offset="10" ng-show="estaRespondiendo(comentario.id)">
             <md-card-title-text>
                 <md-input-container class="md-block md-input-has-value">
                     <label for="input_31">Respuesta</label>
@@ -52,24 +48,34 @@
     </md-card>
 </div>
 
-<md-card md-theme-watch ng-show="comentando">
+<md-card ng-show="comentando">
     <md-card-title>
         <md-card-title-text>
-            <md-input-container class="md-block md-input-has-value">
-                <label for="input_31">Comentario</label>
-                <div class="md-resize-wrapper">
-                        <textarea ng-model="comentario.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
-                        </textarea>
-                </div>
-            </md-input-container>
+            <div ng-show="seQuiereComentar">
+                <md-input-container class="md-block md-input-has-value">
+                    <div class="md-resize-wrapper">
+                        <textarea ng-model="comentario.contenido" rows="1" placeholder="Comentario"></textarea>
+                    </div>
+                </md-input-container>
+            </div>
+            <div ng-show="seQuiereGrabar">
+                <recorder data="comentario"></recorder>
+            </div>
         </md-card-title-text>
-        <md-card-title-media>
-            <recorder data="comentario"></recorder>
-        </md-card-title-media>
     </md-card-title>
     <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="cancelarComentario()">Cancelar</md-button>
-        <md-button ng-click="guardarComentario()">Aceptar</md-button>
+        <div layout-align="start center">
+            <div ng-hide="seQuiereComentar">
+                <md-button ng-click="modoComentar()">Comentar</md-button>
+            </div>
+            <div ng-hide="seQuiereGrabar">
+                <md-button ng-click="modoGrabar()">Grabar</md-button>
+            </div>
+        </div>
+        <div layout-align="end center">
+            <md-button ng-click="cancelarComentario()">Cancelar</md-button>
+            <md-button ng-click="guardarComentario()">Aceptar</md-button>
+        </div>
     </md-card-actions>
 </md-card>
 

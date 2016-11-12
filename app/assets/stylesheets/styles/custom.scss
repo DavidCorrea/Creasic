@@ -45,3 +45,22 @@
   max-height: 110px;
   overflow-y: scroll;
 }
+
+.titulo {
+  color: $creasic-orange;
+  font-size: 40px;
+  font-weight: bolder;
+  margin-top: 20px;
+
+  &.small {
+    font-size: 20px;
+    margin-top: 0px;
+    padding-right: 10px;
+  }
+}
+
+.letra {
+  white-space: pre-line;
+  text-align: center;
+}
+
