@@ -5,7 +5,7 @@ creasic.controller("secuenciaDeAcordesCtrl",
     $scope.modoEdicion = modoEdicion;
     $scope.notas = notas;
     $scope.secuencia = secuenciaDeAcordes;
-    $scope.perteneceAlUsuario = $rootScope.usuario.id === secuenciaDeAcordes.usuario_id;
+    $scope.perteneceAlUsuario = $rootScope.usuario && ($rootScope.usuario.id === secuenciaDeAcordes.usuario_id);
 
     $scope.$watch('secuencia.bpm', function(){
         pianoService.cambiarBPM($scope.secuencia.bpm);

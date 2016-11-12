@@ -3,7 +3,7 @@ creasic.controller('letraCtrl', ['$scope', '$rootScope', 'letra', 'modoEdicion',
 
     $scope.modoEdicion = modoEdicion;
     $scope.letra = letra;
-    $scope.perteneceAlUsuario = $rootScope.usuario.id === letra.usuario_id;
+    $scope.perteneceAlUsuario = $rootScope.usuario && ($rootScope.usuario.id === letra.usuario_id);
 
     $scope.guardar = function() {
         if(!$scope.modoEdicion) {
