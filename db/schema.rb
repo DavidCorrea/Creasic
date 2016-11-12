@@ -81,4 +81,14 @@ ActiveRecord::Schema.define(version: 20161110064213) do
     t.string   "email",      null: false
   end
 
+  create_table "votos", force: :cascade do |t|
+    t.integer  "valor",        null: false
+    t.string   "votable_type"
+    t.integer  "votable_id"
+    t.integer  "usuario_id",   null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["votable_type", "votable_id"], name: "index_votos_on_votable_type_and_votable_id", using: :btree
+  end
+
 end
