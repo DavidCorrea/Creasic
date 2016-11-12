@@ -1,4 +1,4 @@
-creasic.service('uploadService', ['Upload', 'cloudinary', function(Upload, cloudinary) {
+creasic.service('uploadService', ['Upload', 'cloudinary', 'toastService', function(Upload, cloudinary, toastService) {
 
     this.upload = function(audio, successCallback, errorCallback) {
         return Upload.upload({
@@ -8,6 +8,7 @@ creasic.service('uploadService', ['Upload', 'cloudinary', function(Upload, cloud
                 file: audio
             }
         }).success(function (data, status, headers, config) {
+            toastService.mostrarMensaje('Audio grabado correctamente.');
             successCallback(data.public_id);
         }).error(function (data, status, headers, config) {
             errorCallback();

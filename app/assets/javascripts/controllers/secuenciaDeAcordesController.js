@@ -1,6 +1,6 @@
 creasic.controller("secuenciaDeAcordesCtrl",
-    ['$scope', '$rootScope', 'secuenciaDeAcordes', 'notas', 'modoEdicion', 'secuenciasDeAcordesService', 'pianoService',
-    function ($scope, $rootScope, secuenciaDeAcordes, notas, modoEdicion, secuenciasDeAcordesService, pianoService) {
+    ['$scope', '$rootScope', 'secuenciaDeAcordes', 'notas', 'modoEdicion', 'secuenciasDeAcordesService', 'pianoService', 'toastService', 'navegacionService',
+    function ($scope, $rootScope, secuenciaDeAcordes, notas, modoEdicion, secuenciasDeAcordesService, pianoService, toastService, navegacionService) {
 
     $scope.modoEdicion = modoEdicion;
     $scope.notas = notas;
@@ -32,13 +32,22 @@ creasic.controller("secuenciaDeAcordesCtrl",
 
     $scope.guardar = function() {
         if(!$scope.modoEdicion) {
-            secuenciasDeAcordesService.crear($scope.secuencia);
+            secuenciasDeAcordesService.crear($scope.secuencia).then(function() {
+                $scope.mostrarProcesoExitoso('Secuencia creada exitosamente.');
+            });
         } else {
-            secuenciasDeAcordesService.editar($scope.secuencia);
+            secuenciasDeAcordesService.editar($scope.secuencia).then(function() {
+                $scope.mostrarProcesoExitoso('Secuencia editada exitosamente.');
+            });
         }
     };
 
     $scope.secuenciaDeAcordesActualizada = function(data) {
         return SecuenciaDeAcordes.llenarDesde(data);
-    }
+    };
+
+    $scope.mostrarProcesoExitoso = function(mensaje) {
+        toastService.mostrarMensaje(mensaje);
+        navegacionService.llevarALetras();
+    };
 }]);

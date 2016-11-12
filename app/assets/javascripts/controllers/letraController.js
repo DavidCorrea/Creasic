@@ -8,11 +8,11 @@ creasic.controller('letraCtrl', ['$scope', '$rootScope', 'letra', 'modoEdicion',
     $scope.guardar = function() {
         if(!$scope.modoEdicion) {
             letrasService.crearLetra($scope.letra).then(function() {
-                $scope.mostrarProcesoExitoso('Propuesta creada exitosamente.');
+                $scope.mostrarProcesoExitoso('Letra creada exitosamente.');
             });
         } else {
             letrasService.editarLetra($scope.letra).then(function() {
-                $scope.mostrarProcesoExitoso('Propuesta editada exitosamente.');
+                $scope.mostrarProcesoExitoso('Letra editada exitosamente.');
             });
         }
 
