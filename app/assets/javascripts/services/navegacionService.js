@@ -1,7 +1,7 @@
 creasic.service('navegacionService', ['$state', function($state) {
 
-    this.llevarAAcordes = function() {
-        $state.transitionTo('acordes');
+    this.llevarASecuencias = function() {
+        $state.transitionTo('secuenciasDeAcordes.todas');
     };
 
     this.llevarACanciones = function() {

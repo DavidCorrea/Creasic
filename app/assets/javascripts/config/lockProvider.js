@@ -1,5 +1,6 @@
 creasic.run(function(authService, authManager) {
     authService.guardarInformacionDeSesion();
+    authService.actualizarSesion();
     authManager.checkAuthOnRefresh();
     authManager.redirectWhenUnauthenticated();
 });

@@ -33,11 +33,11 @@ creasic.controller("secuenciaDeAcordesCtrl",
     $scope.guardar = function() {
         if(!$scope.modoEdicion) {
             secuenciasDeAcordesService.crear($scope.secuencia).then(function() {
-                $scope.mostrarProcesoExitoso('Secuencia creada exitosamente.');
+                $scope.mostrarProcesoExitoso('¡"'+ $scope.secuencia.titulo + '" fue creada exitosamente!');
             });
         } else {
             secuenciasDeAcordesService.editar($scope.secuencia).then(function() {
-                $scope.mostrarProcesoExitoso('Secuencia editada exitosamente.');
+                $scope.mostrarProcesoExitoso('¡"'+ $scope.secuencia.titulo + '" fue editada exitosamente!');
             });
         }
     };
@@ -48,6 +48,6 @@ creasic.controller("secuenciaDeAcordesCtrl",
 
     $scope.mostrarProcesoExitoso = function(mensaje) {
         toastService.mostrarMensaje(mensaje);
-        navegacionService.llevarALetras();
+        navegacionService.llevarASecuencias();
     };
 }]);

@@ -7,6 +7,8 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', fu
     this.cerrarSesion = function() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('usuario');
+        $rootScope.haySesion = this.haySesion();
+        $rootScope.usuario = null;
         authManager.unauthenticate();
     };
 
@@ -21,16 +23,23 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', fu
     };
 
     this.guardarInformacionDeSesion = function() {
+        var self = this;
+
         lock.on('authenticated', function(authResult) {
             localStorage.setItem('id_token', authResult.idToken);
             authManager.authenticate();
 
             lock.getProfile(authResult.idToken, function(error, response) {
                 localStorage.setItem('usuario', JSON.stringify(response));
-                $rootScope.$broadcast('sesionIniciada');
                 $http.post('/usuarios/crear', {id_externo: response.user_id, email: response.email});
+                self.actualizarSesion();
             });
         });
+    };
+
+    this.actualizarSesion = function() {
+        $rootScope.usuario = this.sesionActual();
+        $rootScope.haySesion = this.haySesion();
     };
 
 }]);
