@@ -1,0 +1,48 @@
+<div layout="column" layout-align="center center">
+    <div>
+        <h1 ng-hide="enModoEdicion" style="color: orangered">{{ letra.titulo }} </h1>
+
+        <md-input-container ng-show="enModoEdicion">
+            <label>Titulo</label>
+            <input ng-model="letra.titulo">
+        </md-input-container>
+    </div>
+
+    <h5 ng-hide="enModoEdicion">by {{letra.emailUsuario}}</h5>
+</div>
+
+<div>
+    <md-content ng-hide="enModoEdicion" style="white-space: pre-line;" flex="90" flex-offset="5">
+        {{ letra.contenido }}
+    </md-content>
+
+    <md-input-container class="md-block" ng-show="enModoEdicion" flex="90" flex-offset="5">
+        <label>Contenido</label>
+        <div class="md-resize-wrapper">
+            <textarea ng-model="letra.contenido" rows="5" aria-invalid="false">
+            </textarea>
+        </div>
+    </md-input-container>
+</div>
+
+<br>
+
+<br>
+
+<md-divider></md-divider>
+
+
+<div>
+    <comentarios-con-respuestas post="letra" actualizar-post="letraActualizada"/>
+</div>
+
+
+<md-divider></md-divider>
+
+<div layout="row" layout-sm="column" layout-wrap>
+    <md-button class="md-label" ng-click="entrarModoEdicion()" ng-show="sePuedeEditar()">Editar</md-button>
+    <md-button class="md-label" ui-sref="letras.todas" ng-hide="enModoEdicion">Volver</md-button>
+
+    <md-button class="md-label" ng-click="guardarEdicion()" ng-show="enModoEdicion">Guardar</md-button>
+    <md-button class="md-label" ng-click="cancelarModoEdicion()" ng-show="enModoEdicion">Cancelar</md-button>
+</div>

@@ -18,13 +18,15 @@ gem 'active_model_serializers'
 
 gem 'bower-rails'
 
-gem 'devise'
-
 gem 'angular_rails_csrf', git: 'https://github.com/tpmullan/angular_rails_csrf'
 
-group :development, :test do
+group :test do
   gem 'rspec-rails'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'rails-controller-testing'
+end
 
+group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'

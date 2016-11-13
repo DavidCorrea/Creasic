@@ -15,12 +15,10 @@ module Creasic
     # Assets directory.
     config.assets.paths << Rails.root.join('vendor','assets','bower_components')
 
-    # Only us Devise as JSON API.
-    config.to_prepare do
-      DeviseController.respond_to :json
-    end
-
+    # Locale.
     config.i18n.default_locale = :es
 
+    # Serializer.
+    ActiveModelSerializers.config.default_includes = '**'
   end
 end

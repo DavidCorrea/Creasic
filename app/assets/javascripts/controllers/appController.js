@@ -1,18 +1,11 @@
-creasic.controller("appCtrl", ['$scope', 'authService', 'authObserverService', function ($scope, authService, authObserverService) {
+creasic.controller("appCtrl", ['$scope', '$rootScope', 'authService', 'navegacionService', function ($scope, $rootScope, authService, navegacionService) {
 
-    $scope.existeSesion = authService.existeSesion();
-
-    authObserverService.registerObserverCallback(function(usuario) {
-        $scope.usuario = usuario;
-        $scope.existeSesion = authService.existeSesion();
-    });
+    $scope.iniciarSesion = function() {
+        authService.iniciarSesion();
+    };
 
     $scope.cerrarSesion = function() {
-        authService.cerrarSesion($scope.usuario).then(function(usuarioViejo) {
-            $scope.existeSesion = authService.existeSesion();
-        }, function(response) {
-
-        });
+        authService.cerrarSesion();
     };
 
 }]);

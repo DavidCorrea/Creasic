@@ -1,11 +1,7 @@
 creasic.service('navegacionService', ['$state', function($state) {
 
-    this.llevarAIngresar = function() {
-        $state.transitionTo('ingresar');
-    };
-
-    this.llevarAAcordes = function() {
-        $state.transitionTo('acordes');
+    this.llevarASecuencias = function() {
+        $state.transitionTo('secuenciasDeAcordes.todas');
     };
 
     this.llevarACanciones = function() {
@@ -16,12 +12,8 @@ creasic.service('navegacionService', ['$state', function($state) {
         $state.transitionTo('home');
     };
 
-    this.llevarARegistrar = function() {
-        $state.transitionTo('registrar');
-    };
-
     this.llevarALetras = function() {
-        $state.transitionTo('letras');
+        $state.transitionTo('letras.todas');
     };
 
 

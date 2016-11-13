@@ -1,0 +1,12 @@
+<md-list flex>
+    <md-list-item ng-if="haySesion" ui-sref="letras.crear">
+        <div class="md-list-item-text" layout="column">
+            Crear Letra
+        </div>
+    </md-list-item>
+    <md-list-item class="md-3-line" ng-repeat="letra in letras" ui-sref="letras.ver({id: letra.id})">
+        <div class="md-list-item-text" layout="row">
+            <span class="titulo small">{{ letra.titulo }}</span> by {{letra.emailUsuario}}
+        </div>
+    </md-list-item>
+</md-list>

@@ -11,11 +11,19 @@
 // about supported directives.
 //
 // require jquery
+//= require tone
 //= require angular
 //= require angular-animate
 //= require angular-aria
 //= require angular-messages
 //= require angular-material
-//= require angular-devise
 //= require angular-ui-router
+//= require auth0-lock
+//= require angular-lock
+//= require angular-jwt
+//= require angularAudioRecorder
+//= require lodash
+//= require cloudinary-core
+//= require cloudinary_ng
+//= require ng-file-upload
 //= require_tree .

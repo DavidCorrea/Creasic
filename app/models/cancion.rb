@@ -1,5 +1,6 @@
 class Cancion < ApplicationRecord
 
-  has_many :comentarios
+  belongs_to :usuario
+  has_many :comentarios, as: :comentable
 
 end
