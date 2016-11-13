@@ -26,4 +26,5 @@
 //= require cloudinary-core
 //= require cloudinary_ng
 //= require ng-file-upload
+//= require angularjs-socialshare
 //= require_tree .

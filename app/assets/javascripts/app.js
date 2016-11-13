@@ -5,5 +5,6 @@ var creasic = angular.module('creasic',
         'auth0.lock',
         'angular-jwt',
         'cloudinary',
-        'ngFileUpload'
+        'ngFileUpload',
+        '720kb.socialshare'
     ]);

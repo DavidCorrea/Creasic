@@ -50,6 +50,10 @@
         <br>
     </div>
 
+    <div ng-show="modoEdicion">
+        <redes-sociales></redes-sociales>
+    </div>
+
     <opciones>
         <md-button class="md-label" ng-click="guardar()" ng-show="perteneceAlUsuario">Guardar</md-button>
         <span ng-show="perteneceAlUsuario">|</span>
