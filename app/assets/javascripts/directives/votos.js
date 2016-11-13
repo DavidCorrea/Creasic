@@ -8,22 +8,14 @@ creasic.directive("votos", function($rootScope, votosService) {
         },
         link: function(scope) {
 
-            var colorConVoto = {"color": "#FF9800"};
-            var colorSinVoto = {"color": "white"};
             scope.votoPositivo = false;
             scope.votoNegativo = false;
-            scope.colorPositivo = colorSinVoto;
-            scope.colorNegativo = colorSinVoto;
 
             angular.forEach(scope.post.votos, function(voto){
                 if ($rootScope.usuario && voto.usuario_id == $rootScope.usuario.id){
                     scope.votoDelUsuario = voto;
                     scope.votoPositivo = voto.valor == 1;
                     scope.votoNegativo = voto.valor == -1;
-                    if(scope.votoPositivo)
-                        scope.colorPositivo = colorConVoto;
-                    if(scope.votoNegativo)
-                        scope.colorNegativo = colorConVoto;
                 }
             });
 
@@ -41,8 +33,6 @@ creasic.directive("votos", function($rootScope, votosService) {
                     votosService.eliminarVoto(scope.votoDelUsuario).then(function(){
                         scope.votoPositivo = false;
                         scope.votoNegativo = false;
-                        scope.colorPositivo = colorSinVoto;
-                        scope.colorNegativo = colorSinVoto;
                         scope.post.votos = scope.post.votos.filter(function(voto) {
                             return voto.usuario_id !== $rootScope.usuario.id;
                         });
@@ -55,7 +45,6 @@ creasic.directive("votos", function($rootScope, votosService) {
                         scope.votoDelUsuario = response.data;
                         scope.votoPositivo = true;
                         scope.votoNegativo = false;
-                        scope.colorPositivo = colorConVoto;
                         scope.post.votos.push(response.data);
                     });
                 }
@@ -66,8 +55,6 @@ creasic.directive("votos", function($rootScope, votosService) {
                     votosService.eliminarVoto(scope.votoDelUsuario).then(function(){
                         scope.votoPositivo = false;
                         scope.votoNegativo = false;
-                        scope.colorPositivo = colorSinVoto;
-                        scope.colorNegativo = colorSinVoto;
                         scope.post.votos = scope.post.votos.filter(function(voto) {
                             return voto.usuario_id !== $rootScope.usuario.id;
                         });
@@ -80,7 +67,6 @@ creasic.directive("votos", function($rootScope, votosService) {
                         scope.votoDelUsuario = response.data;
                         scope.votoPositivo = false;
                         scope.votoNegativo = true;
-                        scope.colorNegativo = colorConVoto;
                         scope.post.votos.push(response.data);
                     });
                 }
