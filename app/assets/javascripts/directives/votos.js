@@ -1,4 +1,4 @@
-creasic.directive("votos", function($rootScope, votosService) {
+creasic.directive("votos", function($rootScope, votosService, authService, navegacionService) {
     return {
         type: 'E',
         templateUrl: 'views/directives/votos',
@@ -11,13 +11,18 @@ creasic.directive("votos", function($rootScope, votosService) {
             scope.votoPositivo = false;
             scope.votoNegativo = false;
 
-            angular.forEach(scope.post.votos, function(voto){
-                if ($rootScope.usuario && voto.usuario_id == $rootScope.usuario.id){
-                    scope.votoDelUsuario = voto;
-                    scope.votoPositivo = voto.valor == 1;
-                    scope.votoNegativo = voto.valor == -1;
-                }
-            });
+
+            scope.sumarVotos = function(){
+                angular.forEach(scope.post.votos, function(voto){
+                    if ($rootScope.usuario && voto.usuario_id == $rootScope.usuario.id){
+                        scope.votoDelUsuario = voto;
+                        scope.votoPositivo = voto.valor == 1;
+                        scope.votoNegativo = voto.valor == -1;
+                    }
+                });
+            };
+
+            scope.sumarVotos();
 
 
             scope.cantidadDeVotos = function() {
@@ -27,50 +32,34 @@ creasic.directive("votos", function($rootScope, votosService) {
                 }
                 return total
             };
-            
-            scope.darVotoPositivo = function(){
-                if(scope.votoNegativo){
-                    votosService.eliminarVoto(scope.votoDelUsuario).then(function(){
-                        scope.votoPositivo = false;
-                        scope.votoNegativo = false;
-                        scope.post.votos = scope.post.votos.filter(function(voto) {
-                            return voto.usuario_id !== $rootScope.usuario.id;
-                        });
-                    });
-                }
-                else {
-                    scope.voto = new Voto(scope.post, $rootScope.usuario.id);
-                    scope.voto.valor = 1;
-                    votosService.darVoto(scope.voto).then(function (response) {
-                        scope.votoDelUsuario = response.data;
-                        scope.votoPositivo = true;
-                        scope.votoNegativo = false;
-                        scope.post.votos.push(response.data);
-                    });
-                }
-            };
 
-            scope.darVotoNegativo = function(){
-                if(scope.votoPositivo){
-                    votosService.eliminarVoto(scope.votoDelUsuario).then(function(){
-                        scope.votoPositivo = false;
-                        scope.votoNegativo = false;
-                        scope.post.votos = scope.post.votos.filter(function(voto) {
-                            return voto.usuario_id !== $rootScope.usuario.id;
-                        });
-                    });
+            scope.votar = function(valor){
+                if(!$rootScope.usuario){
+                    authService.iniciarSesion();
+                    navegacionService.llevarALetras();
                 }
                 else {
-                    scope.voto = new Voto(scope.post, $rootScope.usuario.id);
-                    scope.voto.valor = -1;
-                    votosService.darVoto(scope.voto).then(function (response) {
-                        scope.votoDelUsuario = response.data;
-                        scope.votoPositivo = false;
-                        scope.votoNegativo = true;
-                        scope.post.votos.push(response.data);
-                    });
+                    if (scope.votoNegativo || scope.votoPositivo) {
+                        votosService.eliminarVoto(scope.votoDelUsuario).then(function () {
+                            scope.votoPositivo = false;
+                            scope.votoNegativo = false;
+                            scope.post.votos = scope.post.votos.filter(function (voto) {
+                                return voto.usuario_id !== $rootScope.usuario.id;
+                            });
+                        });
+                    }
+                    else {
+                        scope.voto = new Voto(scope.post, $rootScope.usuario.id);
+                        scope.voto.valor = valor;
+                        votosService.darVoto(scope.voto).then(function (response) {
+                            scope.votoDelUsuario = response.data;
+                            scope.votoPositivo = valor == 1;
+                            scope.votoNegativo = valor == -1;
+                            scope.post.votos.push(response.data);
+                        });
+                    }
                 }
-            };
+            }
 
 
         }
