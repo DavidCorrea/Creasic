@@ -30,9 +30,16 @@ Rails.application.routes.draw do
   end
 
   scope '/votos' do
-    post '/dar_voto/*id',     :to => 'votos#dar_voto'
+    post '/dar_voto/*id',                      :to => 'votos#dar_voto'
     get  '/obtener_valor_de_voto/*votable_id', :to => 'votos#obtener_valor_de_voto'
-    post '/eliminar_voto/*id',     :to => 'votos#eliminar_voto'
+    post '/eliminar_voto/*id',                 :to => 'votos#eliminar_voto'
+  end
+
+  scope '/canciones' do
+    post '/crear',      :to => 'canciones#crear'
+    get  '/todas',      :to => 'canciones#todas'
+    get  '/ver/*id',    :to => 'canciones#ver'
+    post '/editar/*id', :to => 'canciones#editar'
   end
 
 end

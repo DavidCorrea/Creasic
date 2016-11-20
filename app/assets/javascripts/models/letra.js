@@ -7,6 +7,7 @@ function Letra(idUsuario) {
 
 /* Constructor */
 Letra.llenarDesde = function(datosDeLetra) {
+    debugger;
     var letra = new Letra(datosDeLetra.usuario_id);
     letra.id = datosDeLetra.id;
     letra.titulo = datosDeLetra.titulo;

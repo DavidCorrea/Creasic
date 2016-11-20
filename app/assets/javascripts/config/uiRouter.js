@@ -147,10 +147,59 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
 
     var cancionesState = {
         parent: 'app',
+        abstract: true,
         name: 'canciones',
         url: 'canciones',
-        templateUrl: 'views/canciones'
+        template: '<ui-view/>'
     };
+
+    var todasLasCancionesState = {
+        name: 'canciones.todas',
+        url: '',
+        templateUrl: 'views/canciones',
+        controller: 'cancionesCtrl',
+        resolve: {
+            canciones: function(cancionesService) {
+                return cancionesService.obtenerTodasLasCanciones().then(function(response){
+                    return response.data.map(function(cancion) {
+                        return Cancion.llenarDesde(cancion);
+                    });
+                });
+            }
+        }
+    };
+    var crearCancionState = {
+        name: 'canciones.crear',
+        url: '/crear',
+        templateUrl: 'views/cancion',
+        controller: 'cancionCtrl',
+        resolve: {
+            cancion: function($rootScope) {
+                return new Cancion($rootScope.usuario.id);
+            },
+            modoEdicion: function() {
+                return false;
+            }
+        }
+    };
+
+    var verCancionState = {
+        name: 'canciones.ver',
+        url: '/{id}',
+        templateUrl: 'views/cancion',
+        controller: 'cancionCtrl',
+        resolve: {
+            cancion: function($stateParams, cancionesService) {
+                return cancionesService.obtenerCancion($stateParams.id).then(function(response) {
+                    return Cancion.llenarDesde(response.data);
+                });
+            },
+            modoEdicion: function() {
+                return true;
+            }
+        }
+    };
+
 
     var cerrarSesionState = {
         parent: 'app',
@@ -169,5 +218,8 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(todasLasletrasState);
     $stateProvider.state(verLetraState);
     $stateProvider.state(cancionesState);
+    $stateProvider.state(todasLasCancionesState);
+    $stateProvider.state(crearCancionState);
+    $stateProvider.state(verCancionState);
     $stateProvider.state(cerrarSesionState);
 });
