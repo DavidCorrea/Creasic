@@ -10,42 +10,34 @@
             <div layout="row">
                 <h4>Descripcion</h4>
             </div>
-            <md-input-container layout-fill layout-margin flex="80" md-no-float>
-                <textarea ng-model="usuario.descripcion"></textarea>
-            </md-input-container>
+            <span>{{ usuario.descripcion || "No ha dado informacion al respecto." }}</span>
         </div>
 
         <div layout="column" flex="33" layout-wrap layout-align="center center">
             <div layout="row">
                 <h4>Gustos</h4>
             </div>
-            <md-input-container layout-fill layout-margin flex="80" md-no-float>
-                <textarea ng-model="usuario.gustos"></textarea>
-            </md-input-container>
+            <span>{{ usuario.gustos || "No ha dado informacion al respecto." }}</span>
         </div>
 
         <div layout="column" flex="33" layout-wrap layout-align="center center">
             <div layout="row">
                 <h4>Intereses</h4>
             </div>
-            <md-input-container layout-fill layout-margin flex="80" md-no-float>
-                <textarea ng-model="usuario.intereses"></textarea>
-            </md-input-container>
+            <span>{{ usuario.intereses || "No ha dado informacion al respecto." }}</span>
         </div>
 
         <div layout="column" flex="33" layout-wrap layout-align="center center">
             <div layout="row">
                 <h4>Instrumentos</h4>
             </div>
-            <md-input-container layout-fill layout-margin flex="80" md-no-float>
-                <textarea ng-model="usuario.instrumentos"></textarea>
-            </md-input-container>
+            <span>{{ usuario.instrumentos || "No ha dado informacion al respecto." }}</span>
         </div>
     </div>
 
+    <br>
+
     <opciones>
-        <md-button class="md-label" ng-click="guardar()">Guardar</md-button>
-        |
         <md-button class="md-label" ng-click="volver()">Volver</md-button>
     </opciones>
 </div>

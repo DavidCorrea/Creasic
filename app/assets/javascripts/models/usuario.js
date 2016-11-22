@@ -1,6 +1,6 @@
 function Usuario() {
     this.email = "";
-    this.nickname = "";
+    this.nombre = "";
     this.id = "";
 }
 
@@ -8,9 +8,13 @@ function Usuario() {
 Usuario.llenarDesde = function(datosDeUsuario) {
     var usuario = new Usuario();
 
+    usuario.id = datosDeUsuario.user_id || datosDeUsuario.id_externo || datosDeUsuario.id;
     usuario.email = datosDeUsuario.email;
-    usuario.nickname = datosDeUsuario.nickname;
-    usuario.id = datosDeUsuario.user_id;
+    usuario.nombre = datosDeUsuario.nombre;
+    usuario.descripcion = datosDeUsuario.descripcion;
+    usuario.gustos = datosDeUsuario.gustos;
+    usuario.instrumentos = datosDeUsuario.instrumentos;
+    usuario.intereses = datosDeUsuario.intereses;
 
     return usuario;
 };

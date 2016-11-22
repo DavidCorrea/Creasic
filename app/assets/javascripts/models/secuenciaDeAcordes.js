@@ -13,7 +13,7 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
 
     secuenciaDeAcordes.id = datosDeSecuencia.id;
     secuenciaDeAcordes.titulo = datosDeSecuencia.titulo;
-    secuenciaDeAcordes.emailUsuario = datosDeSecuencia.email_usuario;
+    secuenciaDeAcordes.nombreUsuario = datosDeSecuencia.nombre_usuario;
     secuenciaDeAcordes.bpm = datosDeSecuencia.bpm;
 
     datosDeSecuencia.acordes.forEach(function(acorde) {
@@ -57,5 +57,9 @@ SecuenciaDeAcordes.prototype = {
         acordesACorrer.forEach(function(acorde) {
            acorde.decrementarPosicion();
         });
+    },
+
+    perteneceA: function(usuario_id) {
+        return this.usuario_id === usuario_id;
     }
 };

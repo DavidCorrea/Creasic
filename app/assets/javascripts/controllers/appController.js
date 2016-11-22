@@ -1,4 +1,4 @@
-creasic.controller("appCtrl", ['$scope', '$rootScope', 'authService', 'navegacionService', function ($scope, $rootScope, authService, navegacionService) {
+creasic.controller("appCtrl", ['$scope', 'authService', function ($scope, authService) {
 
     $scope.iniciarSesion = function() {
         authService.iniciarSesion();

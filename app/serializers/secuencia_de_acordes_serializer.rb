@@ -1,15 +1,15 @@
 class SecuenciaDeAcordesSerializer < ActiveModel::Serializer
-  attributes :id, :usuario_id, :email_usuario, :titulo, :bpm
+  attributes :id, :usuario_id, :nombre_usuario, :titulo, :bpm
 
   has_many :acordes
   has_many :comentarios
 
-  def email_usuario
-    object.usuario.email
-  end
-
   def usuario_id
     object.usuario.id_externo
+  end
+
+  def nombre_usuario
+    object.usuario.nombre
   end
 
 end

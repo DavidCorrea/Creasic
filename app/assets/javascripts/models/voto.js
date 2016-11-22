@@ -10,5 +10,6 @@ Voto.llenarDesde = function(datosDeVoto, post) {
 
     voto.id = datosDeVoto.id;
     voto.valor = datosDeVoto.valor;
+
     return voto;
 };

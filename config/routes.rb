@@ -4,7 +4,14 @@ Rails.application.routes.draw do
 
   get  'views/*path',    :to => 'views#partial_template'
 
-  post 'usuarios/crear', :to => 'usuarios#crear'
+  scope '/usuarios' do
+    get  '/existe/*id_externo'             , :to => 'usuarios#existe'
+    get  '/nombre_esta_disponible/*nombre' , :to => 'usuarios#nombre_esta_disponible'
+    get  '/todos'                          , :to => 'usuarios#todos'
+    post '/crear'                          , :to => 'usuarios#crear'
+    get  '/ver/*id_externo'                , :to => 'usuarios#ver'
+    post '/editar/*id_externo'             , :to => 'usuarios#editar'
+  end
 
   scope '/letras' do
     post '/crear',      :to => 'letras#crear'
