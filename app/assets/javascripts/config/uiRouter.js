@@ -112,11 +112,6 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
             secuenciaDeAcordes: function($rootScope) {
                 return new SecuenciaDeAcordes($rootScope.usuario.id);
             },
-            notas: function(notasService) {
-                return notasService.todasLasNotas().then(function(response) {
-                    return response;
-                });
-            },
             modoEdicion: function() {
                 return false;
             }
@@ -132,11 +127,6 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
             secuenciaDeAcordes: function($stateParams, secuenciasDeAcordesService) {
                 return secuenciasDeAcordesService.ver($stateParams.id).then(function(response) {
                     return SecuenciaDeAcordes.llenarDesde(response.data);
-                });
-            },
-            notas: function(notasService) {
-                return notasService.todasLasNotas().then(function(response) {
-                    return response;
                 });
             },
             modoEdicion: function() {

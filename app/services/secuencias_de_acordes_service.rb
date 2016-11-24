@@ -19,6 +19,7 @@ class SecuenciasDeAcordesService
 
   def editar
     secuencia_a_editar = ver
+    eliminar_acordes_no_presentes secuencia_a_editar
     secuencia_a_editar.update! parametros_de_edicion
     secuencia_a_editar
   end
@@ -32,7 +33,9 @@ class SecuenciasDeAcordesService
   end
 
   def parametros_de_creacion
-    @parametros.require(:secuencia_de_acordes).permit(:usuario, :titulo, :bpm, acordes_attributes: [ :posicion, nota_ids: [] ]).merge({usuario_id: @usuario.id })
+    transformar_notas_a_json
+
+    @parametros.permit(:usuario, :titulo, :bpm, acordes_attributes: [ :posicion, :notas ]).merge({usuario_id: @usuario.id })
   end
 
   def parametros_de_busqueda
@@ -40,7 +43,21 @@ class SecuenciasDeAcordesService
   end
 
   def parametros_de_edicion
-    @parametros.require(:secuencia_de_acordes).permit(:usuario, :titulo, :bpm, acordes_attributes: [ :id, :posicion, nota_ids: [] ]).merge({usuario_id: @usuario.id })
+    transformar_notas_a_json
+
+    @parametros.permit(:usuario, :titulo, :bpm, acordes_attributes: [ :id, :posicion, :notas ]).merge({usuario_id: @usuario.id })
+  end
+
+  def transformar_notas_a_json
+    @parametros[:acordes_attributes].each do | acorde |
+      acorde[:notas] = acorde[:notas].to_json
+    end
+  end
+
+  def eliminar_acordes_no_presentes secuencia
+    ids_presentes = @parametros[:acordes_attributes].map { |acorde| acorde[:id] }
+    acordes_a_eliminar = secuencia.acordes.where.not(id: ids_presentes)
+    acordes_a_eliminar.destroy_all
   end
 
 end

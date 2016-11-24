@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110064213) do
+ActiveRecord::Schema.define(version: 20161122050318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20161110064213) do
   create_table "acordes", force: :cascade do |t|
     t.integer "posicion",                default: 0, null: false
     t.integer "secuencia_de_acordes_id",             null: false
+    t.text    "notas"
     t.index ["secuencia_de_acordes_id"], name: "index_acordes_on_secuencia_de_acordes_id", using: :btree
   end
 
