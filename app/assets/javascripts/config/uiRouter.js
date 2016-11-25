@@ -21,7 +21,14 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         name: 'perfil',
         url: 'perfil',
         templateUrl: 'views/perfil',
-        controller: 'perfilCtrl'
+        controller: 'perfilCtrl',
+        resolve: {
+            usuarioActual: function($rootScope, usuariosService) {
+                return usuariosService.obtenerUsuario($rootScope.usuario.id).then(function(usuario) {
+                    return Usuario.llenarDesde(usuario);
+                });
+            }
+        }
     };
 
     var usuariosState = {

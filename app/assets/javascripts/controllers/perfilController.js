@@ -1,8 +1,6 @@
-creasic.controller('perfilCtrl', ['$scope', '$rootScope', 'usuariosService', 'toastService', 'navegacionService', function ($scope, $rootScope, usuariosService, toastService, navegacionService) {
+creasic.controller('perfilCtrl', ['$scope', 'usuarioActual', 'usuariosService', 'toastService', 'navegacionService', function ($scope, usuarioActual, usuariosService, toastService, navegacionService) {
 
-    usuariosService.obtenerUsuario($rootScope.usuario.id).then(function(usuario) {
-        $scope.usuario = usuario;
-    });
+    $scope.usuario = usuarioActual;
 
     $scope.guardar = function() {
         usuariosService.editarUsuario($scope.usuario).then(function(response) {
