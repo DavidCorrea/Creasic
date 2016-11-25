@@ -1,11 +1,6 @@
 creasic.service('secuenciasDeAcordesService', ['$http', function($http) {
 
     this.crear = function(secuencia) {
-        secuencia.acordes.map(function(acorde) {
-            acorde.nota_ids = acorde.notas.map(function(nota) {
-               return nota.id;
-            });
-        });
         secuencia.acordes_attributes = secuencia.acordes;
         return $http.post('secuencias_de_acordes/crear', secuencia);
     };
@@ -19,12 +14,8 @@ creasic.service('secuenciasDeAcordesService', ['$http', function($http) {
     };
 
     this.editar = function(nuevaSecuencia) {
-        nuevaSecuencia.acordes.map(function(acorde) {
-            acorde.nota_ids = acorde.notas.map(function(nota) {
-                return nota.id;
-            });
-        });
         nuevaSecuencia.acordes_attributes = nuevaSecuencia.acordes;
+        debugger;
         return $http.post('secuencias_de_acordes/editar/' + nuevaSecuencia.id, nuevaSecuencia);
     };
 

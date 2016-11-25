@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   end
 
   scope '/notas' do
-    get '/todas', :to => 'notas#todas'
+    get '/todas',   :to => 'notas#todas'
+    get '/acordes', :to => 'notas#acordes'
   end
 
   scope '/comentarios' do

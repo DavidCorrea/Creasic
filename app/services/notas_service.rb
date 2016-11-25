@@ -8,4 +8,8 @@ class NotasService
     Nota.all
   end
 
+  def todas_acordes
+    Acorde.where(default: true)
+  end
+
 end
