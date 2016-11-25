@@ -76,10 +76,15 @@ ActiveRecord::Schema.define(version: 20161122050318) do
   end
 
   create_table "usuarios", force: :cascade do |t|
-    t.string   "id_externo", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "email",      null: false
+    t.string   "id_externo",                null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "email",                     null: false
+    t.string   "nombre",                    null: false
+    t.text     "descripcion",  default: "", null: false
+    t.text     "gustos",       default: "", null: false
+    t.text     "intereses",    default: "", null: false
+    t.text     "instrumentos", default: "", null: false
   end
 
   create_table "votos", force: :cascade do |t|

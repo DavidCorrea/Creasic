@@ -1,4 +1,5 @@
-creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', function($http, $rootScope, lock, authManager) {
+creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', 'usuariosService', 'navegacionService',
+    function($http, $rootScope, lock, authManager, usuariosService, navegacionService) {
 
     this.iniciarSesion = function() {
         lock.show();
@@ -18,8 +19,15 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', fu
 
     this.sesionActual = function() {
         if(this.haySesion()) {
-            return Usuario.llenarDesde(JSON.parse(localStorage.getItem('usuario')));
+            var usuarioStorage = JSON.parse(localStorage.getItem('usuario'));
+            debugger;
+            return Usuario.llenarDesde(usuarioStorage);
         }
+    };
+
+    this.actualizarSesion = function() {
+        $rootScope.usuario = this.sesionActual();
+        $rootScope.haySesion = this.haySesion();
     };
 
     this.guardarInformacionDeSesion = function() {
@@ -29,17 +37,14 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', fu
             localStorage.setItem('id_token', authResult.idToken);
             authManager.authenticate();
 
-            lock.getProfile(authResult.idToken, function(error, response) {
-                localStorage.setItem('usuario', JSON.stringify(response));
-                $http.post('/usuarios/crear', {id_externo: response.user_id, email: response.email});
-                self.actualizarSesion();
+            lock.getProfile(authResult.idToken, function(error, informacionUsuario) {
+                usuariosService.loguearUsuario(informacionUsuario, function(usuario) {
+                    localStorage.setItem('usuario', JSON.stringify(usuario));
+                    self.actualizarSesion();
+                    navegacionService.llevarAHome();
+                });
             });
         });
-    };
-
-    this.actualizarSesion = function() {
-        $rootScope.usuario = this.sesionActual();
-        $rootScope.haySesion = this.haySesion();
     };
 
 }]);

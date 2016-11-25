@@ -4,7 +4,7 @@ creasic.controller("secuenciaDeAcordesCtrl",
 
     $scope.modoEdicion = modoEdicion;
     $scope.secuencia = secuenciaDeAcordes;
-    $scope.perteneceAlUsuario = $rootScope.usuario && ($rootScope.usuario.id === secuenciaDeAcordes.usuario_id);
+    $scope.perteneceAlUsuario = $rootScope.usuario && $scope.secuencia.perteneceA($rootScope.usuario.id);
 
     $scope.notasPrecargadas = [Nota.c4, Nota.c4Sharp, Nota.d4, Nota.e4Bemol, Nota.e4, Nota.f4, Nota.f4Sharp, Nota.g4, Nota.a4Bemol, Nota.a4, Nota.b4Bemol, Nota.b4];
     $scope.acordesPrecargados = [Acorde.C(), Acorde.D(), Acorde.E(), Acorde.F(), Acorde.G(), Acorde.A(), Acorde.B()];

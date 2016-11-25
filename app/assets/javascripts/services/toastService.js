@@ -4,6 +4,7 @@ creasic.service('toastService', ['$mdToast', function($mdToast) {
 
     var opciones = {
         mensaje: '',
+        error: '',
         errores: []
     };
 
@@ -24,11 +25,18 @@ creasic.service('toastService', ['$mdToast', function($mdToast) {
         $mdToast.show(toast(locals, 'success_toast'));
     };
 
+    this.mostrarError = function(error) {
+        var locals = opciones;
+        locals.mensaje = error;
+
+        $mdToast.show(toast(locals, 'error_toast'));
+    };
+
     this.mostrarErrores = function(errores) {
         var locals = opciones;
         locals.errores = errores;
 
-        $mdToast.show(toast(locals, 'error_toast'));
+        $mdToast.show(toast(locals, 'errores_toast'));
     };
 
 }]);

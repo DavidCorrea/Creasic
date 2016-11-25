@@ -11,7 +11,7 @@ Respuesta.llenarDesde = function(datosDeRespuesta, comentario) {
 
     comentarioAnidado.id = datosDeRespuesta.id;
     comentarioAnidado.contenido = datosDeRespuesta.contenido;
-    comentarioAnidado.emailUsuario = datosDeRespuesta.email_usuario;
+    comentarioAnidado.nombreUsuario = datosDeRespuesta.nombre_usuario;
 
     angular.forEach(datosDeRespuesta.votos, function(voto){
         var votoAAgregar = Voto.llenarDesde(voto, comentarioAnidado);
@@ -23,5 +23,7 @@ Respuesta.llenarDesde = function(datosDeRespuesta, comentario) {
 
 /* Métodos de Instancia. */
 Comentario.prototype = {
-
+    perteneceA: function(usuario_id) {
+        return this.usuario_id === usuario_id;
+    }
 };

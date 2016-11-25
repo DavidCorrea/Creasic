@@ -1,11 +1,11 @@
 class ComentarioSerializer < ActiveModel::Serializer
-  attributes :id, :contenido, :email_usuario, :media_id
+  attributes :id, :contenido, :nombre_usuario, :media_id
 
   has_many :votos
   has_many :respuestas
 
-  def email_usuario
-    object.usuario.email
+  def nombre_usuario
+    object.usuario.nombre
   end
 
 end
