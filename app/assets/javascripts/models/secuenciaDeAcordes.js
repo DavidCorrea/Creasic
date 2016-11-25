@@ -18,7 +18,7 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
 
     datosDeSecuencia.acordes.forEach(function(acorde) {
         var acordeAAgregar = Acorde.llenarDesde(acorde, secuenciaDeAcordes);
-        secuenciaDeAcordes.agregarAcordeArmado(acordeAAgregar);
+        secuenciaDeAcordes.agregarAcordePrearmado(acordeAAgregar);
     });
 
     datosDeSecuencia.comentarios.forEach(function(comentario) {
@@ -40,7 +40,8 @@ SecuenciaDeAcordes.prototype = {
         this.posicionParaProximoAcorde += 1;
     },
 
-    agregarAcordeArmado: function(acorde) {
+    agregarAcordePrearmado: function(acorde) {
+        acorde.cambiarPosicion(this.posicionParaProximoAcorde);
         this.acordes.push(acorde);
         this.posicionParaProximoAcorde += 1;
     },

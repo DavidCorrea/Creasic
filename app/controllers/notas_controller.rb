@@ -6,6 +6,10 @@ class NotasController < ApiController
     render json: @service.todas
   end
 
+  def acordes
+    render json: @service.todas_acordes
+  end
+
   private
 
   def crear_service
