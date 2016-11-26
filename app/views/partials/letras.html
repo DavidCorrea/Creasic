@@ -4,9 +4,14 @@
             Crear Letra
         </div>
     </md-list-item>
+    <md-list-item ng-if="letras.length === 0" class="md-3-line">
+        <div class="md-list-item-text" layout="row">
+            Nadie ha creado ninguna letra todavia.
+        </div>
+    </md-list-item>
     <md-list-item class="md-3-line" ng-repeat="letra in letras" ui-sref="letras.ver({id: letra.id})">
         <div class="md-list-item-text" layout="row">
-            <span class="titulo small">{{ letra.titulo }}</span> by {{letra.emailUsuario}}
+            <span class="titulo small">{{ letra.titulo }}</span> by {{ letra.nombreUsuario }}
         </div>
     </md-list-item>
 </md-list>

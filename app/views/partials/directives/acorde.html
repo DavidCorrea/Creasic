@@ -1,10 +1,10 @@
 <md-card class="acorde">
     <md-card-content class="notas">
         <div class="nota" ng-repeat="nota in data.notas track by $index" ng-click="eliminarNota(nota)" layout-align="center center" ng-show="puedeSerEditado">
-            {{ nota.nombre }}
+            {{ nota.cifrado }}
         </div>
         <div class="nota" ng-repeat="nota in data.notas track by $index" layout-align="center center" ng-show="!puedeSerEditado">
-            {{ nota.nombre }}
+            {{ nota.cifrado }}
         </div>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end end">

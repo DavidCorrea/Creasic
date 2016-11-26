@@ -1,0 +1,51 @@
+<md-dialog class="modal-bienvenida">
+    <div ng-cloak style="margin: 20px;">
+        <md-dialog-content layout="column" layout-align="center center">
+            <div layout="row">
+                <h2>¡Vemos que es la primera vez que entras a Creasic! ¡Bienvenido/a!</h2>
+            </div>
+
+            <div layout="row">
+                A continuación, ingresa el nombre por el que querés que te llamemos (Minimo 3 caracteres):
+            </div>
+
+            <div layout="column">
+                <md-input-container md-no-float>
+                    <input ng-model="nombreDeUsuario" placeholder="Nombre">
+                </md-input-container>
+            </div>
+
+            <div layout="column" layout-align="center center">
+                <span>
+                    Esperamos que puedas disfrutar tu experiencia en Creasic y puedas concretar tus ideas músicales
+                </span>
+                <span>
+                    con la ayuda de otros usuarios que buscan lo mismo que vos.
+                </span>
+
+                <br>
+
+                <span>
+                    Además, te recordamos que podes pasar tu Perfil
+                </span>
+                <span>
+                    e ingresar información tuya para que otros puedan conocerte más.
+                </span>
+
+                <br>
+
+                <span>
+                    Una vez más, bienvenido/a y gracias por formar parte. Saludos, Creasic Team.
+                </span>
+            </div>
+        </md-dialog-content>
+
+        <br>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="elegirNombre()" ng-disabled="noPuedeElegir()">
+                Elegir
+            </md-button>
+        </md-dialog-actions>
+    </div>
+</md-dialog>

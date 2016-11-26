@@ -12,7 +12,7 @@ Comentario.llenarDesde = function(datosDeComentario, post) {
     var comentario = new Comentario(post, datosDeComentario.usuario_id);
     comentario.id = datosDeComentario.id;
     comentario.contenido = datosDeComentario.contenido;
-    comentario.emailUsuario = datosDeComentario.email_usuario;
+    comentario.nombreUsuario = datosDeComentario.nombre_usuario;
     comentario.media_id = datosDeComentario.media_id;
 
     datosDeComentario.respuestas.forEach(function(respuesta) {
@@ -30,5 +30,7 @@ Comentario.llenarDesde = function(datosDeComentario, post) {
 
 /* Métodos de Instancia. */
 Comentario.prototype = {
-
+    perteneceA: function(usuario_id) {
+        return this.usuario_id === usuario_id;
+    }
 };

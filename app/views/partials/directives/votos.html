@@ -1,6 +1,6 @@
-<md-button style="min-width: 0" ng-click="darVotoNegativo()" ng-disabled="votoNegativo" ng-class="{'votos-color': votoNegativo}">-</md-button>
+<md-button style="min-width: 0" ng-click="votar(-1)" ng-disabled="votoNegativo" ng-class="{'votos-color': votoNegativo}">-</md-button>
 <span class="votos-count">
     {{ cantidadDeVotos() }}
 </span>
-<md-button style="min-width: 0" ng-click="darVotoPositivo()" ng-disabled="votoPositivo" ng-class="{'votos-color': votoPositivo}">+</md-button>
+<md-button style="min-width: 0" ng-click="votar(1)" ng-disabled="votoPositivo" ng-class="{'votos-color': votoPositivo}">+</md-button>
 

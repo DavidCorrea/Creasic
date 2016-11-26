@@ -16,27 +16,41 @@
             <span class="titulo">
                 {{ secuencia.titulo }}
             </span>
-            by {{secuencia.emailUsuario}}
+            by {{secuencia.nombreUsuario}}
         </div>
 
         <br>
 
-        <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
+        <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
+            <h3> Acordes Precargados </h3>
             <div layout="column" layout-align="center center">
                 <div layout="row">
-                    <div class="nota" ng-repeat="nota in notas" ng-click="agregarNota(nota)" layout-align="center center">
-                        {{ nota.nombre }}
+                    <div class="nota" ng-repeat="acordePrecargado in acordesPrecargados" ng-click="agregarAcordePrecargado(acordePrecargado)" layout-align="center center">
+                        {{ acordePrecargado.cifrado }}
                     </div>
                 </div>
             </div>
         </div>
+
+        <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
+            <h3> Notas </h3>
+            <div layout="column" layout-align="center center">
+                <div layout="row">
+                    <div class="nota" ng-repeat="notaPrecargada in notasPrecargadas" ng-click="agregarNota(notaPrecargada)" layout-align="center center">
+                        {{ notaPrecargada.cifrado }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
     </div>
 
     <br>
 
     <div layout="row" flex="33" layout-wrap layout-align="start center" style="min-height: 200px;">
-        <div ng-repeat="acorde in secuencia.acordes" layout="column">
-            <acorde source="secuencia" data="acorde" puede-ser-editado="perteneceAlUsuario"></acorde>
+        <div ng-repeat="acorde in secuencia.acordes track by $index" layout="column">
+            <acorde source="secuencia" data="acorde" puede-ser-editado="perteneceAlUsuario" ng-click="seleccionarAcorde(acorde)"></acorde>
         </div>
     </div>
 

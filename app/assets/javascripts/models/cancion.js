@@ -13,7 +13,7 @@ Cancion.llenarDesde = function(datosDeCancion) {
     cancion.id = datosDeCancion.id;
     cancion.titulo = datosDeCancion.titulo;
     cancion.contenido = datosDeCancion.contenido;
-    cancion.emailUsuario = datosDeCancion.email_usuario;
+    cancion.nombreUsuario = datosDeCancion.nombre_usuario;
     datosDeCancion.comentarios.forEach(function(comentario) {
         var comentarioAAgregar = Comentario.llenarDesde(comentario, cancion);
         cancion.agregarComentario(comentarioAAgregar);

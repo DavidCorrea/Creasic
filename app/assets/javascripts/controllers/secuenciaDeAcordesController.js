@@ -1,20 +1,32 @@
 creasic.controller("secuenciaDeAcordesCtrl",
-    ['$scope', '$rootScope', 'secuenciaDeAcordes', 'notas', 'modoEdicion', 'secuenciasDeAcordesService', 'pianoService', 'toastService', 'navegacionService',
-    function ($scope, $rootScope, secuenciaDeAcordes, notas, modoEdicion, secuenciasDeAcordesService, pianoService, toastService, navegacionService) {
+    ['$scope', '$rootScope', 'secuenciaDeAcordes', 'modoEdicion', 'secuenciasDeAcordesService', 'pianoService', 'toastService', 'navegacionService',
+    function ($scope, $rootScope, secuenciaDeAcordes, modoEdicion, secuenciasDeAcordesService, pianoService, toastService, navegacionService) {
 
     $scope.modoEdicion = modoEdicion;
-    $scope.notas = notas;
     $scope.secuencia = secuenciaDeAcordes;
-    $scope.perteneceAlUsuario = $rootScope.usuario && ($rootScope.usuario.id === secuenciaDeAcordes.usuario_id);
+    $scope.perteneceAlUsuario = $rootScope.usuario && $scope.secuencia.perteneceA($rootScope.usuario.id);
+
+    $scope.notasPrecargadas = [Nota.c4, Nota.c4Sharp, Nota.d4, Nota.e4Bemol, Nota.e4, Nota.f4, Nota.f4Sharp, Nota.g4, Nota.a4Bemol, Nota.a4, Nota.b4Bemol, Nota.b4];
+    $scope.acordesPrecargados = [Acorde.C(), Acorde.D(), Acorde.E(), Acorde.F(), Acorde.G(), Acorde.A(), Acorde.B()];
 
     $scope.$watch('secuencia.bpm', function(){
         pianoService.cambiarBPM($scope.secuencia.bpm);
     });
 
-    $scope.agregarNota = function(nota){
-        var acorde = $scope.secuencia.acordes[$scope.secuencia.acordes.length - 1];
-        acorde.agregarNota(nota);
+    $scope.agregarNuevoAcorde = function(){
+        $scope.secuencia.agregarAcorde();
+    };
 
+    $scope.agregarAcordePrecargado = function(acorde){
+        $scope.secuencia.agregarAcordePrearmado(acorde);
+    };
+
+    $scope.seleccionarAcorde = function(acorde) {
+        $scope.acordeSeleccionado = acorde;
+    };
+
+    $scope.agregarNota = function(nota){
+        $scope.acordeSeleccionado.agregarNota(nota);
         pianoService.tocarNota(nota.cifrado);
     };
 
@@ -24,10 +36,6 @@ creasic.controller("secuenciaDeAcordesCtrl",
         });
 
         pianoService.tocarAcordes(cifradoDeAcordes);
-    };
-
-    $scope.agregarNuevoAcorde = function(){
-        $scope.secuencia.agregarAcorde();
     };
 
     $scope.guardar = function() {

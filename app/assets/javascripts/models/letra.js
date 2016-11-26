@@ -11,7 +11,7 @@ Letra.llenarDesde = function(datosDeLetra) {
     letra.id = datosDeLetra.id;
     letra.titulo = datosDeLetra.titulo;
     letra.contenido = datosDeLetra.contenido;
-    letra.emailUsuario = datosDeLetra.email_usuario;
+    letra.nombreUsuario = datosDeLetra.nombre_usuario;
 
     datosDeLetra.comentarios.forEach(function(comentario) {
         var comentarioAAgregar = Comentario.llenarDesde(comentario, letra);
@@ -22,7 +22,11 @@ Letra.llenarDesde = function(datosDeLetra) {
 
 /* Métodos de Instancia. */
 Letra.prototype = {
-    agregarComentario: function(comentario){
+    agregarComentario: function(comentario) {
         this.comentarios.push(comentario);
+    },
+
+    perteneceA: function(usuario_id) {
+        return this.usuario_id === usuario_id;
     }
 };

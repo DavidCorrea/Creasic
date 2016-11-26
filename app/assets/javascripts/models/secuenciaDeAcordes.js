@@ -13,12 +13,12 @@ SecuenciaDeAcordes.llenarDesde = function(datosDeSecuencia) {
 
     secuenciaDeAcordes.id = datosDeSecuencia.id;
     secuenciaDeAcordes.titulo = datosDeSecuencia.titulo;
-    secuenciaDeAcordes.emailUsuario = datosDeSecuencia.email_usuario;
+    secuenciaDeAcordes.nombreUsuario = datosDeSecuencia.nombre_usuario;
     secuenciaDeAcordes.bpm = datosDeSecuencia.bpm;
 
     datosDeSecuencia.acordes.forEach(function(acorde) {
         var acordeAAgregar = Acorde.llenarDesde(acorde, secuenciaDeAcordes);
-        secuenciaDeAcordes.agregarAcordeArmado(acordeAAgregar);
+        secuenciaDeAcordes.agregarAcordePrearmado(acordeAAgregar);
     });
 
     datosDeSecuencia.comentarios.forEach(function(comentario) {
@@ -40,7 +40,8 @@ SecuenciaDeAcordes.prototype = {
         this.posicionParaProximoAcorde += 1;
     },
 
-    agregarAcordeArmado: function(acorde) {
+    agregarAcordePrearmado: function(acorde) {
+        acorde.cambiarPosicion(this.posicionParaProximoAcorde);
         this.acordes.push(acorde);
         this.posicionParaProximoAcorde += 1;
     },
@@ -57,5 +58,9 @@ SecuenciaDeAcordes.prototype = {
         acordesACorrer.forEach(function(acorde) {
            acorde.decrementarPosicion();
         });
+    },
+
+    perteneceA: function(usuario_id) {
+        return this.usuario_id === usuario_id;
     }
 };

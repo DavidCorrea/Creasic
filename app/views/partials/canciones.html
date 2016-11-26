@@ -4,9 +4,14 @@
             Crear Cancion
         </div>
     </md-list-item>
+    <md-list-item ng-if="canciones.length === 0" class="md-3-line">
+        <div class="md-list-item-text" layout="row">
+            Nadie ha creado ninguna cancion todavia.
+        </div>
+    </md-list-item>
     <md-list-item class="md-3-line" ng-repeat="cancion in canciones" ui-sref="canciones.ver({id: cancion.id})">
         <div class="md-list-item-text" layout="row">
-            <span class="titulo small">{{ cancion.titulo }}</span> by {{cancion.emailUsuario}}
+            <span class="titulo small">{{ cancion.titulo }}</span> by {{cancion.nombreUsuario}}
         </div>
     </md-list-item>
 </md-list>

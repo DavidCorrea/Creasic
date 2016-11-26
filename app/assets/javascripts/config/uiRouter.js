@@ -20,7 +20,48 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
         parent: 'app',
         name: 'perfil',
         url: 'perfil',
-        templateUrl: 'views/perfil'
+        templateUrl: 'views/perfil',
+        controller: 'perfilCtrl',
+        resolve: {
+            usuarioActual: function($rootScope, usuariosService) {
+                return usuariosService.obtenerUsuario($rootScope.usuario.id).then(function(usuario) {
+                    return Usuario.llenarDesde(usuario);
+                });
+            }
+        }
+    };
+
+    var usuariosState = {
+        parent: 'app',
+        abstract: true,
+        name: 'usuarios',
+        url: 'usuarios',
+        template: '<ui-view/>'
+    };
+
+    var todosLosUsuariosState = {
+        name: 'usuarios.todos',
+        url: '',
+        templateUrl: 'views/usuarios',
+        controller: 'usuariosCtrl'
+    };
+
+    var verUsuarioState = {
+        name: 'usuarios.ver',
+        url: '/{nombre}',
+        templateUrl: 'views/usuario',
+        controller: 'usuarioCtrl',
+        params: {
+            id: '',
+            nombre: ''
+        },
+        resolve: {
+            usuario: function($stateParams, usuariosService) {
+                return usuariosService.obtenerUsuario($stateParams.id).then(function(usuario) {
+                   return Usuario.llenarDesde(usuario);
+                });
+            }
+        }
     };
 
     var letrasState = {
@@ -112,11 +153,6 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
             secuenciaDeAcordes: function($rootScope) {
                 return new SecuenciaDeAcordes($rootScope.usuario.id);
             },
-            notas: function(notasService) {
-                return notasService.todasLasNotas().then(function(response) {
-                    return response;
-                });
-            },
             modoEdicion: function() {
                 return false;
             }
@@ -132,11 +168,6 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
             secuenciaDeAcordes: function($stateParams, secuenciasDeAcordesService) {
                 return secuenciasDeAcordesService.ver($stateParams.id).then(function(response) {
                     return SecuenciaDeAcordes.llenarDesde(response.data);
-                });
-            },
-            notas: function(notasService) {
-                return notasService.todasLasNotas().then(function(response) {
-                    return response;
                 });
             },
             modoEdicion: function() {
@@ -209,6 +240,9 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(appParentState);
     $stateProvider.state(homeState);
     $stateProvider.state(perfilState);
+    $stateProvider.state(usuariosState);
+    $stateProvider.state(todosLosUsuariosState);
+    $stateProvider.state(verUsuarioState);
     $stateProvider.state(letrasState);
     $stateProvider.state(crearLetraState);
     $stateProvider.state(secuenciasDeAcordesState);
