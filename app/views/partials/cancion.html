@@ -26,6 +26,16 @@
         </div>
     </div>
 
+    <div layout="column" layout-align="space-around start">
+        <div ng-repeat="audio in cancion.audios">
+            <div layout="row" flex="100">
+                <audio controls ng-src="{{ urlFor(audio) }}"></audio>
+
+            </div>
+        </div>
+        <md-button ngf-select="upload($file)" ng-model="file" name="file" >Subir Archivo</md-button>
+    </div>
+
     <div ng-show="modoEdicion">
         <comentarios-con-respuestas post="cancion" tipo-post="'cancion'" actualizar-post="cancionActualizada"></comentarios-con-respuestas>
     </div>

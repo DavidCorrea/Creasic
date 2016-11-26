@@ -42,4 +42,8 @@ Rails.application.routes.draw do
     post '/editar/*id', :to => 'canciones#editar'
   end
 
+  scope '/audios' do
+    post '/agregar/*id',             :to => 'audios#agregar_audio'
+  end
+
 end

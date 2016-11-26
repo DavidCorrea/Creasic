@@ -36,7 +36,8 @@ class ComentariosService
   def tipos_de_posts
     {
         secuencia: SecuenciaDeAcordes,
-        letra: Letra
+        letra: Letra,
+        cancion: Cancion
     }
   end
 
