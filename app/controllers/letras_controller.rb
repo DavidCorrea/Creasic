@@ -1,5 +1,6 @@
 class LetrasController < ApiController
 
+  before_action :cargar_usuario, except: [:ver, :todas]
   before_action :crear_service
 
   def crear

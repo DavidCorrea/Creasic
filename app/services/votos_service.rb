@@ -1,52 +1,37 @@
-class VotosService
+class VotosService < Service
 
   def initialize params
     @parametros = params
-    @post_id = params[:votable_id]
-    @tipos_de_post = [Comentario, Respuesta]
-    asignar_usuario
   end
 
   def dar_voto
-    tipo_de_post = encontrar_tipo_de_post
-    post_a_votar = tipo_de_post.find @post_id
-    post_a_votar.votos.create parametros_de_creacion
+    on_transaction do
+      tipo_de_post = encontrar_tipo_de_votable
+      post_a_votar = tipo_de_post.find @parametros[:votable_id]
+      post_a_votar.votos.create parametros_de_creacion
+    end
   end
 
   def eliminar_voto
-    @voto = Voto.find parametros_de_busqueda[:id]
-    @voto.destroy
-  end
-
-  def obtener_valor_de_voto
-    tipo_de_post = encontrar_tipo_de_post
-    post_votado = tipo_de_post.find @post_id
-
-    if post_votado.votos.count > 0
-      post_votado.votos.first.valor
-    else
-      0
+    on_transaction do
+      voto = Voto.find parametros_de_busqueda[:id]
+      voto.destroy
     end
   end
 
   private
 
-  def asignar_usuario
-    if @parametros[:usuario_id]
-      @usuario = Usuario.find_by_id_externo(@parametros[:usuario_id])
-    end
-  end
-
-  def encontrar_tipo_de_post
-    @tipos_de_post.find { |tipo| tipo.exists? @post_id }
-  end
-
   def parametros_de_creacion
-    @parametros.permit(:votable_id, :valor).merge({usuario: @usuario})
+    @parametros.permit(:usuario_id, :valor)
   end
 
   def parametros_de_busqueda
     @parametros.permit(:id)
+  end
+
+  def encontrar_tipo_de_votable
+    tipo_de_post = @parametros[:tipo]
+    votables[tipo_de_post.to_sym]
   end
 
 end

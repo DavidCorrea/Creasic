@@ -65,7 +65,7 @@ creasic.directive("comentariosConRespuestas", function($rootScope, $sce, comenta
             };
 
             scope.responder = function(comentario){
-                scope.respuesta = new Respuesta(comentario, $rootScope.usuario.id);
+                scope.respuesta = new Comentario(comentario, $rootScope.usuario.id);
                 scope.comentarioSiendoRespondido = comentario.id;
                 scope.respondiendo = true;
             };

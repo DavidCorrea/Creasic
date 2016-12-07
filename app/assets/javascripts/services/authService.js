@@ -20,7 +20,6 @@ creasic.service('authService', ['$http', '$rootScope', 'lock', 'authManager', 'u
     this.sesionActual = function() {
         if(this.haySesion()) {
             var usuarioStorage = JSON.parse(localStorage.getItem('usuario'));
-            debugger;
             return Usuario.llenarDesde(usuarioStorage);
         }
     };
