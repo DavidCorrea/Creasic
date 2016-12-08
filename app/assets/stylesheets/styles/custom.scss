@@ -1,13 +1,30 @@
 @import "./variables";
 
+html {
+  overflow-y: scroll;
+}
+
+.creasic-link {
+  color: $creasic-orange;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.md-raised.boton-agregar {
+  background-color: $creasic-mid-light-grey;
+}
+
 .content-section {
   background-color: $creasic-grey;
-  border-radius: 10px;
+  border-radius: 5px;
+  margin: 8px;
+  height: 100%;
 }
 
 .options {
   background-color: $creasic-orange;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 5px 5px;
 }
 
 .acorde {

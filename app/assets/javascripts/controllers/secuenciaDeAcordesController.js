@@ -10,7 +10,9 @@ creasic.controller("secuenciaDeAcordesCtrl",
     $scope.acordesPrecargados = [Acorde.C(), Acorde.D(), Acorde.E(), Acorde.F(), Acorde.G(), Acorde.A(), Acorde.B()];
 
     $scope.$watch('secuencia.bpm', function(){
-        pianoService.cambiarBPM($scope.secuencia.bpm);
+        if($scope.secuencia.bpm) {
+            pianoService.cambiarBPM($scope.secuencia.bpm);
+        }
     });
 
     $scope.agregarNuevoAcorde = function(){
@@ -36,6 +38,10 @@ creasic.controller("secuenciaDeAcordesCtrl",
         });
 
         pianoService.tocarAcordes(cifradoDeAcordes);
+    };
+
+    $scope.hayAcordes = function() {
+        return $scope.secuencia.acordes.length === 0;
     };
 
     $scope.guardar = function() {
