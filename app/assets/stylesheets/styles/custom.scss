@@ -4,6 +4,15 @@ html {
   overflow-y: scroll;
 }
 
+.loading {
+  position: fixed;
+  background-color: rgba(0,0,0,0.5);
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: visible;
+}
+
 .creasic-link {
   color: $creasic-orange;
   margin-bottom: 16px;
