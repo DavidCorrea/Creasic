@@ -21,6 +21,7 @@ creasic.controller("secuenciaDeAcordesCtrl",
 
     $scope.agregarAcordePrecargado = function(acorde){
         $scope.secuencia.agregarAcordePrearmado(acorde);
+        pianoService.tocarAcorde(acorde.notasComoCifrado());
     };
 
     $scope.seleccionarAcorde = function(acorde) {
@@ -28,7 +29,9 @@ creasic.controller("secuenciaDeAcordesCtrl",
     };
 
     $scope.agregarNota = function(nota){
-        $scope.acordeSeleccionado.agregarNota(nota);
+        if($scope.acordeSeleccionado) {
+            $scope.acordeSeleccionado.agregarNota(nota);
+        }
         pianoService.tocarNota(nota.cifrado);
     };
 
