@@ -1,23 +1,23 @@
-function Comentario(post, idUsuario) {
+function Comentario(comentable, idUsuario) {
     this.contenido = "";
-    this.respuestas = [];
-    this.comentable_id = post.id;
+    this.comentarios = [];
+    this.comentable_id = comentable.id;
     this.usuario_id = idUsuario;
     this.votos = [];
     this.media_id = "";
 }
 
 /* Constructor */
-Comentario.llenarDesde = function(datosDeComentario, post) {
-    var comentario = new Comentario(post, datosDeComentario.usuario_id);
+Comentario.llenarDesde = function(datosDeComentario, comentable) {
+    var comentario = new Comentario(comentable, datosDeComentario.usuario_id);
     comentario.id = datosDeComentario.id;
     comentario.contenido = datosDeComentario.contenido;
     comentario.nombreUsuario = datosDeComentario.nombre_usuario;
     comentario.media_id = datosDeComentario.media_id;
 
-    datosDeComentario.respuestas.forEach(function(respuesta) {
-        var respuestaAAgregar = Respuesta.llenarDesde(respuesta, comentario);
-        comentario.respuestas.push(respuestaAAgregar);
+    datosDeComentario.comentarios.forEach(function(subcomentario) {
+        var subcomentarioAAgregar = Comentario.llenarDesde(subcomentario, comentario);
+        comentario.comentarios.push(subcomentarioAAgregar);
     });
 
     angular.forEach(datosDeComentario.votos, function(voto){

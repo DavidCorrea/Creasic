@@ -22,6 +22,7 @@ gem 'angular_rails_csrf', git: 'https://github.com/tpmullan/angular_rails_csrf'
 
 group :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'rails-controller-testing'
 end

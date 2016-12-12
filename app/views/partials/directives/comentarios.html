@@ -18,17 +18,17 @@
             </div>
         </md-card-title>
 
-        <md-card flex-offset="10" ng-repeat="respuesta in comentario.respuestas">
+        <md-card flex-offset="10" ng-repeat="respuesta in comentario.comentarios">
             <md-card-title>
                 <span>
                     {{respuesta.nombreUsuario}} dijo: {{respuesta.contenido}}
                 </span>
             </md-card-title>
-            <votos post="respuesta"></votos>
+            <votos post="respuesta" tipo-post="'comentario'"></votos>
         </md-card>
 
             <md-card-actions layout="raw" layout-align="space-between start">
-                <votos post="comentario"></votos>
+                <votos post="comentario" tipo-post="'comentario'"></votos>
                 <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
             </md-card-actions>
 

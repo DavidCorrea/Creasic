@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122050318) do
+ActiveRecord::Schema.define(version: 20161206061130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,13 +20,6 @@ ActiveRecord::Schema.define(version: 20161122050318) do
     t.integer "secuencia_de_acordes_id",             null: false
     t.text    "notas"
     t.index ["secuencia_de_acordes_id"], name: "index_acordes_on_secuencia_de_acordes_id", using: :btree
-  end
-
-  create_table "acordes_notas", id: false, force: :cascade do |t|
-    t.integer "acorde_id"
-    t.integer "nota_id"
-    t.index ["acorde_id"], name: "index_acordes_notas_on_acorde_id", using: :btree
-    t.index ["nota_id"], name: "index_acordes_notas_on_nota_id", using: :btree
   end
 
   create_table "canciones", force: :cascade do |t|
@@ -42,7 +35,9 @@ ActiveRecord::Schema.define(version: 20161122050318) do
     t.string   "comentable_type"
     t.integer  "comentable_id"
     t.string   "media_id"
+    t.integer  "comentario_id"
     t.index ["comentable_type", "comentable_id"], name: "index_comentarios_on_comentable_type_and_comentable_id", using: :btree
+    t.index ["comentario_id"], name: "index_comentarios_on_comentario_id", using: :btree
   end
 
   create_table "letras", force: :cascade do |t|
@@ -51,11 +46,6 @@ ActiveRecord::Schema.define(version: 20161122050318) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "usuario_id",              null: false
-  end
-
-  create_table "notas", force: :cascade do |t|
-    t.string "cifrado", null: false
-    t.string "nombre",  null: false
   end
 
   create_table "respuestas", force: :cascade do |t|
