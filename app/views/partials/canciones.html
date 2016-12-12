@@ -1,5 +1,10 @@
-<md-list-item class="md-3-line">
-    <div class="md-list-item-text" layout="row">
-        Nadie ha creado ninguna cancion todavia.
+<div layout="column" class="content-section">
+    <div layout="column" layout-align="center center">
+        <p> Nadie ha creado ninguna canción todavía.</p>
+        <a class="creasic-link"
+           ui-sref="letras.crear"
+           ng-if="haySesion">
+            ¿Querés ser el primero?
+        </a>
     </div>
-</md-list-item>
+</div>

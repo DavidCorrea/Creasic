@@ -1,80 +1,112 @@
 <div layout="column" class="content-section">
-    <div layout="column" flex="33">
-        <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
-            <md-input-container>
-                <label>Titulo</label>
-                <input ng-model="secuencia.titulo">
-            </md-input-container>
+    <form name="secuenciaDeAcordesForm">
+        <div layout="column" flex="33">
+            <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
+                <md-input-container md-no-float>
+                    <input ng-model="secuencia.titulo"
+                           ng-pattern="/^[a-zA-Z0-9 ]*$/"
+                           ng-maxlength="15"
+                           type="text"
+                           placeholder="Titulo"
+                           required>
+                </md-input-container>
+            </div>
 
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>BPM (Beats per minute)</label>
-                <input name="social" ng-model="secuencia.bpm"/>
-            </md-input-container>
-        </div>
+            <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
+                <div layout="row">
+                    <md-slider-container>
+                        <md-slider flex
+                                   min="20"
+                                   max="300"
+                                   ng-model="secuencia.bpm"
+                                   aria-label="red"
+                                   id="red-slider">
+                        </md-slider>
+                    </md-slider-container>
+                    <md-input-container>
+                        <input type="number"
+                               min="20"
+                               max="300"
+                               ng-model="secuencia.bpm"
+                               aria-label="red"
+                               aria-controls="red-slider">
+                    </md-input-container>
+                </div>
+            </div>
 
-        <div layout="column" layout-align="center center" ng-hide="perteneceAlUsuario">
-            <span class="titulo">
-                {{ secuencia.titulo }}
-            </span>
-            by {{secuencia.nombreUsuario}}
+            <div layout="column" layout-align="center center" ng-hide="perteneceAlUsuario">
+                <span class="titulo">
+                    {{ secuencia.titulo }}
+                </span>
+                por {{secuencia.nombreUsuario}}
+            </div>
+
+            <br>
+
+            <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
+                <h3> Acordes Precargados </h3>
+                <div layout="column" layout-align="center center">
+                    <div layout="row">
+                        <div class="nota" ng-repeat="acordePrecargado in acordesPrecargados" ng-click="agregarAcordePrecargado(acordePrecargado)" layout-align="center center">
+                            {{ acordePrecargado.cifrado }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
+                <h3> Notas </h3>
+                <div layout="column" layout-align="center center">
+                    <div layout="row">
+                        <div class="nota" ng-repeat="notaPrecargada in notasPrecargadas" ng-click="agregarNota(notaPrecargada)" layout-align="center center">
+                            {{ notaPrecargada.cifrado }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
         </div>
 
         <br>
 
-        <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
-            <h3> Acordes Precargados </h3>
-            <div layout="column" layout-align="center center">
-                <div layout="row">
-                    <div class="nota" ng-repeat="acordePrecargado in acordesPrecargados" ng-click="agregarAcordePrecargado(acordePrecargado)" layout-align="center center">
-                        {{ acordePrecargado.cifrado }}
-                    </div>
-                </div>
+        <div layout="row" flex="33" layout-wrap layout-align="start center" style="min-height: 200px;">
+            <div ng-repeat="acorde in secuencia.acordes track by $index" layout="column">
+                <acorde source="secuencia" data="acorde" puede-ser-editado="perteneceAlUsuario" ng-click="seleccionarAcorde(acorde)"></acorde>
             </div>
         </div>
-
-        <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
-            <h3> Notas </h3>
-            <div layout="column" layout-align="center center">
-                <div layout="row">
-                    <div class="nota" ng-repeat="notaPrecargada in notasPrecargadas" ng-click="agregarNota(notaPrecargada)" layout-align="center center">
-                        {{ notaPrecargada.cifrado }}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <br>
-    </div>
-
-    <br>
-
-    <div layout="row" flex="33" layout-wrap layout-align="start center" style="min-height: 200px;">
-        <div ng-repeat="acorde in secuencia.acordes track by $index" layout="column">
-            <acorde source="secuencia" data="acorde" puede-ser-editado="perteneceAlUsuario" ng-click="seleccionarAcorde(acorde)"></acorde>
-        </div>
-    </div>
-
-    <md-divider></md-divider>
-    <br>
-
-    <div ng-show="modoEdicion">
-        <comentarios-con-respuestas post="secuencia" tipo-post="'secuencia'" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
 
         <md-divider></md-divider>
         <br>
-    </div>
 
-    <div ng-show="modoEdicion">
-        <redes-sociales></redes-sociales>
-    </div>
+        <div ng-show="modoEdicion">
+            <comentarios-con-respuestas post="secuencia" tipo-post="'secuencia'" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
 
-    <opciones>
-        <md-button class="md-label" ng-click="guardar()" ng-show="perteneceAlUsuario">Guardar</md-button>
-        <span ng-show="perteneceAlUsuario">|</span>
-        <md-button class="md-label" ng-click="agregarNuevoAcorde()" ng-show="perteneceAlUsuario">Agregar nuevo acorde</md-button>
-        <span ng-show="perteneceAlUsuario">|</span>
-        <md-button class="md-label" ng-click="escucharAcordes()">Escuchar Acordes</md-button>
-        <span>|</span>
-        <md-button class="md-label" ui-sref="secuenciasDeAcordes.todas">Cancelar</md-button>
-    </opciones>
+            <md-divider></md-divider>
+            <br>
+        </div>
+
+        <div ng-show="modoEdicion">
+            <redes-sociales></redes-sociales>
+        </div>
+
+        <opciones>
+            <md-button class="md-label"
+                       ng-click="guardar()"
+                       ng-show="perteneceAlUsuario"
+                       ng-disabled="secuenciaDeAcordesForm.$invalid">
+                Guardar
+            </md-button>
+            <span ng-show="perteneceAlUsuario">|</span>
+            <md-button class="md-label"
+                       ng-click="escucharAcordes()"
+                       ng-disabled="hayAcordes()">
+                Escuchar Acordes
+            </md-button>
+            <span ng-show="perteneceAlUsuario">|</span>
+            <md-button class="md-label" ng-click="agregarNuevoAcorde()" ng-show="perteneceAlUsuario">Agregar nuevo acorde</md-button>
+            <span>|</span>
+            <md-button class="md-label" ui-sref="secuenciasDeAcordes.todas">Cancelar</md-button>
+        </opciones>
+    </form>
 </div>
