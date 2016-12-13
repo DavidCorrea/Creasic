@@ -13,7 +13,7 @@ creasic.service('navegacionService', ['$state', function($state) {
     };
 
     this.llevarACanciones = function() {
-        $state.transitionTo('canciones');
+        $state.transitionTo('canciones.todas');
     };
 
     this.llevarALetras = function() {

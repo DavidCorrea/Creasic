@@ -22,8 +22,26 @@ ActiveRecord::Schema.define(version: 20161206061130) do
     t.index ["secuencia_de_acordes_id"], name: "index_acordes_on_secuencia_de_acordes_id", using: :btree
   end
 
+  create_table "acordes_notas", id: false, force: :cascade do |t|
+    t.integer "acorde_id"
+    t.integer "nota_id"
+    t.index ["acorde_id"], name: "index_acordes_notas_on_acorde_id", using: :btree
+    t.index ["nota_id"], name: "index_acordes_notas_on_nota_id", using: :btree
+  end
+
+  create_table "audios", force: :cascade do |t|
+    t.string   "media_id",   null: false
+    t.integer  "usuario_id", null: false
+    t.integer  "cancion_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cancion_id"], name: "index_audios_on_cancion_id", using: :btree
+  end
+
   create_table "canciones", force: :cascade do |t|
     t.integer "usuario_id", null: false
+    t.string  "titulo"
+    t.text    "contenido"
     t.index ["usuario_id"], name: "index_canciones_on_usuario_id", using: :btree
   end
 
@@ -46,6 +64,11 @@ ActiveRecord::Schema.define(version: 20161206061130) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "usuario_id",              null: false
+  end
+
+  create_table "notas", force: :cascade do |t|
+    t.string "cifrado", null: false
+    t.string "nombre",  null: false
   end
 
   create_table "respuestas", force: :cascade do |t|
