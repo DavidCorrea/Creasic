@@ -4,7 +4,8 @@ creasic.controller('cancionCtrl', ['$scope', '$rootScope', '$sce', 'cancion', 'm
     $scope.modoEdicion = modoEdicion;
     $scope.cancion = cancion;
     $scope.perteneceAlUsuario = $rootScope.usuario && ($rootScope.usuario.id === cancion.usuario_id);
-    $scope.audio = new Audio($scope.cancion, $rootScope.usuario.id);
+    if ($scope.perteneceAlUsuario)
+        $scope.audio = new Audio($scope.cancion, $rootScope.usuario.id);
 
 
     $scope.guardar = function() {

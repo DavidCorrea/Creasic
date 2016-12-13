@@ -10,7 +10,7 @@
             <span class="titulo">
                 {{ cancion.titulo }}
             </span>
-            by {{cancion.emailUsuario}}
+            by {{cancion.nombreUsuario}}
         </div>
     </div>
 
@@ -33,7 +33,7 @@
 
             </div>
         </div>
-        <md-button ngf-select="upload($file)" ng-model="file" name="file" >Subir Archivo</md-button>
+        <md-button ngf-select="upload($file)" ng-model="file" name="file" ng-show="perteneceAlUsuario">Subir Archivo</md-button>
     </div>
 
     <div ng-show="modoEdicion">

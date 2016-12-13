@@ -4,7 +4,6 @@ creasic.controller('letraCtrl', ['$scope', '$rootScope', 'letra', 'modoEdicion',
     $scope.modoEdicion = modoEdicion;
     $scope.letra = letra;
     $scope.perteneceAlUsuario = $rootScope.usuario && $scope.letra.perteneceA($rootScope.usuario.id);
-
     $scope.guardar = function() {
         if(!$scope.modoEdicion) {
             letrasService.crearLetra($scope.letra).then(function() {
