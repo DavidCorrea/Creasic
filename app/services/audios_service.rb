@@ -1,13 +1,11 @@
-class AudiosService
+class AudiosService < Service
 
   def initialize params
     @parametros = params
-    @cancion_id = params[:cancion_id]
-    asignar_usuario
   end
 
   def agregar_audio
-    cancion = Cancion.find @cancion_id
+    cancion = Cancion.find @parametros[:cancion_id]
     cancion.audios.create parametros_de_creacion_de_audio
 
     cancion
@@ -15,14 +13,8 @@ class AudiosService
 
   private
 
-  def asignar_usuario
-    if @parametros[:usuario_id]
-      @usuario = Usuario.find_by_id_externo(@parametros[:usuario_id])
-    end
-  end
-
   def parametros_de_creacion_de_audio
-    @parametros.permit(:cancion_id, :media_id).merge({usuario: @usuario})
+    @parametros.permit(:usuario_id, :cancion_id, :media_id)
   end
 
 
