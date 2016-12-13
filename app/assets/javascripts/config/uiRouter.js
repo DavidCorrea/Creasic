@@ -1,6 +1,6 @@
 creasic.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/home');
 
     var appParentState = {
         name: 'app',
@@ -256,4 +256,14 @@ creasic.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state(crearCancionState);
     $stateProvider.state(verCancionState);
     $stateProvider.state(cerrarSesionState);
+});
+
+creasic.run(function($rootScope, toastService) {
+    $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+        // Aca podemos capturar errores que vengan del server. Habria que retirar la logica
+        // que tenemos hoy en dia para mostrar. En vez de capturar cada error, mostrar nosotros los que vengan
+        // cuando queremos o sino que se encargue esto.
+        // event.preventDefault();
+        // toastService.mostrarError('No pudimos encontrar lo que buscabas.');
+    });
 });

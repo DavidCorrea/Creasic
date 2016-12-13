@@ -7,7 +7,7 @@ creasic.factory('loadingInterceptor', function($q, $rootScope) {
     }
 
     function actualizarEstado() {
-        $rootScope.isLoading = estaCargando();
+        $rootScope.estaCargando = estaCargando();
     }
 
     return {
@@ -35,6 +35,5 @@ creasic.factory('loadingInterceptor', function($q, $rootScope) {
 });
 
 creasic.config(['$httpProvider', function($httpProvider) {
-    // No se esta usando por el momento.
-    // $httpProvider.interceptors.push('loadingInterceptor');
+    $httpProvider.interceptors.push('loadingInterceptor');
 }]);

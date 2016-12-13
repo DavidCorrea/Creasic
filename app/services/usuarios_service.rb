@@ -1,4 +1,4 @@
-class UsuariosService
+class UsuariosService < Service
 
   def initialize params
     @parametros = params
@@ -13,11 +13,15 @@ class UsuariosService
   end
 
   def crear_usuario
-    Usuario.create! parametros_de_creacion
+    on_transaction do
+      Usuario.create! parametros_de_creacion
+    end
   end
 
   def ver_usuario
-    Usuario.find_by_id_externo(id_externo)
+    on_transaction do
+      Usuario.find_by_id_externo!(id_externo)
+    end
   end
 
   def todos
@@ -25,19 +29,21 @@ class UsuariosService
   end
 
   def editar_usuario
-    usuario_a_editar = ver_usuario
-    usuario_a_editar.update!(parametros_de_edicion usuario_a_editar)
-    usuario_a_editar
+    on_transaction do
+      usuario_a_editar = ver_usuario
+      usuario_a_editar.update!(parametros_de_edicion usuario_a_editar)
+      usuario_a_editar
+    end
   end
 
   private
 
   def parametros_de_creacion
-    @parametros.require(:usuario).permit(:id_externo, :email, :nombre)
+    @parametros.permit(:id_externo, :email, :nombre)
   end
 
   def parametros_de_edicion usuario
-    @parametros.require(:usuario).permit(:descripcion, :gustos, :intereses, :instrumentos).merge(id: usuario.id)
+    @parametros.permit(:descripcion, :gustos, :intereses, :instrumentos).merge(id: usuario.id)
   end
 
   def id_externo

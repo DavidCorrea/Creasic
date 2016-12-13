@@ -1,17 +1,23 @@
 <md-dialog class="modal-bienvenida">
-    <div ng-cloak style="margin: 20px;">
+    <form name="formBienvenida" ng-cloak style="margin: 20px">
         <md-dialog-content layout="column" layout-align="center center">
             <div layout="row">
                 <h2>¡Vemos que es la primera vez que entras a Creasic! ¡Bienvenido/a!</h2>
             </div>
 
             <div layout="row">
-                A continuación, ingresa el nombre por el que querés que te llamemos (Minimo 3 caracteres):
+                A continuación, ingresa el nombre por el que querés que te llamemos (3-15 caracteres):
             </div>
 
             <div layout="column">
                 <md-input-container md-no-float>
-                    <input ng-model="nombreDeUsuario" placeholder="Nombre">
+                    <input ng-model="nombreDeUsuario"
+                           ng-pattern="/^[a-zA-Z0-9]*$/"
+                           ng-minlength="3"
+                           ng-maxlength="15"
+                           type="text"
+                           placeholder="Nombre"
+                           required>
                 </md-input-container>
             </div>
 
@@ -43,9 +49,9 @@
         <br>
 
         <md-dialog-actions layout="row">
-            <md-button ng-click="elegirNombre()" ng-disabled="noPuedeElegir()">
+            <md-button ng-click="elegirNombre()" ng-disabled="formBienvenida.$invalid">
                 Elegir
             </md-button>
         </md-dialog-actions>
-    </div>
+    </form>
 </md-dialog>

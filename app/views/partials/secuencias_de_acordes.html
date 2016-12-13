@@ -1,17 +1,22 @@
-<md-list flex>
-    <md-list-item ng-if="haySesion" ui-sref="secuenciasDeAcordes.crear">
-        <div class="md-list-item-text" layout="column">
-            Crear Secuencia de Acordes
-        </div>
-    </md-list-item>
-    <md-list-item ng-if="secuenciasDeAcordes.length === 0" class="md-3-line">
-        <div class="md-list-item-text" layout="row">
-            Nadie ha creado ninguna secuencia de acordes todavia.
-        </div>
-    </md-list-item>
-    <md-list-item class="md-3-line" ng-repeat="secuencia in secuenciasDeAcordes" ui-sref="secuenciasDeAcordes.ver({id: secuencia.id})">
-        <div class="md-list-item-text" layout="row">
-            <span class="titulo small">{{ secuencia.titulo }}</span> by {{ secuencia.nombreUsuario }}
-        </div>
-    </md-list-item>
-</md-list>
+<div layout="row" ng-if="secuenciasDeAcordes.length > 0">
+    <md-button ng-if="haySesion"
+               class="md-raised boton-agregar"
+               ui-sref="secuenciasDeAcordes.crear">
+        Crear
+    </md-button>
+</div>
+
+<div layout="column" class="content-section">
+    <div layout="column" layout-align="center center" ng-if="secuenciasDeAcordes.length === 0">
+        <p> Nadie ha creado ninguna secuencia de acordes todavía.</p>
+        <a class="creasic-link" ui-sref="secuenciasDeAcordes.crear">¿Querés ser el primero?</a>
+    </div>
+
+    <md-list flex ng-if="secuenciasDeAcordes.length > 0">
+        <md-list-item class="md-3-line" ng-repeat="secuencia in secuenciasDeAcordes" ui-sref="secuenciasDeAcordes.ver({id: secuencia.id})">
+            <div class="md-list-item-text" layout="row">
+                <span class="titulo small">{{ secuencia.titulo }}</span> por {{ secuencia.nombreUsuario }}
+            </div>
+        </md-list-item>
+    </md-list>
+</div>

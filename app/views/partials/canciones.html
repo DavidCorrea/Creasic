@@ -5,8 +5,13 @@
         </div>
     </md-list-item>
     <md-list-item ng-if="canciones.length === 0" class="md-3-line">
-        <div class="md-list-item-text" layout="row">
-            Nadie ha creado ninguna cancion todavia.
+        <div layout="column" layout-align="center center">
+            <p> Nadie ha creado ninguna canción todavía.</p>
+            <a class="creasic-link"
+               ui-sref="canciones.crear"
+               ng-if="haySesion">
+                ¿Querés ser el primero?
+            </a>
         </div>
     </md-list-item>
     <md-list-item class="md-3-line" ng-repeat="cancion in canciones" ui-sref="canciones.ver({id: cancion.id})">

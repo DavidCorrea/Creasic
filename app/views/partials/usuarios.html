@@ -1,6 +1,8 @@
-<div layout="column" class="content-section">
-    Estos son todos los Usuarios que forman parte de esta comunidad!
+<div layout="row" layout-align="center center">
+    <h2> ¡Estos son todos los usuarios que forman parte de esta comunidad! </h2>
+</div>
 
+<div layout="column" class="content-section">
     <md-list-item class="md-3-line" ng-repeat="usuario in usuarios" ui-sref="usuarios.ver({id: usuario.id, nombre: usuario.nombre})">
         <div class="md-list-item-text" layout="row">
             <span class="titulo small">{{ usuario.nombre }}</span>

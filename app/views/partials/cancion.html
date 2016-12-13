@@ -1,52 +1,71 @@
 <div layout="column" class="content-section">
-    <div layout="column" flex="33">
-        <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
-            <md-input-container md-no-float>
-                <input ng-model="cancion.titulo" placeholder="Titulo">
-            </md-input-container>
-        </div>
+    <form name="formCancion" ng-cloak>
+        <div layout="column" flex="33">
+            <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
+                <md-input-container md-no-float>
+                    <input ng-model="cancion.titulo"
+                           ng-pattern="/^[a-zA-Z0-9 ]*$/"
+                           ng-maxlength="15"
+                           type="text"
+                           placeholder="Titulo"
+                           required>
+                </md-input-container>
+            </div>
 
-        <div layout="column" layout-align="center center" ng-hide="perteneceAlUsuario">
-            <span class="titulo">
-                {{ cancion.titulo }}
-            </span>
-            by {{cancion.nombreUsuario}}
-        </div>
-    </div>
-
-    <br>
-
-    <div layout="row" flex="33" layout-wrap layout-align="center center">
-        <md-input-container class="md-block md-input-has-value" ng-show="perteneceAlUsuario" layout-fill layout-margin flex="80" md-no-float>
-            <textarea ng-model="cancion.contenido" class="letra-contenido" placeholder="Contenido"></textarea>
-        </md-input-container>
-
-        <div class="letra" style="white-space: pre-line;" layout-fill layout-margin flex="80" ng-hide="perteneceAlUsuario">
-            {{ cancion.contenido }}
-        </div>
-    </div>
-
-    <div layout="column" layout-align="space-around start">
-        <div ng-repeat="audio in cancion.audios">
-            <div layout="row" flex="100">
-                <audio controls ng-src="{{ urlFor(audio) }}"></audio>
-
+            <div layout="column" layout-align="center center" ng-hide="perteneceAlUsuario">
+                <span class="titulo">
+                    {{ cancion.titulo }}
+                </span>
+                por {{cancion.nombreUsuario}}
             </div>
         </div>
-        <md-button ngf-select="upload($file)" ng-model="file" name="file" ng-show="perteneceAlUsuario">Subir Archivo</md-button>
-    </div>
 
-    <div ng-show="modoEdicion">
-        <comentarios-con-respuestas post="cancion" tipo-post="'cancion'" actualizar-post="cancionActualizada"></comentarios-con-respuestas>
-    </div>
+        <br>
 
-    <div ng-show="modoEdicion">
-        <redes-sociales></redes-sociales>
-    </div>
+        <div layout="row" flex="33" layout-wrap layout-align="center center">
+            <md-input-container class="md-block md-input-has-value" ng-show="perteneceAlUsuario" layout-fill layout-margin flex="80" md-no-float>
+                <textarea ng-model="cancion.contenido"
+                          class="letra-contenido"
+                          placeholder="Contenido"
+                          type="text"
+                          required>
+                </textarea>
+            </md-input-container>
 
-    <opciones>
-        <md-button class="md-label" ng-click="guardar()" ng-show="perteneceAlUsuario">Guardar</md-button>
-        <span ng-show="perteneceAlUsuario">|</span>
-        <md-button class="md-label" ui-sref="canciones.todas">Cancelar</md-button>
-    </opciones>
+            <div class="letra" style="white-space: pre-line;" layout-fill layout-margin flex="80" ng-hide="perteneceAlUsuario">
+                {{ cancion.contenido }}
+            </div>
+        </div>
+
+        <div layout="column" layout-align="space-around start">
+            <div ng-repeat="audio in cancion.audios">
+                <div layout="row" flex="100">
+                    <audio controls ng-src="{{ urlFor(audio) }}"></audio>
+
+                </div>
+            </div>
+            <md-button ngf-select="upload($file)" ng-model="file" name="file" ng-show="perteneceAlUsuario">Subir Archivo</md-button>
+        </div>
+
+        <div ng-show="modoEdicion">
+            <comentarios-con-respuestas post="cancion" tipo-post="'cancion'" actualizar-post="cancionActualizada"></comentarios-con-respuestas>
+        </div>
+
+        <div ng-show="modoEdicion">
+            <redes-sociales></redes-sociales>
+        </div>
+
+        <opciones>
+            <md-button class="md-label"
+                       ng-click="guardar()"
+                       ng-show="perteneceAlUsuario"
+                       ng-disabled="formCancion.$invalid">
+                Guardar
+            </md-button>
+
+            <span ng-show="perteneceAlUsuario">|</span>
+
+            <md-button class="md-label" ui-sref="canciones.todas">Cancelar</md-button>
+        </opciones>
+    </form>
 </div>

@@ -1,17 +1,22 @@
-<md-list flex>
-    <md-list-item ng-if="haySesion" ui-sref="letras.crear">
-        <div class="md-list-item-text" layout="column">
-            Crear Letra
-        </div>
-    </md-list-item>
-    <md-list-item ng-if="letras.length === 0" class="md-3-line">
-        <div class="md-list-item-text" layout="row">
-            Nadie ha creado ninguna letra todavia.
-        </div>
-    </md-list-item>
-    <md-list-item class="md-3-line" ng-repeat="letra in letras" ui-sref="letras.ver({id: letra.id})">
-        <div class="md-list-item-text" layout="row">
-            <span class="titulo small">{{ letra.titulo }}</span> by {{ letra.nombreUsuario }}
-        </div>
-    </md-list-item>
-</md-list>
+<div layout="row" ng-if="letras.length > 0">
+    <md-button ng-if="haySesion"
+               class="md-raised boton-agregar"
+               ui-sref="letras.crear">
+        Crear
+    </md-button>
+</div>
+
+<div layout="column" class="content-section">
+    <div layout="column" layout-align="center center" ng-if="letras.length === 0">
+        <p> Nadie ha creado ninguna letra todavía.</p>
+        <a class="creasic-link" ui-sref="letras.crear">¿Querés ser el primero?</a>
+    </div>
+
+    <md-list flex ng-if="letras.length > 0">
+        <md-list-item class="md-3-line" ng-repeat="letra in letras" ui-sref="letras.ver({id: letra.id})">
+            <div class="md-list-item-text" layout="row">
+                <span class="titulo small">{{ letra.titulo }}</span> by {{ letra.nombreUsuario }}
+            </div>
+        </md-list-item>
+    </md-list>
+</div>

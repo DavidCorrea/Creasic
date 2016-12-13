@@ -27,22 +27,15 @@ Rails.application.routes.draw do
     post '/editar/*id', :to => 'secuencias_de_acordes#editar'
   end
 
-  scope '/notas' do
-    get '/todas',   :to => 'notas#todas'
-    get '/acordes', :to => 'notas#acordes'
-  end
-
   scope '/comentarios' do
     post '/comentar/*id',             :to => 'comentarios#agregar_comentario'
     post '/responder/*comentario_id', :to => 'comentarios#agregar_respuesta'
   end
 
   scope '/votos' do
-    post '/dar_voto/*id',                      :to => 'votos#dar_voto'
-    get  '/obtener_valor_de_voto/*votable_id', :to => 'votos#obtener_valor_de_voto'
-    post '/eliminar_voto/*id',                 :to => 'votos#eliminar_voto'
+    post '/dar_voto/*id',      :to => 'votos#dar_voto'
+    post '/eliminar_voto/*id', :to => 'votos#eliminar_voto'
   end
-
   scope '/canciones' do
     post '/crear',      :to => 'canciones#crear'
     get  '/todas',      :to => 'canciones#todas'
@@ -51,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   scope '/audios' do
-    post '/agregar/*id',             :to => 'audios#agregar_audio'
+    post '/agregar/*id', :to => 'audios#agregar_audio'
   end
 
 end

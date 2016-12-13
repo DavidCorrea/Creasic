@@ -5,7 +5,7 @@ creasic.service('comentariosService', ['$http', function($http) {
     };
 
     this.agregarRespuesta = function(respuesta) {
-        return $http.post('comentarios/responder/' + respuesta.comentario_id, respuesta);
+        return $http.post('comentarios/responder/' + respuesta.comentable_id, respuesta);
     };
 
 }]);

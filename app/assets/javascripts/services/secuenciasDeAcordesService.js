@@ -15,7 +15,6 @@ creasic.service('secuenciasDeAcordesService', ['$http', function($http) {
 
     this.editar = function(nuevaSecuencia) {
         nuevaSecuencia.acordes_attributes = nuevaSecuencia.acordes;
-        debugger;
         return $http.post('secuencias_de_acordes/editar/' + nuevaSecuencia.id, nuevaSecuencia);
     };
 

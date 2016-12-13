@@ -1,12 +1,13 @@
-class LetrasService
+class LetrasService < Service
 
   def initialize params
     @parametros = params
-    asignar_usuario
   end
 
   def crear_letra
-    Letra.create! parametros_de_creacion
+    on_transaction do
+      Letra.create! parametros_de_creacion
+    end
   end
 
   def todas_las_letras
@@ -14,33 +15,31 @@ class LetrasService
   end
 
   def ver_letra
-    Letra.find parametros_de_busqueda[:id]
+    on_transaction do
+      Letra.find parametros_de_busqueda[:id]
+    end
   end
 
   def editar
-    letra_a_editar = ver_letra
-    letra_a_editar.update! parametros_de_edicion
-    letra_a_editar
+    on_transaction do
+      letra_a_editar = ver_letra
+      letra_a_editar.update! parametros_de_edicion
+      letra_a_editar
+    end
   end
 
   private
 
-  def asignar_usuario
-    if @parametros[:usuario_id]
-      @usuario = Usuario.find_by_id_externo(@parametros[:usuario_id])
-    end
-  end
-
   def parametros_de_creacion
-    @parametros.require(:letra).permit(:titulo, :contenido).merge({usuario: @usuario})
+    @parametros.permit(:usuario_id, :titulo, :contenido)
   end
 
   def parametros_de_busqueda
-    @parametros.permit(:id, :letra_id)
+    @parametros.permit(:id)
   end
 
   def parametros_de_edicion
-    @parametros.require(:letra).permit(:titulo, :contenido).merge({usuario: @usuario})
+    @parametros.permit(:letra_id, :titulo, :contenido)
   end
 
 end

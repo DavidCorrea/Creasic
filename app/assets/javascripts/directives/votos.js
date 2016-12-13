@@ -4,13 +4,13 @@ creasic.directive("votos", function($rootScope, votosService, authService, naveg
         templateUrl: 'views/directives/votos',
         scope: {
             post: '=',
+            tipoPost: '=',
             actualizarPost: '='
         },
         link: function(scope) {
 
             scope.votoPositivo = false;
             scope.votoNegativo = false;
-
 
             scope.sumarVotos = function(){
                 angular.forEach(scope.post.votos, function(voto){
@@ -23,7 +23,6 @@ creasic.directive("votos", function($rootScope, votosService, authService, naveg
             };
 
             scope.sumarVotos();
-
 
             scope.cantidadDeVotos = function() {
                 var total = 0;
@@ -51,6 +50,7 @@ creasic.directive("votos", function($rootScope, votosService, authService, naveg
                     else {
                         scope.voto = new Voto(scope.post, $rootScope.usuario.id);
                         scope.voto.valor = valor;
+                        scope.voto.tipo = scope.tipoPost;
                         votosService.darVoto(scope.voto).then(function (response) {
                             scope.votoDelUsuario = response.data;
                             scope.votoPositivo = valor == 1;

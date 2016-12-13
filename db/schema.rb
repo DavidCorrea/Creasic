@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122050318) do
+ActiveRecord::Schema.define(version: 20161206061130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,19 @@ ActiveRecord::Schema.define(version: 20161122050318) do
     t.index ["nota_id"], name: "index_acordes_notas_on_nota_id", using: :btree
   end
 
+  create_table "audios", force: :cascade do |t|
+    t.string   "media_id",   null: false
+    t.integer  "usuario_id", null: false
+    t.integer  "cancion_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cancion_id"], name: "index_audios_on_cancion_id", using: :btree
+  end
+
   create_table "canciones", force: :cascade do |t|
     t.integer "usuario_id", null: false
+    t.string  "titulo"
+    t.text    "contenido"
     t.index ["usuario_id"], name: "index_canciones_on_usuario_id", using: :btree
   end
 
@@ -42,7 +53,9 @@ ActiveRecord::Schema.define(version: 20161122050318) do
     t.string   "comentable_type"
     t.integer  "comentable_id"
     t.string   "media_id"
+    t.integer  "comentario_id"
     t.index ["comentable_type", "comentable_id"], name: "index_comentarios_on_comentable_type_and_comentable_id", using: :btree
+    t.index ["comentario_id"], name: "index_comentarios_on_comentario_id", using: :btree
   end
 
   create_table "letras", force: :cascade do |t|
