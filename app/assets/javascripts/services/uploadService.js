@@ -9,7 +9,7 @@ creasic.service('uploadService', ['Upload', 'cloudinary', 'toastService', functi
             }
         }).success(function (data, status, headers, config) {
             toastService.mostrarMensaje('Audio grabado correctamente.');
-            successCallback(data.public_id);
+            successCallback(data.public_id, data.format);
         }).error(function (data, status, headers, config) {
             errorCallback();
         });

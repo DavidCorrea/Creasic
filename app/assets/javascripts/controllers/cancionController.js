@@ -22,12 +22,12 @@ creasic.controller('cancionCtrl', ['$scope', '$rootScope', '$sce', 'cancion', 'm
     };
 
     $scope.upload = function(file){
-        uploadService.upload(file, function(audio_id) {
+        uploadService.upload(file, function(audio_id, file_format) {
             $scope.audio = new Audio($scope.cancion, $rootScope.usuario.id);
             $scope.audio.media_id = audio_id;
+            $scope.audio.file_format = file_format;
             audiosService.agregarAudio($scope.audio).then(function(response) {
                 $scope.cancion.audios.push(response.data);
-                //scope.post = scope.actualizarPost(response.data);
             });
 
         });
@@ -43,7 +43,7 @@ creasic.controller('cancionCtrl', ['$scope', '$rootScope', '$sce', 'cancion', 'm
 
     $scope.urlFor = function(audio) {
         var media_id = (audio.media_id === undefined) ? audio.audios[0].media_id : audio.media_id;
-        var url = "http://res.cloudinary.com/dzfxwe6la/video/upload/v1478324228/" + media_id + ".mp3";//TODO: CAMBIAR ESTO OMG
+        var url = "http://res.cloudinary.com/dzfxwe6la/video/upload/v1478324228/" + media_id + "." + audio.file_format;
         return $sce.trustAsResourceUrl(url);
     }
 
