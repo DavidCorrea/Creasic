@@ -71,8 +71,14 @@
         <br>
 
         <div layout="row" flex="33" layout-wrap layout-align="start center" style="min-height: 200px;">
-            <div ng-repeat="acorde in secuencia.acordes track by $index" layout="column">
-                <acorde source="secuencia" data="acorde" puede-ser-editado="perteneceAlUsuario" ng-click="seleccionarAcorde(acorde)"></acorde>
+            <div ng-repeat="acorde in secuencia.acordes | orderBy:'posicion' track by $index" layout="column">
+                <acorde source="secuencia"
+                        ng-copy="copiarAcorde(acorde)"
+                        ng-paste="pegarAcorde()"
+                        data="acorde"
+                        puede-ser-editado="perteneceAlUsuario"
+                        ng-click="seleccionarAcorde(acorde)">
+                </acorde>
             </div>
         </div>
 

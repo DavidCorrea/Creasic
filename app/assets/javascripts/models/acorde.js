@@ -6,18 +6,20 @@ function Acorde(cifrado, posicion) {
 
 /* Constructor */
 Acorde.llenarDesde = function(datosDeAcorde) {
-    var acorde = new Acorde(datosDeAcorde.posicion);
+    var acorde = new Acorde(datosDeAcorde.cifrado, datosDeAcorde.posicion);
 
     acorde.id = datosDeAcorde.id;
-    acorde.secuenciaDeAcordesId = datosDeAcorde.secuencia_de_acordes_id;
     acorde.notas = JSON.parse(datosDeAcorde.notas);
-    acorde.cifrado = datosDeAcorde.cifrado;
 
     return acorde;
 };
 
 /* Métodos de Instancia. */
 Acorde.prototype = {
+    reset: function() {
+        this.id = undefined;
+    },
+
     cambiarPosicion: function(nuevaPosicion) {
         this.posicion = nuevaPosicion;
     },
