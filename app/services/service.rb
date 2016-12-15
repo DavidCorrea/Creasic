@@ -6,6 +6,8 @@ class Service
     raise CreasicException.new('Los valores ingresados no son validos', e.record.errors.full_messages)
   rescue ActiveRecord::RecordNotFound => e
     raise CreasicException.new('No se pudo encontrar lo buscado.', [])
+  rescue => e
+    raise CreasicException.new('Ha ocurrido un error.', [])
   end
 
   def votables

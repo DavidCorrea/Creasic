@@ -1,19 +1,19 @@
-function Audio(post, idUsuario) {
-    this.usuario_id = idUsuario;
+function Audio(media_id) {
+    this.media_id = media_id;
     this.votos = [];
-    this.cancion_id = post.id;
 }
 
 /* Constructor */
-Audio.llenarDesde = function(datosDeAudio, post) {
-    var audio = new Audio(post, datosDeAudio.usuario_id);
+Audio.llenarDesde = function(datosDeAudio) {
+    var audio = new Audio(datosDeAudio.media_id);
+
     audio.id = datosDeAudio.id;
-    audio.media_id = datosDeAudio.media_id;
 
     angular.forEach(datosDeAudio.votos, function(voto){
         var votoAAgregar = Voto.llenarDesde(voto, audio);
         audio.agregarVoto(votoAAgregar);
     });
+
     return audio;
 };
 
@@ -23,4 +23,5 @@ Audio.prototype = {
     agregarVoto: function(voto){
         this.votos.push(voto);
     }
+
 };

@@ -4,9 +4,6 @@ creasic.controller('cancionCtrl', ['$scope', '$rootScope', '$sce', 'cancion', 'm
     $scope.modoEdicion = modoEdicion;
     $scope.cancion = cancion;
     $scope.perteneceAlUsuario = $rootScope.usuario && ($rootScope.usuario.id === cancion.usuario_id);
-    if ($scope.perteneceAlUsuario)
-        $scope.audio = new Audio($scope.cancion, $rootScope.usuario.id);
-
 
     $scope.guardar = function() {
         if(!$scope.modoEdicion) {
@@ -23,15 +20,10 @@ creasic.controller('cancionCtrl', ['$scope', '$rootScope', '$sce', 'cancion', 'm
 
     $scope.upload = function(file){
         uploadService.upload(file, function(audio_id) {
-            $scope.audio = new Audio($scope.cancion, $rootScope.usuario.id);
-            $scope.audio.media_id = audio_id;
-            audiosService.agregarAudio($scope.audio).then(function(response) {
-                $scope.cancion.audios.push(response.data);
-                //scope.post = scope.actualizarPost(response.data);
-            });
-
+            $scope.cancion.agregarAudio(new Audio(audio_id));
         });
     };
+
     $scope.cancionActualizada = function(data) {
         return Cancion.llenarDesde(data);
     };

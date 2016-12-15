@@ -31,7 +31,7 @@ class CancionesService < Service
   private
 
   def parametros_de_creacion
-    @parametros.permit(:usuario_id, :titulo, :contenido)
+    @parametros.permit(:usuario_id, :titulo, :contenido, audios_attributes: [:media_id])
   end
 
   def parametros_de_busqueda
@@ -39,7 +39,7 @@ class CancionesService < Service
   end
 
   def parametros_de_edicion
-    @parametros.permit(:cancion_id, :titulo, :contenido)
+    @parametros.permit(:cancion_id, :titulo, :contenido, audios_attributes: [:id, :media_id])
   end
 
 end
