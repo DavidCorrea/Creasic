@@ -1,6 +1,6 @@
 <div layout="column" class="content-section">
     <form name="secuenciaDeAcordesForm">
-        <div layout="column" flex="33">
+        <div layout="column" style="margin: 20px">
             <div layout="row" layout-align="center center" ng-show="perteneceAlUsuario">
                 <md-input-container md-no-float>
                     <input ng-model="secuencia.titulo"
@@ -13,17 +13,18 @@
             </div>
 
             <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
-                <div layout="row">
-                    <md-slider-container>
-                        <md-slider flex
-                                   min="20"
+                <span>BPM (20 - 300)</span>
+                <div layout="row" layout-wrap>
+                    <md-slider-container flex="75">
+                        <md-slider min="20"
                                    max="300"
                                    ng-model="secuencia.bpm"
                                    aria-label="red"
                                    id="red-slider">
                         </md-slider>
                     </md-slider-container>
-                    <md-input-container>
+                    <span flex="5"></span>
+                    <md-input-container flex>
                         <input type="number"
                                min="20"
                                max="300"
@@ -43,23 +44,29 @@
 
             <br>
 
-            <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
-                <h3> Acordes Precargados </h3>
-                <div layout="column" layout-align="center center">
-                    <div layout="row">
-                        <div class="nota" ng-repeat="acordePrecargado in acordesPrecargados" ng-click="agregarAcordePrecargado(acordePrecargado)" layout-align="center center">
-                            {{ acordePrecargado.cifrado }}
+            <div layout="row">
+                <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
+                    <h3> Acordes Precargados </h3>
+                    <div layout="column" layout-align="center center">
+                        <div layout="row">
+                            <div class="nota" ng-repeat="acordePrecargado in acordesPrecargados" ng-click="agregarAcordePrecargado(acordePrecargado)" layout-align="center center">
+                                {{ acordePrecargado.cifrado }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
-                <h3> Notas </h3>
-                <div layout="column" layout-align="center center">
-                    <div layout="row">
-                        <div class="nota" ng-repeat="notaPrecargada in notasPrecargadas" ng-click="agregarNota(notaPrecargada)" layout-align="center center">
-                            {{ notaPrecargada.cifrado }}
+                <span flex></span>
+                <md-divider></md-divider>
+                <span flex></span>
+
+                <div layout="column" layout-align="center center" ng-show="perteneceAlUsuario">
+                    <h3> Notas </h3>
+                    <div layout="column" layout-align="center center">
+                        <div layout="row">
+                            <div class="nota" ng-repeat="notaPrecargada in notasPrecargadas" ng-click="agregarNota(notaPrecargada)" layout-align="center center">
+                                {{ notaPrecargada.cifrado }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,7 +77,7 @@
 
         <br>
 
-        <div layout="row" flex="33" layout-wrap layout-align="start center" style="min-height: 200px;">
+        <div layout="row" layout-wrap layout-align="start center" style="margin: 5px; min-height: 200px;">
             <div ng-repeat="acorde in secuencia.acordes | orderBy:'posicion' track by $index" layout="column">
                 <acorde source="secuencia"
                         ng-copy="copiarAcorde(acorde)"
@@ -82,14 +89,8 @@
             </div>
         </div>
 
-        <md-divider></md-divider>
-        <br>
-
         <div ng-show="modoEdicion">
             <comentarios-con-respuestas post="secuencia" tipo-post="'secuencia'" actualizar-post="secuenciaDeAcordesActualizada"></comentarios-con-respuestas>
-
-            <md-divider></md-divider>
-            <br>
         </div>
 
         <div ng-show="modoEdicion">

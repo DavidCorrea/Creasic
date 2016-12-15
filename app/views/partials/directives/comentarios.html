@@ -1,84 +1,86 @@
-<div>
-    <div style="padding-top: 20px;">
-        Comentarios ({{ cantidadDeComentarios() }})
-    </div>
-</div>
+<br>
 
-<div ng-repeat="comentario in post.comentarios">
-    <md-card>
-        <md-card-title>
-            <div ng-if="!comentarioTieneAudio(comentario)">
+<md-divider></md-divider>
+
+<div layout="column" style="margin: 5px">
+    <span style="padding: 5px">Comentarios ({{ cantidadDeComentarios() }})</span>
+
+    <div ng-repeat="comentario in post.comentarios">
+        <md-card>
+            <md-card-title>
+                <div ng-if="!comentarioTieneAudio(comentario)">
                 <span>
                     {{comentario.nombreUsuario}} dijo: {{comentario.contenido}}
                 </span>
-            </div>
+                </div>
 
-            <div ng-if="comentarioTieneAudio(comentario)">
-                {{comentario.nombreUsuario}} dijo: <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
-            </div>
-        </md-card-title>
+                <div ng-if="comentarioTieneAudio(comentario)">
+                    {{comentario.nombreUsuario}} dijo: <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
+                </div>
+            </md-card-title>
 
-        <md-card flex-offset="10" ng-repeat="respuesta in comentario.comentarios">
-            <md-card-title>
+            <md-card flex-offset="10" ng-repeat="respuesta in comentario.comentarios">
+                <md-card-title>
                 <span>
                     {{respuesta.nombreUsuario}} dijo: {{respuesta.contenido}}
                 </span>
-            </md-card-title>
-            <votos post="respuesta" tipo-post="'comentario'"></votos>
-        </md-card>
+                </md-card-title>
+                <votos post="respuesta" tipo-post="'comentario'"></votos>
+            </md-card>
+
+            <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
+                <md-card-title-text>
+                    <md-input-container class="md-block md-input-has-value">
+                        <label for="input_31">Respuesta</label>
+                        <div class="md-resize-wrapper">
+                        <textarea ng-model="respuesta.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
+                        </textarea>
+                        </div>
+                    </md-input-container>
+                </md-card-title-text>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="cancelarRespuesta()">Cancelar</md-button>
+                    <md-button ng-click="guardarRespuesta()">Aceptar</md-button>
+                </md-card-actions>
+            </md-card>
 
             <md-card-actions layout="raw" layout-align="space-between start">
                 <votos post="comentario" tipo-post="'comentario'"></votos>
                 <md-button ng-click="responder(comentario)" ng-show="sePuedeResponder()">Responder</md-button>
             </md-card-actions>
-
-        <md-card flex-offset="10" md-theme-watch ng-show="estaRespondiendo(comentario.id)">
-            <md-card-title-text>
-                <md-input-container class="md-block md-input-has-value">
-                    <label for="input_31">Respuesta</label>
-                    <div class="md-resize-wrapper">
-                        <textarea ng-model="respuesta.contenido" rows="1" md-select-on-focus="" class="ng-pristine ng-valid md-input ng-not-empty ng-touched" id="input_31" aria-invalid="false" ng-trim="false" style="height: 135px;">
-                        </textarea>
-                    </div>
-                </md-input-container>
-            </md-card-title-text>
-            <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="cancelarRespuesta()">Cancelar</md-button>
-                <md-button ng-click="guardarRespuesta()">Aceptar</md-button>
-            </md-card-actions>
         </md-card>
+    </div>
+
+    <md-card md-theme-watch ng-show="comentando">
+        <md-card-title>
+            <md-card-title-text>
+                <div ng-show="seQuiereComentar">
+                    <md-input-container class="md-block md-input-has-value">
+                        <div class="md-resize-wrapper">
+                            <textarea ng-model="comentario.contenido" rows="1" placeholder="Comentario"></textarea>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div ng-show="seQuiereGrabar">
+                    <recorder data="comentario"></recorder>
+                </div>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+            <div layout-align="start center">
+                <div ng-hide="seQuiereComentar">
+                    <md-button ng-click="modoComentar()">Comentar</md-button>
+                </div>
+                <div ng-hide="seQuiereGrabar">
+                    <md-button ng-click="modoGrabar()">Grabar</md-button>
+                </div>
+            </div>
+            <div layout-align="end center">
+                <md-button ng-click="cancelarComentario()">Cancelar</md-button>
+                <md-button ng-click="guardarComentario()">Aceptar</md-button>
+            </div>
+        </md-card-actions>
     </md-card>
+
+    <md-button ng-click="comentar()" ng-show="sePuedeComentar()">Comentar</md-button>
 </div>
-
-<md-card md-theme-watch ng-show="comentando">
-    <md-card-title>
-        <md-card-title-text>
-            <div ng-show="seQuiereComentar">
-                <md-input-container class="md-block md-input-has-value">
-                    <div class="md-resize-wrapper">
-                        <textarea ng-model="comentario.contenido" rows="1" placeholder="Comentario"></textarea>
-                    </div>
-                </md-input-container>
-            </div>
-            <div ng-show="seQuiereGrabar">
-                <recorder data="comentario"></recorder>
-            </div>
-        </md-card-title-text>
-    </md-card-title>
-    <md-card-actions layout="row" layout-align="end center">
-        <div layout-align="start center">
-            <div ng-hide="seQuiereComentar">
-                <md-button ng-click="modoComentar()">Comentar</md-button>
-            </div>
-            <div ng-hide="seQuiereGrabar">
-                <md-button ng-click="modoGrabar()">Grabar</md-button>
-            </div>
-        </div>
-        <div layout-align="end center">
-            <md-button ng-click="cancelarComentario()">Cancelar</md-button>
-            <md-button ng-click="guardarComentario()">Aceptar</md-button>
-        </div>
-    </md-card-actions>
-</md-card>
-
-<md-button ng-click="comentar()" ng-show="sePuedeComentar()">Comentar</md-button>
