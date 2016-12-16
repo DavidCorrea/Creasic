@@ -9,22 +9,19 @@
         <md-card>
             <md-card-title>
                 <div ng-if="!comentarioTieneAudio(comentario)">
-                <span>
-                    {{comentario.nombreUsuario}} dijo: {{comentario.contenido}}
-                </span>
+                    <span class="autor-comentario"> {{comentario.nombreUsuario}} dijo: </span> {{comentario.contenido}}
                 </div>
 
-                <div ng-if="comentarioTieneAudio(comentario)">
-                    {{comentario.nombreUsuario}} dijo: <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
+                <div layout="row" layout-align="start center" ng-if="comentarioTieneAudio(comentario)">
+                    <span class="autor-comentario"> {{comentario.nombreUsuario}} dijo: </span> <audio controls ng-src="{{ urlFor(comentario) }}"></audio>
                 </div>
             </md-card-title>
 
             <md-card flex-offset="10" ng-repeat="respuesta in comentario.comentarios">
                 <md-card-title>
-                <span>
-                    {{respuesta.nombreUsuario}} dijo: {{respuesta.contenido}}
-                </span>
+                    <span class="autor-comentario"> {{respuesta.nombreUsuario}} dijo: </span> {{respuesta.contenido}}
                 </md-card-title>
+
                 <votos post="respuesta" tipo-post="'comentario'"></votos>
             </md-card>
 

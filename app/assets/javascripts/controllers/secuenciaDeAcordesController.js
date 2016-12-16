@@ -29,14 +29,15 @@ creasic.controller("secuenciaDeAcordesCtrl",
     };
 
     $scope.copiarAcorde = function(acorde) {
-        $scope.acordeAPegar = angular.copy(acorde);
+        $scope.acordeAPegar = acorde;
     };
 
     $scope.pegarAcorde = function() {
         if($scope.acordeAPegar) {
-            debugger;
-            $scope.acordeAPegar.reset();
-            $scope.secuencia.agregarAcordePrearmado($scope.acordeAPegar);
+            var acordeADuplicar = angular.copy($scope.acordeAPegar);
+
+            acordeADuplicar.reset();
+            $scope.secuencia.agregarAcordePrearmado(acordeADuplicar);
         }
     };
 

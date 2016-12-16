@@ -1,5 +1,5 @@
-creasic.controller('cancionCtrl', ['$scope', '$rootScope', '$sce', 'cancion', 'modoEdicion', 'cancionesService', 'toastService', 'navegacionService', 'uploadService', 'audiosService',
-    function ($scope, $rootScope, $sce, cancion, modoEdicion, cancionesService, toastService, navegacionService, uploadService, audiosService) {
+creasic.controller('cancionCtrl', ['$scope', '$rootScope', '$sce', 'cancion', 'modoEdicion', 'cancionesService', 'toastService', 'navegacionService', 'uploadService',
+    function ($scope, $rootScope, $sce, cancion, modoEdicion, cancionesService, toastService, navegacionService, uploadService) {
 
     $scope.modoEdicion = modoEdicion;
     $scope.cancion = cancion;
