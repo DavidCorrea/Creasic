@@ -36,15 +36,12 @@ Rails.application.routes.draw do
     post '/dar_voto/*id',      :to => 'votos#dar_voto'
     post '/eliminar_voto/*id', :to => 'votos#eliminar_voto'
   end
+
   scope '/canciones' do
     post '/crear',      :to => 'canciones#crear'
     get  '/todas',      :to => 'canciones#todas'
     get  '/ver/*id',    :to => 'canciones#ver'
     post '/editar/*id', :to => 'canciones#editar'
-  end
-
-  scope '/audios' do
-    post '/agregar/*id', :to => 'audios#agregar_audio'
   end
 
 end

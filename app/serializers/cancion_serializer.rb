@@ -1,8 +1,7 @@
 class CancionSerializer < ActiveModel::Serializer
-  attributes :id, :usuario_id, :nombre_usuario, :titulo, :contenido, :audios
+  attributes :id, :usuario_id, :nombre_usuario, :titulo, :contenido
 
   has_many :comentarios
-  has_many :votos
   has_many :audios
 
   def nombre_usuario

@@ -1,6 +1,7 @@
 creasic.service('cancionesService', ['$http', function($http) {
 
     this.crearCancion = function(cancion) {
+        cancion.audios_attributes = cancion.audios;
         return $http.post('canciones/crear', cancion);
     };
 
@@ -13,6 +14,7 @@ creasic.service('cancionesService', ['$http', function($http) {
     };
 
     this.editarCancion = function(nuevaCancion) {
+        nuevaCancion.audios_attributes = nuevaCancion.audios;
         return $http.post('canciones/editar/' + nuevaCancion.id, nuevaCancion);
     };
 
